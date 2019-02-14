@@ -41,6 +41,7 @@
     -> can tag ppl, projects, and sub-projects on calendar events  
     -> each person has display profile for explore page 
         -> unique type of display profile for each member type 
+    -> client perspective will have a similar but diff look -> i.e. they will only be able to see their projects and certain things linked from designer pages... and have a limited info box of their designer page....
 
 
 ------>User Stories<------
@@ -166,14 +167,15 @@
     -> "add comment" capabilities
 
 *g* I want the /d.a./clients/unique_client/projects/unique-sub-project/pictures page to display:
-    -> before photos
-    -> inspiration photos
+    -> house photos
+        -> before photos
+        -> in-process photos
+        -> after photos 
     -> potential photos
-    -> option photos
-    -> selected photos
-    -> in-process photos
-    -> after photos 
-    -> (can make unique group names)
+        -> inspiration photos
+        -> client photos
+        -> selected photos
+    -> (can make and delete unique group names)
 
 *g* I want the /d.a./clients/unique_client/projects/unique-sub-project/measurements page to display:
     -> floor plans
@@ -190,4 +192,36 @@
         -> labeled according to who the task is for (with view only... see ideas above...)
         -> potential tags of other people linked to task
     -> "create a new task" capabilities
+
+------>MVP (descoping)<------
+
+* I want to be able to create a client account. 
+
+* I want to be able to create a designer account.
+
+* I want the designer account to have multiple access points (i.e. different users - design group and designer...).
+
+* I want the designer account to be populated with info from their linked clients (specific to client - as described above).
+
+* I want the client account to be populated with info from their linked designers (specific to designer - as described above).
+
+* I want the designer and client accounts to be able to view, add, and edit on "my clients" / "my designers" (as organized above).
+
+* I want the designer and client accounts to be able to view, add, edit, and comment on projects (as organized above).
+
+* I want the designer and client accounts to be able to view, add, edit, and comment on sub-projects (as organized above).
+
+* I want the designer and client accounts to be able to view, add, edit, and comment on pictures (as organized above).
+
+* I want the designer and client accounts to be able to view, add, edit, and comment on orders (as organized above).
+
+* I want the designer and client accounts to be able to view, add, edit, and comment on calendar (as organized above).
+
+* I want the designer and client accounts to be able to view, add, edit, and comment on tasks (as organized above).
+
+* I want the designer and client accounts to be able to view, add, edit, and comment on billing (as organized above).
+
+* I want the designer and client accounts to be able to view, add, edit, and comment on measurements (as organized above).
+
+* I want the designer and client accounts to be able to view and add to the comment flow (as organized above).
 
