@@ -35,11 +35,12 @@
         -> to-do's
         -> "general" tasks (linked to all accounts)
         -> for each client
+    -> search box based off tags... (ex. Natonov living-room rug dimensions)
     -> tag each comment picture client to multiple places (so could see in different environments... i.e. general to-do's)   
     -> tasks could be labeled according to who is supposed to fulfill it...   
     -> can tag ppl, projects, and sub-projects on calendar events  
     -> each person has display profile for explore page 
-        -> unique type of display profile for each member type
+        -> unique type of display profile for each member type 
 
 
 ------>User Stories<------
@@ -165,12 +166,18 @@
     -> "add comment" capabilities
 
 *g* I want the /d.a./clients/unique_client/projects/unique-sub-project/pictures page to display:
-    ->
-    ->
+    -> before photos
+    -> inspiration photos
+    -> potential photos
+    -> option photos
+    -> selected photos
+    -> in-process photos
+    -> after photos 
+    -> (can make unique group names)
 
 *g* I want the /d.a./clients/unique_client/projects/unique-sub-project/measurements page to display:
-    ->
-    ->
+    -> floor plans
+    -> general measurements
 
 *g* I want the /d.a./clients/unique_client/projects/unique-sub-project/orders page to display:
     -> an "order" list for this sub-project
