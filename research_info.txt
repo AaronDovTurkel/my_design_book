@@ -1,0 +1,186 @@
+------>Time-Stamps<------
+    -> (1/9/19) (45 min) Brain-Storming 
+    -> (1/11/19) (45 min) User Stories 
+    -> (1/13/19) (120 min) User Stories 
+
+
+------>Initial Ideas<------
+
+-> Type of Job
+    -> decorator
+    -> construction
+        -> architect
+        -> contractor
+
+-> Users 
+    -> designers
+    -> clients
+    -> contractors
+
+-> Client Interface
+    -> project (house w/ address)
+        -> sub-project (ex. kitchen, bathroom, etc.)
+            -> pictures
+            -> to-do list
+            -> measurements (maybe just admin)
+    -> comment flow
+    -> current balance
+    -> pending orders (diff admin and client view)
+    -> calender (set appointments)
+
+-> Random Notes/Ideas
+    -> compare w/ evernote functionality
+    -> compare w/ gtask functionality
+        -> everyone could edit list
+        -> to-do's
+        -> "general" tasks (linked to all accounts)
+        -> for each client
+    -> tag each comment picture client to multiple places (so could see in different environments... i.e. general to-do's)   
+    -> tasks could be labeled according to who is supposed to fulfill it...   
+    -> can tag ppl, projects, and sub-projects on calendar events  
+    -> each person has display profile for explore page 
+        -> unique type of display profile for each member type
+
+
+------>User Stories<------
+
+*a* I want to be able to create a "designer account" (d.a.), a "contractor account" (c.r.a.), and a "client account" (c.a.) from root page.
+
+*a* I want to be able to see some info / stats about the site from the root page.
+
+*a* I want to be able to explore members (w. limited info) that are currently searching for hire from root page.
+
+*b* I want the d.a. main page to display: 
+    -> my clients
+    -> my contractors (workers?)
+    -> projects
+    -> calendar
+    -> tasks
+    -> explore
+
+*b* I want the c.a. main page to display: 
+    -> my designers
+    -> my contractors (workers?)
+    -> projects
+    -> calendar
+    -> tasks
+    -> explore
+
+*b* I want the c.r.a. main page to display: 
+    -> my clients
+    -> my designers 
+    -> projects
+    -> calendar
+    -> tasks
+    -> explore
+
+*c* I want the /d.a./clients page to display:
+    -> a list of clients (w. tagged workers)
+    -> "add new client" button
+
+*c* I want the client list to show active clients and hide inactive clients (w. toggle ability).
+
+*c* I want the /d.a./contractors page to display:
+    -> a list of contractors (w. tagged clients)
+    -> "add new contractor" button
+
+*c* I want the /d.a./projects page to display:
+    -> a list of all projects for all clients (w. tagged clients)
+        -> links into *d* lvl page...
+
+*c* I want the /d.a./calendar page to display:
+    -> a calendar with events for all clients / projects
+        -> w. toggle for active/closed
+        -> pending orders, scheduled tasks, etc...
+    -> "add new event" capabilities
+        -> require tag for specific project / client
+        -> optional tag to inform people 
+        -> "send message to members attending" option
+
+*c* I want the /d.a./tasks page to display:
+    -> a "task" (to-do) list for all clients / projects
+        -> w. toggle for active/closed
+        -> labeled according to who the task is for (with view only... see "ideas" above...)
+        -> potential tags of other people linked to task
+    -> "create a new task" capabilities
+
+*c* I want the /d.a./explore page to display:
+    -> a list of all active members
+        -> organized based off of...
+            -> member-type
+            -> project-type
+            -> location
+            -> searching to / for hire
+        -> if member is clicked can "offer a proposal" to work with... (see "ideas" above)
+
+*d* I want the /d.a./clients/unique-client page to display:
+    -> list of projects (each w. activity status, static date of creation, address, type-of, and customizable name)
+    -> "add new project" button
+
+*e* I want the /d.a./clients/unique-client/projects page to display:
+    -> a drop-down list of sub-projects (each w. activity status and customizable name)
+    -> calendar
+    -> tasks
+    -> orders (labeled according to lvl deep)
+    -> current balance
+    -> comment flow
+
+*f* I want the /d.a./clients/unique-client/projects/unique-sub-project page to display: (each item below should have comment capabilities)
+    -> pictures
+    -> measurements
+    -> orders
+    -> tasks
+
+*f* I want the /d.a./clients/unique_client/projects/calendar page to display:
+    -> a calendar with events for this project
+        -> w. toggle for active/closed
+        -> pending orders, scheduled tasks, etc...
+    -> "add new event" capabilities
+        -> require tag for specific project
+        -> optional tag to inform people 
+        -> "send message to members attending" option
+
+*f* I want the /d.a./clients/unique_client/projects/tasks page to display:
+    -> a "task" (to-do) list for this project
+        -> w. toggle for active/closed
+        -> labeled according to who the task is for
+        -> potential tags of other people linked to task
+    -> "create a new task" capabilities
+
+*f* I want the /d.a./clients/unique_client/projects/orders page to display:
+    -> an "order" list for this project
+        -> w. toggle for active/closed
+    -> "add new order" capabilities
+
+*f* I want the /d.a./clients/unique_client/projects/current_balance page to display:
+    -> a "current balance" box for this project
+    -> completed transaction
+    -> total cost of project
+    -> "add new transaction" capabilities
+
+*f* I want the /d.a./clients/unique_client/projects/comment_flow page to display:
+    -> a flow (whats app style) of comments
+        -> linked (and titled according) to the specific place / picture they were made
+        -> arranged according to date and time of comment
+    -> "add comment" capabilities
+
+*g* I want the /d.a./clients/unique_client/projects/unique-sub-project/pictures page to display:
+    ->
+    ->
+
+*g* I want the /d.a./clients/unique_client/projects/unique-sub-project/measurements page to display:
+    ->
+    ->
+
+*g* I want the /d.a./clients/unique_client/projects/unique-sub-project/orders page to display:
+    -> an "order" list for this sub-project
+        -> w. toggle for active/closed
+    -> "add new order" capabilities
+
+*g* I want the /d.a./clients/unique_client/projects/unique-sub-project/tasks page to display:
+    -> a "task" (to-do) list for this sub-project
+        -> w. toggle for active/closed
+        -> labeled according to who the task is for (with view only... see ideas above...)
+        -> potential tags of other people linked to task
+    -> "create a new task" capabilities
+
