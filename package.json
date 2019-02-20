@@ -1,0 +1,27 @@
+{
+  "name": "my_design_book",
+  "version": "1.0.0",
+  "description": "A hub that streamlines home design for designers and their clients.",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AaronDovTurkel/my_design_book.git"
+  },
+  "author": "Aaron Dov Turkel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AaronDovTurkel/my_design_book/issues"
+  },
+  "homepage": "https://github.com/AaronDovTurkel/my_design_book#readme"
+}
