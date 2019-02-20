@@ -5,7 +5,8 @@ const morgan = require("morgan");
 const app = express();
 app.use(express.json());
 
-const sign_up_form = require("./sign_up_form_router") 
+const sign_up_form = require("./sign_up_form_router"); 
+const designer_pages = require("./designer-pages-router") ;
 
 // log the http layer
 app.use(morgan("common"));
@@ -13,10 +14,11 @@ app.use(morgan("common"));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "index.html");
+  res.sendFile("public/index.html");
 });
 
 app.use("/sign_up_form", sign_up_form);
+app.use("/designer_pages", designer_pages);
 
 // both runServer and closeServer need to access the same
 // server object, so we declare `server` here, and then when

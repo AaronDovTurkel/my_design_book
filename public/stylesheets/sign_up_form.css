@@ -35,14 +35,14 @@ html {
             align-self: stretch;
             justify-self: stretch;
             display: grid;
-            grid-template-rows: 1.5fr 7fr 1.5fr;
+            grid-template-rows: 2fr 8fr;
             grid-template-columns: 1fr;
             border: 1px solid black;
         }
 
             .sign_up-header {
                 grid-row: 1 / 2;
-                grid-column: 1 / 4;
+                grid-column: 1 / 2;
                 align-self: stretch;
                 justify-self: stretch;
                 display: grid;
@@ -54,7 +54,7 @@ html {
 
             .sign_up-main {
                 grid-row: 2 / 3;
-                grid-column: 1 / 4;
+                grid-column: 1 / 2;
                 align-self: stretch;
                 justify-self: stretch;
                 display: grid;
@@ -76,15 +76,6 @@ html {
                     border: 1px solid black;
                 }
 
-                    .sign_up-main-form-user_name {
-                        grid-row: 1 / 2;
-                        grid-column: 1 / 2;
-                        align-self: center;
-                        justify-self: center;
-                        width: 90%;
-                        border: 1px solid black;
-                    }
-
                     .sign_up-main-form-name {
                         grid-row: 2 / 3;
                         grid-column: 1 / 2;
@@ -96,6 +87,15 @@ html {
 
                     .sign_up-main-form-email {
                         grid-row: 3 / 4;
+                        grid-column: 1 / 2;
+                        align-self: center;
+                        justify-self: center;
+                        width: 90%;
+                        border: 1px solid black;
+                    }
+
+                    .sign_up-main-form-user_name {
+                        grid-row: 1 / 2;
                         grid-column: 1 / 2;
                         align-self: center;
                         justify-self: center;
@@ -117,25 +117,13 @@ html {
                         grid-column: 1 / 2;
                         align-self: center;
                         justify-self: center;
-                        width: 80%;
+                        width: 90%;
                         border: 1px solid black;
                     }
 
                     .sign_up-main-form-input {
                         width: 65%;
                     }
-
-            .sign_up-footer {
-                grid-row: 3 / 4;
-                grid-column: 1 / 4;
-                align-self: stretch;
-                justify-self: stretch;
-                display: grid;
-                grid-template-rows: 1fr;
-                grid-template-columns: 1fr;
-                border: 1px solid black;
-                text-align: center;
-            }
 
         footer {
             grid-row: 3 / 4;
