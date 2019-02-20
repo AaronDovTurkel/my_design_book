@@ -36,7 +36,7 @@ describe("Basic Server Call", function() {
   //   1. make request to `/shopping-list`
   //   2. inspect response object and prove has right code and have
   //   right keys in response object.
-  it("should list items on GET", function() {
+  it("should return status 200 on GET to root", function() {
     // for Mocha tests, when we're dealing with asynchronous operations,
     // we must either return a Promise object or else call a `done` callback
     // at the end of the test. The `chai.request(server).get...` call is asynchronous
@@ -44,6 +44,19 @@ describe("Basic Server Call", function() {
     return chai
       .request(app)
       .get("/")
+      .then(function(res) {
+        expect(res).to.have.status(200);
+      });
+  });
+
+  it("should return status 200 on GET to /sign_up_form", function() {
+    // for Mocha tests, when we're dealing with asynchronous operations,
+    // we must either return a Promise object or else call a `done` callback
+    // at the end of the test. The `chai.request(server).get...` call is asynchronous
+    // and returns a Promise, so we just return it.
+    return chai
+      .request(app)
+      .get("/sign_up_form")
       .then(function(res) {
         expect(res).to.have.status(200);
       });
