@@ -61,4 +61,56 @@ describe("Basic Server Call", function() {
         expect(res).to.have.status(200);
       });
   });
+
+  it("should return status 200 on GET to /designer_pages", function() {
+    // for Mocha tests, when we're dealing with asynchronous operations,
+    // we must either return a Promise object or else call a `done` callback
+    // at the end of the test. The `chai.request(server).get...` call is asynchronous
+    // and returns a Promise, so we just return it.
+    return chai
+      .request(app)
+      .get("/designer_pages")
+      .then(function(res) {
+        expect(res).to.have.status(200);
+      });
+  });
+
+  it("should return status 200 on GET to /designer_pages/clients", function() {
+    // for Mocha tests, when we're dealing with asynchronous operations,
+    // we must either return a Promise object or else call a `done` callback
+    // at the end of the test. The `chai.request(server).get...` call is asynchronous
+    // and returns a Promise, so we just return it.
+    return chai
+      .request(app)
+      .get("/designer_pages/clients")
+      .then(function(res) {
+        expect(res).to.have.status(200);
+      });
+  });
+
+  it("should return status 200 on GET to /designer_pages/tasks", function() {
+    // for Mocha tests, when we're dealing with asynchronous operations,
+    // we must either return a Promise object or else call a `done` callback
+    // at the end of the test. The `chai.request(server).get...` call is asynchronous
+    // and returns a Promise, so we just return it.
+    return chai
+      .request(app)
+      .get("/designer_pages/tasks")
+      .then(function(res) {
+        expect(res).to.have.status(200);
+      });
+  });
+
+  it("should return status 200 on GET to /designer_pages/unique_client", function() {
+    // for Mocha tests, when we're dealing with asynchronous operations,
+    // we must either return a Promise object or else call a `done` callback
+    // at the end of the test. The `chai.request(server).get...` call is asynchronous
+    // and returns a Promise, so we just return it.
+    return chai
+      .request(app)
+      .get("/designer_pages/unique_client")
+      .then(function(res) {
+        expect(res).to.have.status(200);
+      });
+  });
 });
