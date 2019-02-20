@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: YcW2fYb1l1uG+gqkk4UOcKAVLrZbxKDC6cLbvIGjprpWeeJswb321BN4zL0c0FtsBha/dF9InxQzfXZMn+BwnUDEIipbA/vM6pBbMSycnS7FFXVPkuHdf1RHdI+j9SjPAslsSRP4COjqGCGfhriWUEKNq3iG+nDhgdSL8mfY4+Wku1ldwzgXMUIXClbMA/wo6+waAbLb9mtjAGTMXrDvG2qJnaESKxJ3yTJsjFxjg0wa5g3wYZxYq7duIhLYfebgaK7LTF/gwloz+kjgsRFRGhnaJ+C27Y2cjymnFzfX5q+jNjr30U9D4SqlTPJJBP6Wq3+k0EN9s6fFfk1h3x0k5W/4mmpmNGRBMQmZNX+EgOfaNMWJibcPk8tuvkzpeUU45qVX1Esul5qRuf3kh82g5bG0cJbaSdXZxvSDGL/RqgOZkjmF8xhteZyvwC6SUAGmqnsNgeXwIulN1YrUeuNU2+Lwkh/9QiVeKZ1cPzx8pKzH0EIn1RDzNONQ0w6YgRlmcRW+VO04DwHp4goRkwX51ZyqHyzW4aHNOO765NCZcaIEiqunovXCndxohPfDUtyQjhQwg48SNRddthaenWnBdi4a/ioiW71SX385ypHYquhVMu0rtjQK0otWOrROb1+5ttMvuuvXAv/RIjchcAhYq15i1vK5aOMXdQhinFCBghQ=
+  app: afternoon-cove-68012
+  on:
+    repo: AaronDovTurkel/my_design_book
