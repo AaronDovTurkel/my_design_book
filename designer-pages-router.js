@@ -15,7 +15,7 @@ router.get("/tasks", (req, res) => {
 });
 
 router.get("/unique_client", (req, res) => { //TODO: will be replaced with /:id
-    res.sendFile(__dirname + "/views/pages/designer-pages/designer-unique_client-pages/designer-unique_client.html");
+    res.sendFile(__dirname + "/views/pages/designer-pages/designer-unique_client-pages/designer-unique_client-projects.html");
 });
 
 router.get("/unique_client-projects", (req, res) => { //TODO: will be replaced with /:id

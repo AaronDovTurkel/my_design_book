@@ -6,7 +6,8 @@ const app = express();
 app.use(express.json());
 
 const sign_up_form = require("./sign_up_form_router"); 
-const designer_pages = require("./designer-pages-router") ;
+const designer_pages = require("./designer-pages-router");
+const client_pages = require("./client-pages-router");
 
 // log the http layer
 app.use(morgan("common"));
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 
 app.use("/sign_up_form", sign_up_form);
 app.use("/designer_pages", designer_pages);
+app.use("/client_pages", client_pages);
 
 // both runServer and closeServer need to access the same
 // server object, so we declare `server` here, and then when
