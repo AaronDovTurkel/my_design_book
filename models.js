@@ -10,8 +10,7 @@ const accountSchema = mongoose.Schema({
   },
   email: {type: String, required: true},
   userName: {type: String, required: true},
-  passWord: {type: String, required: true},
-  created: {type: Date, default: Date.now}
+  passWord: {type: String, required: true}
 });
 
 
@@ -23,8 +22,8 @@ accountSchema.methods.serialize = function() {
   return {
     id: this._id,
     name: this.accountName,
-    email: this.email,
-    created: this.created
+    userName: this.userName,
+    email: this.email
   };
 };
 
