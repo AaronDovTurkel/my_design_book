@@ -26,6 +26,7 @@ router.post('/', (req, res) => {
       .create({
         name: req.body.name,
         email: req.body.email,
+        accountType: req.body.accountType,
         userName: req.body.userName,
         passWord: req.body.passWord
       })
