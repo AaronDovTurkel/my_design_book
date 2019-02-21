@@ -1,0 +1,4 @@
+{"email": "fakeEmail1@gfail.com", "name": {"firstName": "Billy1", "lastName": "Smith1"}, "userName": "BillySmithFakeMan1", "passWord": "123abc456def789ghi1"}
+{"email": "fakeEmail2@gfail.com", "name": {"firstName": "Billy2", "lastName": "Smith2"}, "userName": "BillySmithFakeMan2", "passWord": "123abc456def789ghi2"}
+{"email": "fakeEmail3@gfail.com", "name": {"firstName": "Billy3", "lastName": "Smith3"}, "userName": "BillySmithFakeMan3", "passWord": "123abc456def789ghi3"}
+{"email": "fakeEmail4@gfail.com", "name": {"firstName": "Billy4", "lastName": "Smith4"}, "userName": "BillySmithFakeMan4", "passWord": "123abc456def789ghi4"}

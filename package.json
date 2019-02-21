@@ -1,14 +1,23 @@
 {
   "name": "my_design_book",
   "version": "1.0.0",
-  "description": "A hub that streamlines home design for designers and their clients.",
+  "description": "A hub that streamlines home design for designers and clients.",
   "main": "server.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.0",
+    "mongoose": "^5.4.14",
     "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "save": "^2.3.3",
     "travis": "^0.1.1"
   },
   "devDependencies": {
