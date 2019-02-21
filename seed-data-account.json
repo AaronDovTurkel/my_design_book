@@ -5,6 +5,7 @@
             "firstName": "Billy1",
             "lastName": "Smith1"
         },
+        "accountType": "designer",
         "userName": "BillySmithFakeMan1",
         "passWord": "123abc456def789ghi1"
     },
@@ -14,6 +15,7 @@
             "firstName": "Billy2",
             "lastName": "Smith2"
         },
+        "accountType": "client",
         "userName": "BillySmithFakeMan2",
         "passWord": "123abc456def789ghi2"
     },
@@ -23,6 +25,7 @@
             "firstName": "Billy3",
             "lastName": "Smith3"
         },
+        "accountType": "designer",
         "userName": "BillySmithFakeMan3",
         "passWord": "123abc456def789ghi3"
     }
