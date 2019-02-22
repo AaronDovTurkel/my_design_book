@@ -1,0 +1,7 @@
+1. create schemas
+2. add more end points (CRUD)
+    a. for proper path lines
+3. add proper testing for each CRUD end point...
+4. client side html and css
+5. client side js (j query)
+
