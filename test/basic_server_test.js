@@ -2,23 +2,20 @@
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const faker = require('faker');
 const mongoose = require('mongoose');
-const { app, runServer, closeServer } = require("../server");
 
 const expect = chai.expect;
 
 
-const {BlogPost} = require('../models');
 const {app, runServer, closeServer} = require('../server');
-const {TEST_DATABASE_URL} = require('../config');
+const {DATABASE_URL} = require('../config');
 
 chai.use(chaiHttp);
 
 describe("Basic Server Call", function() {
 
   before(function() {
-    return runServer();
+    return runServer(DATABASE_URL);
   });
 
   after(function() {
@@ -62,10 +59,10 @@ describe("Basic Server Call", function() {
       });
   });
 
-  it("should return status 200 on GET to /designer_pages/tasks", function() {
+  it("should return status 200 on GET to /designer_pages/explore", function() {
     return chai
       .request(app)
-      .get("/designer_pages/tasks")
+      .get("/designer_pages/explore")
       .then(function(res) {
         expect(res).to.have.status(200);
       });
@@ -89,14 +86,6 @@ describe("Basic Server Call", function() {
       });
   });
 
-  it("should return status 200 on GET to /designer_pages/unique_client-tasks", function() {
-    return chai
-      .request(app)
-      .get("/designer_pages/unique_client-tasks")
-      .then(function(res) {
-        expect(res).to.have.status(200);
-      });
-  });
 
   it("should return status 200 on GET to /client_pages", function() {
     return chai
@@ -116,10 +105,10 @@ describe("Basic Server Call", function() {
       });
   });
 
-  it("should return status 200 on GET to /client_pages/tasks", function() {
+  it("should return status 200 on GET to /client_pages/explore", function() {
     return chai
       .request(app)
-      .get("/client_pages/tasks")
+      .get("/client_pages/explore")
       .then(function(res) {
         expect(res).to.have.status(200);
       });
@@ -138,15 +127,6 @@ describe("Basic Server Call", function() {
     return chai
       .request(app)
       .get("/client_pages/unique_project-sub_projects")
-      .then(function(res) {
-        expect(res).to.have.status(200);
-      });
-  });
-
-  it("should return status 200 on GET to /client_pages/unique_project-tasks", function() {
-    return chai
-      .request(app)
-      .get("/client_pages/unique_project-tasks")
       .then(function(res) {
         expect(res).to.have.status(200);
       });
