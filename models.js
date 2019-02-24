@@ -12,8 +12,9 @@ const accountSchema = mongoose.Schema({
   accountType: {type: String, required: true},
   userName: {type: String, required: true},
   passWord: {type: String, required: true}, 
-  taggedAccounts: {type: String, required: false},
-  profile: {type: String, required: false}
+  taggedAccounts: {type: String, required: false}, // going to be populated with accountProfiles
+  profile: {type: String, required: false}, // going to be populated with linked profile
+  projects: {type: String, required: false} // going to be populated with linked projects
 });
 
 const profileSchema = mongoose.Schema({
@@ -28,6 +29,34 @@ const profileSchema = mongoose.Schema({
   designStyle: {type: String, required: false},
   profileImage: {type: String, required: false},
   personalInfo: {type: String, required: false}
+});
+
+const projectSchema = mongoose.Schema({
+  projectTitle: {type: String, required: true},
+  taggedAccount: {type: String, required: false},
+  projectDate: {type: Date, default: Date.now},
+  subProjects: {type: String, required: false} // going to be populated with linked subProjects
+});
+
+const subProjectSchema = mongoose.Schema({
+  taggedProject: {type: String, required: false},
+  subProjectTitle: {type: String, required: false},
+  info: {type: String, required: false},
+  pictures: {type: String, required: false}, // populated with tagged pictures
+  measurements: {
+    title: {type: String, required: false},
+    number:  {type: String, required: false}
+  }
+});
+
+const subProjectPictureSchema = mongoose.Schema({
+  taggedSubProject:  {type: String, required: false},
+  pictureTitle:  {type: String, required: false},
+  pictureDate: {type: Date, default: Date.now},
+  pictureComments: {
+    commentAuthor: {type: String, required: false},
+    comment: {type: String, required: false}
+  }
 });
 
 accountSchema.virtual('accountName').get(function() {
