@@ -1,4 +1,4 @@
-1. create schemas
+1. create schemas --> look up how to populate in async fashion
 2. add more end points (CRUD)
     a. for proper path lines
 3. add proper testing for each CRUD end point...
