@@ -4,7 +4,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-const {Account} = require('./models');
+const { Account, Profile, Project, SubProject, SubProjectPicture } = require('./models');
 
 
 router.get("/", (req, res) => {
