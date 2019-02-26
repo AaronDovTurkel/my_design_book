@@ -19,6 +19,7 @@ router.get("/clients", (req, res) => {
 
 router.get("/explore", (req, res) => {
     Account
+        console.log(`hey from line 22`);
         .find()
         .then(accounts => {
             res.json(accounts.map(account => {
