@@ -22,7 +22,7 @@ router.get("/clients", (req, res) => {
 router.get("/explore", (req, res) => {
     Account
         .find()
-        .then(accounts => res.status(201).json(accounts))
+        .then(accounts => res.status(200).json(accounts))
         .catch(err => {
             console.error(err);
             res.status(500).json({ error: `something went terribly wrong ${err}` });
