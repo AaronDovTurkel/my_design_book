@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const requiredFields = ['name', 'email', 'userName', 'passWord'];
+    const requiredFields = ['email', 'userName', 'passWord'];
     for (let i = 0; i < requiredFields.length; i++) {
       const field = requiredFields[i];
       if (!(field in req.body)) {

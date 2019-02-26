@@ -3,6 +3,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
+router.use(express.json());
+
 
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
@@ -19,20 +21,11 @@ router.get("/clients", (req, res) => {
 
 router.get("/explore", (req, res) => {
     Account
-        console.log(`hey from line 22`);
         .find()
-        .then(accounts => {
-            res.json(accounts.map(account => {
-                return {
-                id: account._id,
-                name: `${account.firstName} ${account.lastName}`,
-                userName: account.userName
-                };
-            }));
-        })
+        .then(accounts => res.status(201).json(accounts))
         .catch(err => {
-        console.error(err);
-        res.status(500).json({ error: 'something went terribly wrong' });
+            console.error(err);
+            res.status(500).json({ error: `something went terribly wrong ${err}` });
         });
     res.sendFile(__dirname + "/views/pages/designer-pages/designer-explore.html");
 });

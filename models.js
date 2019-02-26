@@ -5,9 +5,9 @@ mongoose.Promise = global.Promise;
 
 //schema
 const profileSchema = mongoose.Schema({
-  taggedAccount: {type: String, required: true},
-  gender: {type: String, required: true},
-  dob: {type: Date, required: true},
+  taggedAccount: {type: String, required: false},
+  gender: {type: String, required: false},
+  dob: {type: Date, required: false},
   address: {
     streetAddress: {type: String, required: false},
     city: {type: String, required: false},
@@ -21,8 +21,8 @@ const profileSchema = mongoose.Schema({
 
 const accountSchema = mongoose.Schema({
   name: {
-    firstName: {type: String, required: true},
-    lastName: {type: String, required: true}
+    firstName: {type: String, required: false},
+    lastName: {type: String, required: false}
   },
   email: {type: String, required: true},
   accountType: {type: String, required: true},
@@ -30,7 +30,7 @@ const accountSchema = mongoose.Schema({
   passWord: {type: String, required: true}, 
   taggedAccounts: {type: String, required: false}, // going to be populated with accountProfiles
   profile: [profileSchema], // going to be populated with linked profile
-  projects: { type: mongoose.Schema.Types.ObjectId, ref: 'Project' } // going to be populated with linked projects
+  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }] // going to be populated with linked projects
 });
 
 
@@ -39,14 +39,14 @@ const projectSchema = mongoose.Schema({
   taggedAccount: {type: String, required: true},
   projectDate: {type: Date, default: Date.now},
   taggedWorkers: {type: String, required: false},
-  subProjects: { type: mongoose.Schema.Types.ObjectId, ref: 'SubProject' } // going to be populated with linked subProjects
+  subProjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProject' }] // going to be populated with linked subProjects
 });
 
 const subProjectSchema = mongoose.Schema({
-  taggedProject: {type: String, required: true},
-  subProjectTitle: {type: String, required: true},
+  taggedProject: {type: String, required: false},
+  subProjectTitle: {type: String, required: false},
   info: {type: String, required: false},
-  pictures: { type: mongoose.Schema.Types.ObjectId, ref: 'SubProjectPicture' }, // populated with tagged pictures
+  pictures: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProjectPicture' }], // populated with tagged pictures
   measurements: {
     title: {type: String, required: false},
     content:  {type: String, required: false}
@@ -68,34 +68,21 @@ const subProjectPictureSchema = mongoose.Schema({
 
 //pre-hook
 accountSchema.pre('find', function(next) {
-  projectSchema.pre('find', function(next) {
-    this.populate('subProjects');
-    next();
-    subProjectSchema.pre('find', function(next) {
-      this.populate('pictures');
-      next();
-    });
+  this.populate({
+    path: 'projects',
+    model: 'Project',
+    populate: {
+      path: 'subProjects',
+      model: 'SubProject',
+      populate: {
+        path: 'pictures',
+        model: 'SubProjectPicture'
+      }
+    }
   });
-  this.populate('name');
-  this.populate('profile');
-  this.populate('projects');
   next();
 });
 
-accountSchema.pre('findOne', function(next) {
-  projectSchema.pre('find', function(next) {
-    this.populate('subProjects');
-    next();
-    subProjectSchema.pre('find', function(next) {
-      this.populate('pictures');
-      next();
-    });
-  });
-  this.populate('name');
-  this.populate('profile');
-  this.populate('projects');
-  next();
-});
 
 // virtual
 accountSchema.virtual('accountName').get(function() {
@@ -114,13 +101,15 @@ profileSchema.virtual('profileLocation').get(function() {
 accountSchema.methods.serialize = function() {
   return {
     id: this._id,
-    name: this.accountName,
+    name: this.name,
     userName: this.userName,
-    email: this.email
+    email: this.email,
+    profile: this.profile,
+    projects: this.projects
   };
 };
 
-profileSchema.methods.serialize = function() {
+/*profileSchema.methods.serialize = function() {
   return {
     profileImage: this.profileImage,
     designStyle: this.designStyle,
@@ -151,7 +140,7 @@ subProjectSchema.methods.serialize = function() {
     },
     taggedWorkers: this.taggedWorkers
   };
-};
+};*/
 
 
 // export
