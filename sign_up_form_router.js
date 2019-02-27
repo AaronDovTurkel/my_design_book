@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-const { Account, Profile, Project, SubProject, SubProjectPicture, Comment, Measurement } = require('./models');
+const { Account, Profile, Project, SubProject, SubProjectPicture, Measurement } = require('./models');
 
 
 router.get("/", (req, res) => {
@@ -22,30 +24,21 @@ router.post('/', (req, res) => {
     }
   }
 
-  let newComment = new Comment({
-    commentAuthor: `Comment Example Author`,
-    content: `Comment content example...`
-  });
-
-  newComment.save(function (err){
-    if(err) return console.error(err.stack)
-    console.log("newComment is added")
-  });
-
+  //create and save new subProjectPicture
   let newSubProjectPicture = new SubProjectPicture({
-    pictureTitle: `SubProject Picture One`
+    pictureTitle: `SubProject Picture One`,
+    imgUrl: 'Example imgUrl'
   });
-
-  newSubProjectPicture.pictureComments.push(newComment);
 
   newSubProjectPicture.save(function (err){
     if(err) return console.error(err.stack)
     console.log("newSubProject is added")
   });
 
+  //create and save new measurement
   let newMeasurement = new Measurement({
     title: `Measurement Example Title`,
-    content: `Measerment content example...`
+    content: `Measurement content example...`
   });
 
   newMeasurement.save(function (err){
@@ -53,6 +46,7 @@ router.post('/', (req, res) => {
     console.log("newMeasurement is added")
   });
 
+  //create, save, and push new subProject (w/ info, measurement, and pic)
   let newSubProject = new SubProject({
     subProjectTitle: `SubProject One`
   });
@@ -61,6 +55,7 @@ router.post('/', (req, res) => {
   newSubProject.measurements.push(newMeasurement);
   newSubProject.pictures.push(newSubProjectPicture);
 
+  //create and save new Project (w/ pushed subProject)
   newSubProject.save(function (err){
     if(err) return console.error(err.stack)
     console.log("newSubProject is added")
@@ -77,6 +72,7 @@ router.post('/', (req, res) => {
     console.log("newProject is added")
   });
 
+  //create and save new profile
   let newProfile = new Profile({
     gender: '',
     dob: '',
@@ -86,7 +82,6 @@ router.post('/', (req, res) => {
       state: '',
       zipCode: ''
     },
-    designStyle: '',
     profileImage: '',
     personalInfo: ''
   });
@@ -96,10 +91,10 @@ router.post('/', (req, res) => {
     console.log("newProfile is added")
   });
 
+  //create and save new Account (w/ all previous pushed info)
   let newAccount = new Account({
     name: req.body.name,
     email: req.body.email,
-    accountType: req.body.accountType,
     userName: req.body.userName,
     passWord: req.body.passWord
   });

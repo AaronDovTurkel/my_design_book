@@ -14,6 +14,7 @@ app.use(express.json());
 // log the http layer
 app.use(morgan("common"));
 
+
 // CORS
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -26,18 +27,22 @@ app.use(function (req, res, next) {
 });
 
 const sign_up_form = require("./sign_up_form_router"); 
-const designer_pages = require("./designer-pages-router");
 const client_pages = require("./client-pages-router");
-
 
 app.use(express.static("public"));
 
+// home log-in page
 app.get("/", (req, res) => {
   res.sendFile("public/index.html");
 });
 
+// submit log-in
+app.post("/", (req, res) => {
+  res.sendFile("public/index.html");
+});
+
+// routed CRUD pages
 app.use("/sign_up_form", sign_up_form);
-app.use("/designer_pages", designer_pages);
 app.use("/client_pages", client_pages);
 
 

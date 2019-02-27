@@ -3,6 +3,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
 const expect = chai.expect;
 
@@ -27,106 +28,6 @@ describe("Basic Server Call", function() {
     return chai
       .request(app)
       .get("/")
-      .then(function(res) {
-        expect(res).to.have.status(200);
-      });
-  });
-
-  it("should return status 200 on GET to /sign_up_form", function() {
-    return chai
-      .request(app)
-      .get("/sign_up_form")
-      .then(function(res) {
-        expect(res).to.have.status(200);
-      });
-  });
-
-  it("should return status 200 on GET to /designer_pages", function() {
-    return chai
-      .request(app)
-      .get("/designer_pages")
-      .then(function(res) {
-        expect(res).to.have.status(200);
-      });
-  });
-
-  it("should return status 200 on GET to /designer_pages/clients", function() {
-    return chai
-      .request(app)
-      .get("/designer_pages/clients")
-      .then(function(res) {
-        expect(res).to.have.status(200);
-      });
-  });
-
-  it("should return status 200 on GET to /designer_pages/explore", function() {
-    return chai
-      .request(app)
-      .get("/designer_pages/explore")
-      .then(function(res) {
-        expect(res).to.have.status(200);
-      });
-  });
-
-  it("should return status 200 on GET to /designer_pages/unique_client", function() {
-    return chai
-      .request(app)
-      .get("/designer_pages/unique_client")
-      .then(function(res) {
-        expect(res).to.have.status(200);
-      });
-  });
-
-  it("should return status 200 on GET to /designer_pages/unique_client-projects", function() {
-    return chai
-      .request(app)
-      .get("/designer_pages/unique_client-projects")
-      .then(function(res) {
-        expect(res).to.have.status(200);
-      });
-  });
-
-
-  it("should return status 200 on GET to /client_pages", function() {
-    return chai
-      .request(app)
-      .get("/client_pages")
-      .then(function(res) {
-        expect(res).to.have.status(200);
-      });
-  });
-
-  it("should return status 200 on GET to /client_pages/projects", function() {
-    return chai
-      .request(app)
-      .get("/client_pages/projects")
-      .then(function(res) {
-        expect(res).to.have.status(200);
-      });
-  });
-
-  it("should return status 200 on GET to /client_pages/explore", function() {
-    return chai
-      .request(app)
-      .get("/client_pages/explore")
-      .then(function(res) {
-        expect(res).to.have.status(200);
-      });
-  });
-
-  it("should return status 200 on GET to /client_pages/unique_project", function() {
-    return chai
-      .request(app)
-      .get("/client_pages/unique_project")
-      .then(function(res) {
-        expect(res).to.have.status(200);
-      });
-  });
-
-  it("should return status 200 on GET to /client_pages/unique_project-sub_projects", function() {
-    return chai
-      .request(app)
-      .get("/client_pages/unique_project-sub_projects")
       .then(function(res) {
         expect(res).to.have.status(200);
       });
