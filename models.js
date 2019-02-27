@@ -37,7 +37,7 @@ const measurementSchema = mongoose.Schema({
 const subProjectSchema = mongoose.Schema({
   subProjectTitle: {type: String, required: false},
   info: [{type: String, required: false}],
-  pictures: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProjectPicture' }], // populated with tagged pictures
+  pictures: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProjectPicture' }], 
   measurements: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Measurement' }],
   taggedWorkers: [{type: String, required: false}]
 });
@@ -46,7 +46,7 @@ const projectSchema = mongoose.Schema({
   projectTitle: {type: String, required: true},
   projectDate: {type: Date, default: Date.now},
   taggedWorkers: [{type: String, required: false}],
-  subProjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProject' }] // going to be populated with linked subProjects
+  subProjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProject' }] 
 });
 
 const accountSchema = mongoose.Schema({ 
@@ -65,43 +65,6 @@ const accountSchema = mongoose.Schema({
 
 
 //pre-hook
-/*accountSchema.pre('find', function(next) {
-  this.populate('projects');
-  next();
-});
-
-accountSchema.pre('save', function(next) {
-  this.populate({
-    path: 'projects',
-    model: 'Project',
-    populate: {
-      path: 'subProjects',
-      model: 'SubProject'
-    }
-  });
-  next();
-});
-
-projectSchema.pre('create', function(next) {
-  this.populate({
-    path: 'subProjects',
-    model: 'SubProject',
-    populate: {
-      path: 'pictures',
-      model: 'SubProjectPicture',
-      populate: {
-        path: 'comments',
-        model: 'SubProjectPicture'
-      }
-    }
-  });
-  next();
-});
-
-projectSchema.pre('find', function(next) {
-  this.populate('subProjects')
-  next();
-});*/
 
 
 // virtual
@@ -119,48 +82,7 @@ profileSchema.virtual('profileLocationState').get(function() {
 
 //serialize
 /*accountSchema.methods.serialize = function() {
-  return {
-    id: this._id,
-    name: this.name,
-    userName: this.userName,
-    email: this.email,
-    profile: this.profile,
-    projects: this.projects
-  };
-};
-
-profileSchema.methods.serialize = function() {
-  return {
-    profileImage: this.profileImage,
-    designStyle: this.designStyle,
-    personalInfo: this.personalInfo,
-    location: this.profileLocation
-  };
-};
-
-projectSchema.methods.serialize = function() {
-  return {
-    projectTitle: this.projectTitle,
-    taggedAccount: this.taggedAccount,
-    projectDate: this.projectDate,
-    taggedWorkers: this.taggedWorkers,
-    subProjects: this.subProjects
-  };
-};
-
-subProjectSchema.methods.serialize = function() {
-  return {
-    taggedProject: this.taggedProject,
-    subProjectTitle: this.subProjectTitle,
-    info: this.info,
-    pictures: this.pictures, 
-    measurements: {
-      title: this.title,
-      content:  this.content
-    },
-    taggedWorkers: this.taggedWorkers
-  };
-};*/
+  return {}*/
 
 
 // export
