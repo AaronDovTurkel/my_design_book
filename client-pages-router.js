@@ -10,9 +10,28 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
 const { Account, Profile, Project, SubProject, SubProjectPicture, Measurement } = require('./models');
+// gets //
+// get - findAll accounts
+router.get("/explore", (req, res) => {
+    Account
+        .find()
+        .then(accounts => res.status(200).json(accounts))
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: `something went terribly wrong ${err}` });
+        });
+    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
+});
 
-// 6 gets
-router.get("/", (req, res) => {
+// get - find one account profile by id
+router.get("/explore/:id", (req, res) => {
+    Account
+        .findById(req.params.id)
+        .then(account => res.status(200).json(account.profile))
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'something went horribly awry' });
+        });
     res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
 });
 

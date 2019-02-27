@@ -58,6 +58,12 @@ const accountSchema = mongoose.Schema({
 //pre-hook
 
 
+accountSchema.pre('findById', function(next) {
+  this.populate('profile');
+  next();
+});
+
+
 // virtual
 accountSchema.virtual('accountName').get(function() {
   return `${this.name.firstName} ${this.name.lastName}`.trim();

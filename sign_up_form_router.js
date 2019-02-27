@@ -75,7 +75,7 @@ router.post('/', (req, res) => {
   //create and save new profile
   let newProfile = new Profile({
     gender: '',
-    dob: '',
+    dob: 0,
     address: {
       streetAddress: '',
       city: '',
