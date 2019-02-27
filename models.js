@@ -13,20 +13,15 @@ const profileSchema = mongoose.Schema({
     state: {type: String, required: false},
     zipCode: {type: String, required: false}
   },
-  designStyle: {type: String, required: false},
   profileImage: {type: String, required: false},
   personalInfo: {type: String, required: false}
 });
 
-const commentSchema = mongoose.Schema({
-  commentAuthor: {type: String, required: false},
-  content: {type: String, required: false}
-});
 
 const subProjectPictureSchema = mongoose.Schema({
   pictureTitle:  {type: String, required: true},
   pictureDate: {type: Date, default: Date.now},
-  pictureComments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
+  imgUrl: {type: String, required: true}
 });
 
 const measurementSchema = mongoose.Schema({
@@ -39,13 +34,11 @@ const subProjectSchema = mongoose.Schema({
   info: [{type: String, required: false}],
   pictures: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProjectPicture' }], 
   measurements: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Measurement' }],
-  taggedWorkers: [{type: String, required: false}]
 });
 
 const projectSchema = mongoose.Schema({ 
   projectTitle: {type: String, required: true},
   projectDate: {type: Date, default: Date.now},
-  taggedWorkers: [{type: String, required: false}],
   subProjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProject' }] 
 });
 
@@ -55,10 +48,8 @@ const accountSchema = mongoose.Schema({
     lastName: {type: String, required: false}
   },
   email: {type: String, required: true},
-  accountType: {type: String, required: true},
   userName: {type: String, required: true},
-  passWord: {type: String, required: true}, 
-  taggedAccounts: [{type: String, required: false}],
+  passWord: {type: String, required: true},
   profile: [profileSchema], 
   projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }] 
 });
@@ -96,8 +87,6 @@ const SubProject = mongoose.model('SubProject', subProjectSchema);
 
 const SubProjectPicture = mongoose.model('SubProjectPicture', subProjectPictureSchema);
 
-const Comment = mongoose.model('Comment', commentSchema);
-
 const Measurement = mongoose.model('Measurement', measurementSchema);
 
-module.exports = { Account, Profile, Project, SubProject, SubProjectPicture, Comment, Measurement };
+module.exports = { Account, Profile, Project, SubProject, SubProjectPicture, Measurement };
