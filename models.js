@@ -5,7 +5,6 @@ mongoose.Promise = global.Promise;
 
 //schema
 const profileSchema = mongoose.Schema({
-  taggedAccount: {type: String, required: false},
   gender: {type: String, required: false},
   dob: {type: Date, required: false},
   address: {
@@ -19,7 +18,38 @@ const profileSchema = mongoose.Schema({
   personalInfo: {type: String, required: false}
 });
 
-const accountSchema = mongoose.Schema({
+const commentSchema = mongoose.Schema({
+  commentAuthor: {type: String, required: false},
+  content: {type: String, required: false}
+});
+
+const subProjectPictureSchema = mongoose.Schema({
+  pictureTitle:  {type: String, required: true},
+  pictureDate: {type: Date, default: Date.now},
+  pictureComments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]
+});
+
+const measurementSchema = mongoose.Schema({
+  title: {type: String, required: false},
+  content:  {type: String, required: false}
+});
+
+const subProjectSchema = mongoose.Schema({
+  subProjectTitle: {type: String, required: false},
+  info: [{type: String, required: false}],
+  pictures: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProjectPicture' }], // populated with tagged pictures
+  measurements: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Measurement' }],
+  taggedWorkers: [{type: String, required: false}]
+});
+
+const projectSchema = mongoose.Schema({ 
+  projectTitle: {type: String, required: true},
+  projectDate: {type: Date, default: Date.now},
+  taggedWorkers: [{type: String, required: false}],
+  subProjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProject' }] // going to be populated with linked subProjects
+});
+
+const accountSchema = mongoose.Schema({ 
   name: {
     firstName: {type: String, required: false},
     lastName: {type: String, required: false}
@@ -28,54 +58,39 @@ const accountSchema = mongoose.Schema({
   accountType: {type: String, required: true},
   userName: {type: String, required: true},
   passWord: {type: String, required: true}, 
-  taggedAccounts: {type: String, required: false}, // going to be populated with accountProfiles
-  profile: [profileSchema], // going to be populated with linked profile
-  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }] // going to be populated with linked projects
+  taggedAccounts: [{type: String, required: false}],
+  profile: [profileSchema], 
+  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }] 
 });
 
-
-const projectSchema = mongoose.Schema({
-  projectTitle: {type: String, required: true},
-  taggedAccount: {type: String, required: true},
-  projectDate: {type: Date, default: Date.now},
-  taggedWorkers: {type: String, required: false},
-  subProjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProject' }] // going to be populated with linked subProjects
-});
-
-const subProjectSchema = mongoose.Schema({
-  taggedProject: {type: String, required: false},
-  subProjectTitle: {type: String, required: false},
-  info: {type: String, required: false},
-  pictures: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProjectPicture' }], // populated with tagged pictures
-  measurements: {
-    title: {type: String, required: false},
-    content:  {type: String, required: false}
-  },
-  taggedWorkers: {type: String, required: false}
-});
-
-const commentSchema = mongoose.Schema({
-  commentAuthor: {type: String, required: false},
-  content: {type: String, required: false}
-})
-
-const subProjectPictureSchema = mongoose.Schema({
-  taggedSubProject:  {type: String, required: true},
-  pictureTitle:  {type: String, required: true},
-  pictureDate: {type: Date, default: Date.now},
-  pictureComments: [commentSchema]
-});
 
 //pre-hook
-accountSchema.pre('find', function(next) {
+/*accountSchema.pre('find', function(next) {
+  this.populate('projects');
+  next();
+});
+
+accountSchema.pre('save', function(next) {
   this.populate({
     path: 'projects',
     model: 'Project',
     populate: {
       path: 'subProjects',
-      model: 'SubProject',
+      model: 'SubProject'
+    }
+  });
+  next();
+});
+
+projectSchema.pre('create', function(next) {
+  this.populate({
+    path: 'subProjects',
+    model: 'SubProject',
+    populate: {
+      path: 'pictures',
+      model: 'SubProjectPicture',
       populate: {
-        path: 'pictures',
+        path: 'comments',
         model: 'SubProjectPicture'
       }
     }
@@ -83,22 +98,27 @@ accountSchema.pre('find', function(next) {
   next();
 });
 
+projectSchema.pre('find', function(next) {
+  this.populate('subProjects')
+  next();
+});*/
+
 
 // virtual
 accountSchema.virtual('accountName').get(function() {
   return `${this.name.firstName} ${this.name.lastName}`.trim();
 });
 
-profileSchema.virtual('profileAddress').get(function() {
+profileSchema.virtual('profileAddressFull').get(function() {
   return `${this.address.streetAddress}, ${this.address.city}, ${this.address.state}, ${this.address.zipCode}`.trim();
 });
 
-profileSchema.virtual('profileLocation').get(function() {
+profileSchema.virtual('profileLocationState').get(function() {
   return `${this.address.state}`.trim();
 });
 
 //serialize
-accountSchema.methods.serialize = function() {
+/*accountSchema.methods.serialize = function() {
   return {
     id: this._id,
     name: this.name,
@@ -109,7 +129,7 @@ accountSchema.methods.serialize = function() {
   };
 };
 
-/*profileSchema.methods.serialize = function() {
+profileSchema.methods.serialize = function() {
   return {
     profileImage: this.profileImage,
     designStyle: this.designStyle,
@@ -154,4 +174,8 @@ const SubProject = mongoose.model('SubProject', subProjectSchema);
 
 const SubProjectPicture = mongoose.model('SubProjectPicture', subProjectPictureSchema);
 
-module.exports = { Account, Profile, Project, SubProject, SubProjectPicture };
+const Comment = mongoose.model('Comment', commentSchema);
+
+const Measurement = mongoose.model('Measurement', measurementSchema);
+
+module.exports = { Account, Profile, Project, SubProject, SubProjectPicture, Comment, Measurement };
