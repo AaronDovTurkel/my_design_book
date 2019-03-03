@@ -107,8 +107,68 @@ router.get("/:id/subProjectPicture", (req, res) => {
 });
 
 // 6 posts
-router.post("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
+// post - findById() - post to unique client -> new project
+router.post("/:id/project", (req, res) => {
+    const requiredFields = ['projectTitle'];
+    for (let i = 0; i < requiredFields.length; i++) {
+        const field = requiredFields[i];
+        if (!(field in req.body)) {
+            const message = `Missing \`${field}\` in request body`;
+            console.error(message);
+            return res.status(400).send(message);
+        }
+    }
+
+    Project.
+        create({
+            projectTitle: req.body.projectTitle,
+            account: req.params.id
+        }).
+        then(project => {
+            SubProject.
+                create({
+                    subProjectTitle: `Empty subProject One`,
+                    project: project._id
+                }).
+                then(subProject => {
+                    SubProjectPicture.
+                        create({
+                            pictureTitle: `Empty Picture One`,
+                            subProject: subProject._id,
+                            imgUrl: 'fakeUrl.furl'
+                        }).
+                        then (subProjectPicture => {
+                            subProject.pictures.push(subProjectPicture);
+                            subProject.info.push('Empty info message...');
+                            subProject.measurements.push({
+                              title: "Empty Measurement Title",
+                              content: 'Empty measurement message...'
+                            });
+                            subProject.save(function(err){
+                              if(err) return console.log(err.stack);
+                            });
+                            project.subProjects.push(subProject);
+                            project.save(function(err){
+                              if(err) return console.log(err.stack);
+                            });
+                            Account.
+                                findById(req.params.id).
+                                then(updatedUser => {
+                                    updatedUser.projects.push(project);
+                                    updatedUser.save(function(err){
+                                        if(err) return console.log(err.stack);
+                                        console.log("new user added with a fully populated project");
+                                    });
+                                });
+                            res.status(201).json(project);
+                            console.log(`${project}`);
+                        });
+                });
+        }).
+        catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'something went horribly awry' });
+        });
 });
 
 router.post("/", (req, res) => {

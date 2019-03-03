@@ -59,112 +59,25 @@ router.post('/', (req, res) => {
                   });
                   subProject.save(function(err){
                     if(err) return console.log(err.stack);
+                  });
                   project.subProjects.push(subProject);
                   project.save(function(err){
                     if(err) return console.log(err.stack);
+                  });
                   user.projects.push(project);
                   user.save(function(err){
                     if(err) return console.log(err.stack);
-                    console.log("new user added with a populated project");
+                    console.log("new user added with a fully populated project");
                   });
                 });
-              });
             });
-          });
         });
       res.status(200).json(user);
-    })
-    .catch(err => {
+    }).
+    catch(err => {
       console.error(err);
       res.status(500).json({ error: 'Something went wrong' });
     });
-
-
-
-  //create and save new subProjectPicture
-  /*let newSubProjectPicture = new SubProjectPicture({
-    pictureTitle: `SubProject Picture One`,
-    imgUrl: 'Example imgUrl'
-  });
-
-  newSubProjectPicture.save(function (err){
-    if(err) return console.error(err.stack)
-    console.log("newSubProject is added")
-  });
-
-  //create and save new measurement
-  let newMeasurement = new Measurement({
-    title: `Measurement Example Title`,
-    content: `Measurement content example...`
-  });
-
-  newMeasurement.save(function (err){
-    if(err) return console.error(err.stack)
-    console.log("newMeasurement is added")
-  });
-
-  //create, save, and push new subProject (w/ info, measurement, and pic)
-  let newSubProject = new SubProject({
-    subProjectTitle: `SubProject One`
-  });
-
-  newSubProject.info.push(`Example info for subProject One...`);
-  newSubProject.measurements.push(newMeasurement);
-  newSubProject.pictures.push(newSubProjectPicture);
-
-  //create and save new Project (w/ pushed subProject)
-  newSubProject.save(function (err){
-    if(err) return console.error(err.stack)
-    console.log("newSubProject is added")
-  });
-
-  let newProject = new Project({
-    projectTitle: `Project One`
-  });
-
-  newProject.subProjects.push(newSubProject);
-
-  newProject.save(function (err){
-    if(err) return console.error(err.stack)
-    console.log("newProject is added")
-  });
-
-  //create and save new profile
-  let newProfile = new Profile({
-    gender: '',
-    dob: 0,
-    address: {
-      streetAddress: '',
-      city: '',
-      state: '',
-      zipCode: ''
-    },
-    profileImage: '',
-    personalInfo: ''
-  });
-
-  newProfile.save(function (err){
-    if(err) return console.error(err.stack)
-    console.log("newProfile is added")
-  });
-
-  //create and save new Account (w/ all previous pushed info)
-  let newAccount = new Account({
-    name: req.body.name,
-    email: req.body.email,
-    userName: req.body.userName,
-    passWord: req.body.passWord
-  });
-
-  newAccount.profile.push(newProfile);
-  newAccount.projects.push(newProject);
-
-  
-  newAccount.save(function(err){
-	  if(err) return console.log(err.stack);
-	  console.log("newAccount is added")
-  });*/
- 
 });
 
 module.exports = router;
