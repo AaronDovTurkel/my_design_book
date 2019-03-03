@@ -157,7 +157,7 @@ router.post("/:id/project", (req, res) => {
                                     updatedUser.projects.push(project);
                                     updatedUser.save(function(err){
                                         if(err) return console.log(err.stack);
-                                        console.log("new user added with a fully populated project");
+                                        console.log("user updated with a fully populated new project");
                                     });
                                 });
                             res.status(201).json(project);
@@ -171,12 +171,125 @@ router.post("/:id/project", (req, res) => {
         });
 });
 
-router.post("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
+// post - create - post to unique client -> unique project -> new subProject
+router.post("/:id/subProject", (req, res) => {
+    const requiredFields = ['subProjectTitle'];
+    for (let i = 0; i < requiredFields.length; i++) {
+        const field = requiredFields[i];
+        if (!(field in req.body)) {
+            const message = `Missing \`${field}\` in request body`;
+            console.error(message);
+            return res.status(400).send(message);
+        }
+    }
+
+    SubProject.
+        create({
+            subProjectTitle: req.body.subProjectTitle,
+            project: req.params.id
+        }).
+        then(subProject => {
+            SubProjectPicture.
+                create({
+                    pictureTitle: `Empty Picture One`,
+                    subProject: subProject._id,
+                    imgUrl: 'fakeUrl.furl'
+                }).
+                then (subProjectPicture => {
+                    subProject.pictures.push(subProjectPicture);
+                    subProject.info.push('Empty info message...');
+                    subProject.measurements.push({
+                        title: "Empty Measurement Title",
+                        content: 'Empty measurement message...'
+                    });
+                    subProject.save(function(err){
+                        if(err) return console.log(err.stack);
+                    });
+                    Project.
+                        findById(req.params.id).
+                        then(updatedProject => {
+                            updatedProject.subProjects.push(subProject);
+                            updatedProject.save(function(err){
+                                if(err) return console.log(err.stack);
+                                console.log("project updated with a fully populated new subProject");
+                            });
+                            Account.
+                                findById(updatedProject.account).
+                                then(updatedUser => {
+                                    updatedUser.projects.push(updatedProject);
+                                    updatedUser.save(function(err){
+                                        if(err) return console.log(err.stack);
+                                        console.log("project updated with a fully populated new subProject");
+                                    });
+                                });
+                        });
+                    res.status(201).json(subProject);
+                    console.log(`${subProject}`);
+                });
+        }).
+        catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'something went horribly awry' });
+        });
 });
 
-router.post("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
+// post - create - post to unique client -> unique project -> unique subProject -> new picture
+router.post("/:id/subProjectPicture", (req, res) => {
+    const requiredFields = ['pictureTitle', 'imgUrl'];
+    for (let i = 0; i < requiredFields.length; i++) {
+        const field = requiredFields[i];
+        if (!(field in req.body)) {
+            const message = `Missing \`${field}\` in request body`;
+            console.error(message);
+            return res.status(400).send(message);
+        }
+    }
+
+    SubProjectPicture.
+        create({
+            pictureTitle: req.body.pictureTitle,
+            subProject: req.params.id,
+            imgUrl: req.body.imgUrl
+        }).
+        then (subProjectPicture => {
+            SubProject.
+                findById(req.params.id).
+                then(updatedSubProject => {
+                    updatedSubProject.pictures.push(subProjectPicture);
+                    updatedSubProject.info.push('Empty info message...');
+                    updatedSubProject.measurements.push({
+                        title: "Empty Measurement Title",
+                        content: 'Empty measurement message...'
+                    });
+                    updatedSubProject.save(function(err){
+                        if(err) return console.log(err.stack);
+                    });
+                    Project.
+                        findById(updatedSubProject.project).
+                        then(updatedProject => {
+                            updatedProject.subProjects.push(updatedSubProject);
+                            updatedProject.save(function(err){
+                                if(err) return console.log(err.stack);
+                            });
+                            Account.
+                                findById(updatedProject.account).
+                                then(updatedUser => {
+                                    updatedUser.projects.push(updatedProject);
+                                    updatedUser.save(function(err){
+                                        if(err) return console.log(err.stack);
+                                        console.log("project updated with a fully populated new subProject");
+                                    });
+                                });
+                        });
+                })
+            
+            res.status(201).json(subProjectPicture);
+            console.log(`${subProjectPicture}`);
+        }).
+        catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'something went horribly awry' });
+        });
 });
 
 router.post("/", (req, res) => {
