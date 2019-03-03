@@ -19,6 +19,7 @@ const profileSchema = mongoose.Schema({
 
 
 const subProjectPictureSchema = mongoose.Schema({
+  subProject: { type: mongoose.Schema.Types.ObjectId, ref: 'SubProject' },
   pictureTitle:  {type: String, required: true},
   pictureDate: {type: Date, default: Date.now},
   imgUrl: {type: String, required: true}
@@ -30,16 +31,18 @@ const measurementSchema = mongoose.Schema({
 });
 
 const subProjectSchema = mongoose.Schema({
+  project: { type: mongoose.Schema.Types.String, ref: 'Project' },
   subProjectTitle: {type: String, required: false},
   info: [{type: String, required: false}],
   pictures: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProjectPicture' }], 
-  measurements: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Measurement' }],
+  measurements: [measurementSchema],
 });
 
 const projectSchema = mongoose.Schema({ 
+  account: { type: mongoose.Schema.Types.ObjectId, ref: 'Account' },
   projectTitle: {type: String, required: true},
   projectDate: {type: Date, default: Date.now},
-  subProjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProject' }] 
+  subProjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'SubProject' }]
 });
 
 const accountSchema = mongoose.Schema({ 
@@ -51,36 +54,21 @@ const accountSchema = mongoose.Schema({
   userName: {type: String, required: true},
   passWord: {type: String, required: true},
   profile: [profileSchema], 
-  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }] 
+  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }]
 });
+
 
 
 //pre-hook
 
 
-accountSchema.pre('findById', function(next) {
-  this.populate('profile');
-  next();
-});
-
 
 // virtual
-accountSchema.virtual('accountName').get(function() {
-  return `${this.name.firstName} ${this.name.lastName}`.trim();
-});
 
-profileSchema.virtual('profileAddressFull').get(function() {
-  return `${this.address.streetAddress}, ${this.address.city}, ${this.address.state}, ${this.address.zipCode}`.trim();
-});
-
-profileSchema.virtual('profileLocationState').get(function() {
-  return `${this.address.state}`.trim();
-});
 
 //serialize
 /*accountSchema.methods.serialize = function() {
   return {}*/
-
 
 // export
 const Account = mongoose.model('Account', accountSchema);

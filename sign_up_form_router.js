@@ -24,8 +24,65 @@ router.post('/', (req, res) => {
     }
   }
 
+  Account
+    .create({
+      name: req.body.name,
+      email: req.body.email,
+      userName: req.body.userName,
+      passWord: req.body.passWord
+    })
+    .then(user => {
+      Project
+        .create({
+          projectTitle: `Empty Project One`,
+          account: user._id
+        })
+        .then(project => {
+          SubProject
+            .create({
+              subProjectTitle: `Empty subProject One`,
+              project: project._id
+            })
+            .then(subProject => {
+              SubProjectPicture
+                .create({
+                  pictureTitle: `Empty Picture One`,
+                  subProject: subProject._id,
+                  imgUrl: 'fakeUrl.furl'
+                })
+                .then (subProjectPicture => {
+                  subProject.pictures.push(subProjectPicture);
+                  subProject.info.push('Empty info message...');
+                  subProject.measurements.push({
+                    title: "Empty Measurement Title",
+                    content: 'Empty measurement message...'
+                  });
+                  subProject.save(function(err){
+                    if(err) return console.log(err.stack);
+                  project.subProjects.push(subProject);
+                  project.save(function(err){
+                    if(err) return console.log(err.stack);
+                  user.projects.push(project);
+                  user.save(function(err){
+                    if(err) return console.log(err.stack);
+                    console.log("new user added with a populated project");
+                  });
+                });
+              });
+            });
+          });
+        });
+      res.status(200).json(user);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'Something went wrong' });
+    });
+
+
+
   //create and save new subProjectPicture
-  let newSubProjectPicture = new SubProjectPicture({
+  /*let newSubProjectPicture = new SubProjectPicture({
     pictureTitle: `SubProject Picture One`,
     imgUrl: 'Example imgUrl'
   });
@@ -106,9 +163,7 @@ router.post('/', (req, res) => {
   newAccount.save(function(err){
 	  if(err) return console.log(err.stack);
 	  console.log("newAccount is added")
-  });
-
-  res.status(200).json(newAccount);
+  });*/
  
 });
 
