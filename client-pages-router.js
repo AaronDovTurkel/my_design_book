@@ -261,12 +261,62 @@ router.post("/:id/subProjectPicture", (req, res) => {
         });
 });
 
-router.post("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
+// post - add info to subProject
+router.post("/:id/subProjectInfo", (req, res) => {
+    const requiredFields = ['info'];
+    for (let i = 0; i < requiredFields.length; i++) {
+        const field = requiredFields[i];
+        if (!(field in req.body)) {
+            const message = `Missing \`${field}\` in request body`;
+            console.error(message);
+            return res.status(400).send(message);
+        }
+    }
+
+    SubProject.
+        findById(req.params.id).
+        then(subProject => {
+            subProject.info.push(req.body.info)
+            subProject.save(function(err){
+                if(err) return console.log(err.stack);
+                console.log("added info to subProject");
+            res.status(201).json(subProject.info);
+            console.log(`${subProject.info}`);
+            });
+        }).
+        catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'something went horribly awry' });
+        });
 });
 
-router.post("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
+// post - add measurement to subProject
+router.post("/:id/subProjectMeasurements", (req, res) => {
+    const requiredFields = ['title', 'content'];
+    for (let i = 0; i < requiredFields.length; i++) {
+        const field = requiredFields[i];
+        if (!(field in req.body)) {
+            const message = `Missing \`${field}\` in request body`;
+            console.error(message);
+            return res.status(400).send(message);
+        }
+    }
+
+    SubProject.
+        findById(req.params.id).
+        then(subProject => {
+            subProject.measurements.push(req.body)
+            subProject.save(function(err){
+                if(err) return console.log(err.stack);
+                console.log("added measurement to subProject");
+            res.status(201).json(subProject);
+            console.log(`${subProject}`);
+            });
+        }).
+        catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'something went horribly awry' });
+        });
 });
 
 router.post("/", (req, res) => {
