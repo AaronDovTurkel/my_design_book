@@ -213,15 +213,6 @@ router.post("/:id/subProject", (req, res) => {
                                 if(err) return console.log(err.stack);
                                 console.log("project updated with a fully populated new subProject");
                             });
-                            Account.
-                                findById(updatedProject.account).
-                                then(updatedUser => {
-                                    updatedUser.projects.push(updatedProject);
-                                    updatedUser.save(function(err){
-                                        if(err) return console.log(err.stack);
-                                        console.log("project updated with a fully populated new subProject");
-                                    });
-                                });
                         });
                     res.status(201).json(subProject);
                     console.log(`${subProject}`);
@@ -256,31 +247,9 @@ router.post("/:id/subProjectPicture", (req, res) => {
                 findById(req.params.id).
                 then(updatedSubProject => {
                     updatedSubProject.pictures.push(subProjectPicture);
-                    updatedSubProject.info.push('Empty info message...');
-                    updatedSubProject.measurements.push({
-                        title: "Empty Measurement Title",
-                        content: 'Empty measurement message...'
-                    });
                     updatedSubProject.save(function(err){
                         if(err) return console.log(err.stack);
                     });
-                    Project.
-                        findById(updatedSubProject.project).
-                        then(updatedProject => {
-                            updatedProject.subProjects.push(updatedSubProject);
-                            updatedProject.save(function(err){
-                                if(err) return console.log(err.stack);
-                            });
-                            Account.
-                                findById(updatedProject.account).
-                                then(updatedUser => {
-                                    updatedUser.projects.push(updatedProject);
-                                    updatedUser.save(function(err){
-                                        if(err) return console.log(err.stack);
-                                        console.log("project updated with a fully populated new subProject");
-                                    });
-                                });
-                        });
                 })
             
             res.status(201).json(subProjectPicture);
