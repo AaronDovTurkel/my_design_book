@@ -106,7 +106,7 @@ router.get("/:id/subProjectPicture", (req, res) => {
         });
 });
 
-// 6 posts
+// post section //
 // post - findById() - post to unique client -> new project
 router.post("/:id/project", (req, res) => {
     const requiredFields = ['projectTitle'];
@@ -319,97 +319,187 @@ router.post("/:id/subProjectMeasurements", (req, res) => {
         });
 });
 
-router.post("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
-});
 
-// 6 puts
-router.put("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
-});
-
-router.put("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
-});
-
-router.put("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
-});
-
-router.put("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
-});
-
-router.put("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
-});
-
-router.put("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
-});
-
-// 6 deletes
-router.delete("/explore", (req, res) => {
-    Account
-        .deleteMany();
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
-});
-
-router.delete("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
-});
-
-router.delete("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
-});
-
-router.delete("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
-});
-
-router.delete("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
-});
-
-router.delete("/", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
-});
-
-
-
-/*router.get("/projects", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-projects.html");
-});
-
-router.post('/projects', (req, res) => {
-    const requiredFields = ['projectTitle', 'taggedAccount'];
-    for (let i = 0; i < requiredFields.length; i++) {
-      const field = requiredFields[i];
-      if (!(field in req.body)) {
-        const message = `Missing \`${field}\` in request body`;
-        console.error(message);
-        return res.status(400).send(message);
-      }
+// put section //
+// put - update Account info
+router.put("/:id", (req, res) => {
+    const updated = {};
+    const updateableFields = ['name', 'email', 'userName', 'passWord'];
+    updateableFields.forEach(field => {
+    if (field in req.body) {
+        updated[field] = req.body[field];
     }
+    });
+
+    Account.
+        findByIdAndUpdate(req.params.id, { $set: updated }, { new: true }).
+        then(updatedAccount => {
+            console.log(updatedAccount);
+            res.status(200).json(updatedAccount);
+        }).
+        catch(err => {
+            console.log(err);
+            res.status(500).json({ message: 'Something went wrong' });
+        });
 });
 
-router.get("/explore", (req, res) => {
-    Account
-        .find()
-        .then(accounts => res.status(200).json(accounts))
+// put - update Project info
+router.put("/:id/project", (req, res) => {
+    const updated = {};
+    const updateableFields = ['projectTitle'];
+    updateableFields.forEach(field => {
+    if (field in req.body) {
+        updated[field] = req.body[field];
+    }
+    });
+
+    Project.
+        findByIdAndUpdate(req.params.id, { $set: updated }, { new: true }).
+        then(updatedProject => {
+            console.log(updatedProject);
+            res.status(200).json(updatedProject);
+        }).
+        catch(err => {
+            console.log(err);
+            res.status(500).json({ message: 'Something went wrong' });
+        });
+});
+
+// put - update subProjectTitle info
+router.put("/:id/subProjectTitle", (req, res) => {
+    const updated = {};
+    const updateableFields = ['subProjectTitle'];
+    updateableFields.forEach(field => {
+    if (field in req.body) {
+        updated[field] = req.body[field];
+    }
+    });
+
+    SubProject.
+        findByIdAndUpdate(req.params.id, { $set: updated }, { new: true }).
+        then(updatedSubProject => {
+            console.log(updatedSubProject);
+            res.status(200).json(updatedSubProject);
+        }).
+        catch(err => {
+            console.log(err);
+            res.status(500).json({ message: 'Something went wrong' });
+        });
+});
+
+// put - update subProjectPicture info
+router.put("/:id/subProjectPicture", (req, res) => {
+    const updated = {};
+    const updateableFields = ['pictureTitle', 'imgUrl'];
+    updateableFields.forEach(field => {
+    if (field in req.body) {
+        updated[field] = req.body[field];
+    }
+    });
+
+    SubProjectPicture.
+        findByIdAndUpdate(req.params.id, { $set: updated }, { new: true }).
+        then(updatedSubProjectPicture => {
+            console.log(updatedSubProjectPicture);
+            res.status(200).json(updatedSubProjectPicture);
+        }).
+        catch(err => {
+            console.log(err);
+            res.status(500).json({ message: 'Something went wrong' });
+        });
+});
+
+
+// delete section //
+// delete - All Accounts, Projects, SubProjects, and SubProjectPictures
+router.delete("/explore", (req, res) => {
+    Account.
+        deleteMany().
+        then(() => console.log(`All Accounts Wiped`)).
+        catch(err => {
+            console.log(err);
+            res.status(500).json({ message: 'Something went wrong' });
+        });
+    Project.
+        deleteMany().
+        then(() => console.log(`All Projects Wiped`)).
+        catch(err => {
+            console.log(err);
+            res.status(500).json({ message: 'Something went wrong' });
+        });
+    SubProject.
+        deleteMany().
+        then(() => console.log(`All SubProjects Wiped`)).
+        catch(err => {
+            console.log(err);
+            res.status(500).json({ message: 'Something went wrong' });
+        });
+    SubProjectPicture.
+        deleteMany().
+        then(() => console.log(`All SubProjectPictures Wiped`)).
+        catch(err => {
+            console.log(err);
+            res.status(500).json({ message: 'Something went wrong' });
+        });
+    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
+});
+
+// delete - unique account
+router.delete("/:id", (req, res) => {
+    Account.
+        findById(req.params.id).
+        then(account => {
+            Project.
+                find({account: req.params.id}).
+                then(projects => {
+                    for (let i = 0; i < projects.length; i++) {
+                        SubProject.
+                            find({project: projects[i]._id})
+                            .then(subProjects => {
+                                for (let i = 0; i < projects.length; i++) {
+                                    SubProjectPicture.
+                                        deleteMany({subProject: subProjects[i]._id})
+                                        .then(() => {
+                                            console.log(`SubProjectPictures Wiped`);
+                                        });
+                                };
+                            });
+                        SubProject.
+                            deleteMany({project: projects[i]._id})
+                            .then(() => {
+                                console.log(`SubProjects Wiped`);
+                            });
+                    };
+                    Project.
+                        deleteMany({account: req.params.id})
+                        .then(() => {
+                            console.log(`Projects Wiped`);
+                        });
+                });
+            Account.
+                deleteOne({_id: req.params.id})
+                .then(() => {
+                    console.log(`Accounts Wiped`);
+                    res.status(204).end();
+                });
+        })
         .catch(err => {
             console.error(err);
-            res.status(500).json({ error: `something went terribly wrong ${err}` });
+            res.status(500).json({ error: 'something went terribly wrong' });
         });
-    res.sendFile(__dirname + "/views/pages/designer-pages/designer-explore.html");
 });
 
-router.get("/unique_project", (req, res) => { //TODO: will be replaced with /:id
-    res.sendFile(__dirname + "/views/pages/client-pages/client-unique_project-pages/client-unique_project-sub_projects.html");
+router.delete("/", (req, res) => {
+    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
 });
 
-router.get("/unique_project-sub_projects", (req, res) => {
-    res.sendFile(__dirname + "/views/pages/client-pages/client-unique_project-pages/client-unique_project-sub_projects.html");
-});*/
+router.delete("/", (req, res) => {
+    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
+});
+
+router.delete("/", (req, res) => {
+    res.sendFile(__dirname + "/views/pages/client-pages/client-home.html");
+});
+
 
 module.exports = router;

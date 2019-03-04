@@ -62,13 +62,11 @@ const accountSchema = mongoose.Schema({
 //pre-hook
 
 
-
 // virtual
 
 
 //serialize
-/*accountSchema.methods.serialize = function() {
-  return {}*/
+
 
 // export
 const Account = mongoose.model('Account', accountSchema);
