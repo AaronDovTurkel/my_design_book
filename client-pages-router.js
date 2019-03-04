@@ -456,7 +456,7 @@ router.delete("/:id", (req, res) => {
                         SubProject.
                             find({project: projects[i]._id})
                             .then(subProjects => {
-                                for (let i = 0; i < projects.length; i++) {
+                                for (let i = 0; i < subProjects.length; i++) {
                                     SubProjectPicture.
                                         deleteMany({subProject: subProjects[i]._id})
                                         .then(() => {
