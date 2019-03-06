@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 //schema
-const profileSchema = mongoose.Schema({
+
+
+/*const profileSchema = mongoose.Schema({
   gender: {type: String, required: false},
   dob: {type: Date, required: false},
   address: {
@@ -15,7 +17,7 @@ const profileSchema = mongoose.Schema({
   },
   profileImage: {type: String, required: false},
   personalInfo: {type: String, required: false}
-});
+});*/ // ->  Under Construction
 
 
 const subProjectPictureSchema = mongoose.Schema({
@@ -52,8 +54,7 @@ const accountSchema = mongoose.Schema({
   },
   email: {type: String, required: true},
   userName: {type: String, required: true},
-  passWord: {type: String, required: true},
-  profile: [profileSchema], 
+  passWord: {type: String, required: true}, 
   projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }]
 });
 
@@ -66,12 +67,13 @@ const accountSchema = mongoose.Schema({
 
 
 //serialize
+accountSchema.virtual('accountName').get(function() {
+  return `${this.name.firstName} ${this.name.lastName}`.trim();
+});
 
 
 // export
 const Account = mongoose.model('Account', accountSchema);
-
-const Profile = mongoose.model('Profile', profileSchema);
 
 const Project = mongoose.model('Project', projectSchema);
 
@@ -81,4 +83,4 @@ const SubProjectPicture = mongoose.model('SubProjectPicture', subProjectPictureS
 
 const Measurement = mongoose.model('Measurement', measurementSchema);
 
-module.exports = { Account, Profile, Project, SubProject, SubProjectPicture, Measurement };
+module.exports = { Account, Project, SubProject, SubProjectPicture, Measurement };

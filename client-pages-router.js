@@ -9,7 +9,7 @@ router.use(express.json());
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-const { Account, Profile, Project, SubProject, SubProjectPicture, Measurement } = require('./models');
+const { Account, Project, SubProject, SubProjectPicture } = require('./models');
 
 
 // get section //
