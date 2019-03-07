@@ -63,7 +63,7 @@ const accountSchema = mongoose.Schema({
 //pre-hook
 
 
-// virtual
+// virtual pop
 
 
 //serialize
@@ -81,6 +81,5 @@ const SubProject = mongoose.model('SubProject', subProjectSchema);
 
 const SubProjectPicture = mongoose.model('SubProjectPicture', subProjectPictureSchema);
 
-const Measurement = mongoose.model('Measurement', measurementSchema);
 
-module.exports = { Account, Project, SubProject, SubProjectPicture, Measurement };
+module.exports = { Account, Project, SubProject, SubProjectPicture};

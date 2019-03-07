@@ -6,7 +6,7 @@ mongoose.Promise = global.Promise;
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-const { Account, Profile, Project, SubProject, SubProjectPicture, Measurement } = require('./models');
+const { Account, Project, SubProject, SubProjectPicture } = require('./models');
 
 
 router.get("/", (req, res) => {
@@ -72,7 +72,7 @@ router.post('/', (req, res) => {
                 });
             });
         });
-      res.status(200).json(user);
+      res.status(201).json(user);
     }).
     catch(err => {
       console.error(err);
