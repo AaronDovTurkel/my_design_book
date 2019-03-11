@@ -531,35 +531,157 @@ describe('client pages API resource', function () {
                     });
                 });
         });
+
+        it('should update subProject fields you send over', function () {
+
+            const updatedSubProjectData = {
+                subProjectTitle: faker.lorem.words()
+            };
+
+            let firstname = faker.name.firstName();
+            let lastname = faker.name.lastName();
+            let username = firstname.charAt(0)+lastname;
+            const newAccount = {
+                name: {
+                    firstName: firstname,
+                    lastName: lastname
+                },
+                email: username.toLowerCase()+'@'+faker.internet.domainName(),
+                userName: username,
+                passWord: faker.lorem.word() + faker.random.number() + faker.lorem.word()
+            };
+            
+            return chai.request(app)
+                .post('/sign_up_form/')
+                .send(newAccount)
+                .then(function (res) {return Account.findById(res.body._id)})
+                .then(function (res) {return Project.find({account: res._id})})
+                .then(function (res) {return SubProject.find({project: res._id})})
+                .then(function () {
+                    return SubProject.
+                    findOne().
+                    then(subProject => {
+                        return chai.request(app)
+                            .put(`/client_pages/subProjectTitle/${subProject._id}`)
+                            .send(updatedSubProjectData)
+                            .then(res => {
+                                console.log(res.body);
+                                res.should.have.status(200);
+                                return SubProject.findById(res.body._id);
+                            })
+                            .then(updatedSubProject => {
+                                updatedSubProject.subProjectTitle.should.equal(updatedSubProjectData.subProjectTitle);
+                            });
+                    });
+                });
+        });
+
+        it('should update subProjectPicture fields you send over', function () {
+
+            const updatedSubProjectPictureData = {
+                pictureTitle: faker.lorem.words(),
+                imgUrl: faker.image.imageUrl()
+            };
+
+            let firstname = faker.name.firstName();
+            let lastname = faker.name.lastName();
+            let username = firstname.charAt(0)+lastname;
+            const newAccount = {
+                name: {
+                    firstName: firstname,
+                    lastName: lastname
+                },
+                email: username.toLowerCase()+'@'+faker.internet.domainName(),
+                userName: username,
+                passWord: faker.lorem.word() + faker.random.number() + faker.lorem.word()
+            };
+            
+            return chai.request(app)
+                .post('/sign_up_form/')
+                .send(newAccount)
+                .then(function (res) {return Account.findById(res.body._id)})
+                .then(function (res) {return Project.find({account: res._id})})
+                .then(function (res) {return SubProject.find({project: res._id})})
+                .then(function (res) {return SubProjectPicture.find({subProject: res._id})})
+                .then(function (res) {return SubProjectPicture.findById(res._id)})
+                .then(function () {
+                    return SubProjectPicture.
+                    findOne().
+                    then(subProjectPicture => {
+                        return chai.request(app)
+                            .put(`/client_pages/subProjectPicture/${subProjectPicture._id}`)
+                            .send(updatedSubProjectPictureData)
+                            .then(res => {
+                                console.log(res.body);
+                                res.should.have.status(200);
+                                return SubProjectPicture.findById(res.body._id);
+                            })
+                            .then(updatedSubProjectPicture => {
+                                updatedSubProjectPicture.pictureTitle.should.equal(updatedSubProjectPictureData.pictureTitle);
+                                updatedSubProjectPicture.imgUrl.should.equal(updatedSubProjectPictureData.imgUrl);
+                            });
+                    });
+                });
+        });
     });
 
-  /*describe('DELETE endpoint', function () {
-        // strategy:
-        //  1. get a post
-        //  2. make a DELETE request for that post's id
-        //  3. assert that response has right status code
-        //  4. prove that post with the id doesn't exist in db anymore
-        it('should delete a post by id', function () {
+  describe('DELETE endpoints', function () {
 
-        let post;
+        it('should delete an account with all children by id', function () {
 
-        return BlogPost
+        let account;
+
+        return Account
             .findOne()
-            .then(_post => {
-            post = _post;
-            return chai.request(app).delete(`/posts/${post.id}`);
+            .then(_account => {
+                account = _account;
+                return chai.request(app).delete(`/client_pages/${account._id}`);
             })
             .then(res => {
-            res.should.have.status(204);
-            return BlogPost.findById(post.id);
+                res.should.have.status(204);
+                return Account.findById(account._id);
             })
-            .then(_post => {
-            // when a variable's value is null, chaining `should`
-            // doesn't work. so `_post.should.be.null` would raise
-            // an error. `should.be.null(_post)` is how we can
-            // make assertions about a null value.
-            should.not.exist(_post);
+            .then(_account => {
+                should.not.exist(_account);
             });
         });
-    });*/
+
+        it('should delete a project with all children by id', function () {
+
+            let project;
+    
+            let firstname = faker.name.firstName();
+            let lastname = faker.name.lastName();
+            let username = firstname.charAt(0)+lastname;
+            const newAccount = {
+                name: {
+                    firstName: firstname,
+                    lastName: lastname
+                },
+                email: username.toLowerCase()+'@'+faker.internet.domainName(),
+                userName: username,
+                passWord: faker.lorem.word() + faker.random.number() + faker.lorem.word()
+            };
+            
+            return chai.request(app)
+                .post('/sign_up_form/')
+                .send(newAccount)
+                .then(function (res) {return Account.findById(res.body._id)})
+                .then(function () {
+                    return Project
+                    .findOne()
+                    .then(_project => {
+                        project = _project;
+                        return chai.request(app).delete(`/client_pages/project/${project._id}`);
+                    })
+                    .then(res => {
+                        res.should.have.status(204);
+                        return Project.findById(project._id);
+                    })
+                    .then(_project => {
+                        should.not.exist(_project);
+                    });
+                });
+        });
+    });
 });

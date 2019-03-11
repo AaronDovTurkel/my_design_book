@@ -69,10 +69,10 @@ router.post('/', (req, res) => {
                     if(err) return console.log(err.stack);
                     console.log("new user added with a fully populated project");
                   });
-                });
+                })
+                .then(() => res.status(201).json(user));
             });
         });
-      res.status(201).json(user);
     }).
     catch(err => {
       console.error(err);
