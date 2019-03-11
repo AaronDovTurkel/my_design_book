@@ -6,6 +6,9 @@ mongoose.Promise = global.Promise;
 router.use(express.json());
 
 
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
+
 const { Account, Project, SubProject, SubProjectPicture } = require('./models');
 
 
@@ -114,7 +117,7 @@ router.post("/project/:id", (req, res) => {
             console.error(message);
             return res.status(400).send(message);
         }
-    };
+    }
 
     Project.
         create({
@@ -147,22 +150,18 @@ router.post("/project/:id", (req, res) => {
                             project.subProjects.push(subProject);
                             project.save(function(err){
                               if(err) return console.log(err.stack);
-                            }).
-                            then(() => {
-                                Account.
-                                    findById(req.params.id).
-                                    then(updatedUser => {
-                                        updatedUser.projects.push(project);
-                                        updatedUser.save(function(err){
-                                            if(err) return console.log(err.stack);
-                                            console.log("user updated with a fully populated new project");
-                                        });
-                                    }).
-                                    then((updatedUser) => {
-                                        res.status(201).json(updatedUser);
-                                        console.log(`${updatedUser}`);
+                            });
+                            Account.
+                                findById(req.params.id).
+                                then(updatedUser => {
+                                    updatedUser.projects.push(project);
+                                    updatedUser.save(function(err){
+                                        if(err) return console.log(err.stack);
+                                        console.log("user updated with a fully populated new project");
                                     });
-                            });  
+                                });
+                            res.status(201).json(project);
+                            console.log(`${project}`);
                         });
                 });
         }).
@@ -214,11 +213,9 @@ router.post("/subProject/:id", (req, res) => {
                                 if(err) return console.log(err.stack);
                                 console.log("project updated with a fully populated new subProject");
                             });
-                        })
-                        .then(() => {
-                            res.status(201).json(updatedProject);
-                            console.log(`${updatedProject}`);
                         });
+                    res.status(201).json(subProject);
+                    console.log(`${subProject}`);
                 });
         }).
         catch(err => {
@@ -254,10 +251,9 @@ router.post("/subProjectPicture/:id", (req, res) => {
                         if(err) return console.log(err.stack);
                     });
                 })
-                .then(() => {
-                    res.status(201).json(updatedSubProject);
-                    console.log(`${updatedSubProject}`);
-                });
+            
+            res.status(201).json(subProjectPicture);
+            console.log(`${subProjectPicture}`);
         }).
         catch(err => {
             console.error(err);
@@ -284,11 +280,9 @@ router.post("/subProjectInfo/:id", (req, res) => {
             subProject.save(function(err){
                 if(err) return console.log(err.stack);
                 console.log("added info to subProject");
-            
-        })
-        .then(() => {
-            res.status(201).json(subProject);
-            console.log(`${subProject}`);
+            res.status(201).json(subProject.info);
+            console.log(`${subProject.info}`);
+            });
         }).
         catch(err => {
             console.error(err);
@@ -315,10 +309,9 @@ router.post("/subProjectMeasurements/:id", (req, res) => {
             subProject.save(function(err){
                 if(err) return console.log(err.stack);
                 console.log("added measurement to subProject");
-        }).
-        then(() => {
             res.status(201).json(subProject);
             console.log(`${subProject}`);
+            });
         }).
         catch(err => {
             console.error(err);
@@ -533,11 +526,11 @@ router.delete("/project/:id", (req, res) => {
                         console.log(`Project Wiped from Account`);
                         res.status(204).end();
                     });
-            })
-            .catch(err => {
-                console.error(err);
-                res.status(500).json({ error: 'something went terribly wrong' });
-            });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'something went terribly wrong' });
+        });
 });
 
 // delete - unique subProject and children
@@ -565,11 +558,11 @@ router.delete("/subProject/:id", (req, res) => {
                     console.log(`subProject Wiped from Project`);
                     res.status(204).end();
                 });
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).json({ error: 'something went terribly wrong' });
-        });
+    })
+    .catch(err => {
+        console.error(err);
+        res.status(500).json({ error: 'something went terribly wrong' });
+    });
 });
 
 // delete - unique subProjectPicture
@@ -588,11 +581,12 @@ router.delete("/subProjectPicture/:id", (req, res) => {
                     console.log(`subProjectPicture Wiped from subProject`);
                     res.status(204).end();
                 });
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).json({ error: 'something went terribly wrong' });
-        });
+    })
+    .catch(err => {
+        console.error(err);
+        res.status(500).json({ error: 'something went terribly wrong' });
+    });
 });
 
-module.exports = router; 
+
+module.exports = router;

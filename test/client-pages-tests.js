@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const should = chai.should();
-const expect = chai.expect;
 
 
 const { Account, Project, SubProject, SubProjectPicture } = require('../models');
@@ -680,6 +679,82 @@ describe('client pages API resource', function () {
                     })
                     .then(_project => {
                         should.not.exist(_project);
+                    });
+                });
+        });
+
+        it('should delete a subProject with all children by id', function () {
+
+            let subProject;
+    
+            let firstname = faker.name.firstName();
+            let lastname = faker.name.lastName();
+            let username = firstname.charAt(0)+lastname;
+            const newAccount = {
+                name: {
+                    firstName: firstname,
+                    lastName: lastname
+                },
+                email: username.toLowerCase()+'@'+faker.internet.domainName(),
+                userName: username,
+                passWord: faker.lorem.word() + faker.random.number() + faker.lorem.word()
+            };
+            
+            return chai.request(app)
+                .post('/sign_up_form/')
+                .send(newAccount)
+                .then(function (res) {return Account.findById(res.body._id)})
+                .then(function () {
+                    return SubProject
+                    .findOne()
+                    .then(_subProject => {
+                        subProject = _subProject;
+                        return chai.request(app).delete(`/client_pages/subProject/${subProject._id}`);
+                    })
+                    .then(res => {
+                        res.should.have.status(204);
+                        return SubProject.findById(subProject._id);
+                    })
+                    .then(_subProject => {
+                        should.not.exist(_subProject);
+                    });
+                });
+        });
+
+        it('should delete a subProjectPicture with all children by id', function () {
+
+            let subProjectPicture;
+    
+            let firstname = faker.name.firstName();
+            let lastname = faker.name.lastName();
+            let username = firstname.charAt(0)+lastname;
+            const newAccount = {
+                name: {
+                    firstName: firstname,
+                    lastName: lastname
+                },
+                email: username.toLowerCase()+'@'+faker.internet.domainName(),
+                userName: username,
+                passWord: faker.lorem.word() + faker.random.number() + faker.lorem.word()
+            };
+            
+            return chai.request(app)
+                .post('/sign_up_form/')
+                .send(newAccount)
+                .then(function (res) {return Account.findById(res.body._id)})
+                .then(function () {
+                    return SubProjectPicture
+                    .findOne()
+                    .then(_subProjectPicture => {
+                        subProjectPicture = _subProjectPicture;
+                        return chai.request(app).delete(`/client_pages/subProjectPicture/${subProjectPicture._id}`);
+                    })
+                    .then(res => {
+                        res.should.have.status(204);
+                        return SubProjectPicture.findById(subProjectPicture._id);
+                    })
+                    .then(_subProjectPicture => {
+                        should.not.exist(_subProjectPicture);
                     });
                 });
         });
