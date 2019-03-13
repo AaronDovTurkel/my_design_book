@@ -6,24 +6,25 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
-        <link rel="stylesheet" href="./stylesheets/main.css" type="text/css">
+        <link rel="stylesheet" href="./main.css" type="text/css">
         <title>My Design Book</title>
     </head>
     <body class="">
         <header>
             <p>header</p>
         </header>
+
         <main class="">
             <section class="sign_in-header">
                 <p>My Design Book</p>
             </section>
             <section class="sign_in-main">
-                <form class="sign_in-main-form" action="">
+                <form class="sign_in-main-form" method="POST" action="/client_pages/login">
                     <label class="sign_in-main-form-user_name">
-                        <p>Username: <input class="sign_in-main-form-input" type="text" placeholder="BTDesigns" name="user_name" required>  </p> 
+                        <p>Username: <input class="sign_in-main-form-input" type="text" placeholder="BTDesigns" id="user_name" name="user_name" required>  </p> 
                     </label>
                     <label class="sign_in-main-form-pass_word">
-                        <p>Password: <input class="sign_in-main-form-input" type="password" placeholder="aSh43Thjk" name="pass_word" required></p>
+                        <p>Password: <input class="sign_in-main-form-input" type="password" placeholder="aSh43Thjk" id="pass_word" name="pass_word" required></p>
                     </label>
                     <button class="sign_in-main-form-submit" type="submit">
                         <p>Sign In</p>
@@ -31,12 +32,35 @@
                     <span class="sign_in-main-form-forgot_password_link"><a href="">Forgot password?</a></span>
                 </form>
             </section>
+            <section class="sign_up-main">
+                <form class="sign_up-main-form" action="">
+                    <label class="sign_up-main-form-name">
+                        <p>Full Name: <input class="sign_up-main-form-input" type="text" placeholder="FakeUser Name" name="name" required></p> 
+                    </label>
+                    <label class="sign_up-main-form-email">
+                        <p>Email: <input class="sign_up-main-form-input" type="email" placeholder="FakeUserName@gmail.com" name="email" required></p> 
+                    </label>
+                    <label class="sign_up-main-form-user_name">
+                        <p>Username: <input class="sign_up-main-form-input" type="text" placeholder="FakeUserName" name="user_name" required></p> 
+                    </label>
+                    <label class="sign_up-main-form-pass_word">
+                        <p>Password: <input class="sign_up-main-form-input" type="password" placeholder="FakeUserNamePassWord" name="pass_word" required></p>
+                    </label>
+                    <button class="sign_up-main-form-submit" type="submit">
+                        <p>Create Your Book!</p>
+                    </button>
+                </form>
+            </section>
             <section class="sign_in-footer">
-                    <button class="sign_in-footer-create_new_book_button" type="submit">
+                    <button class="sign_in-footer-create_new_book_button" type="button">
                         <p>Create a Book?</p>
+                    </button>
+                    <button class="sign_up-footer-return_button" type="button">
+                        <p>Already have an account? <span>Login</span></p>
                     </button>
             </section>
         </main>
+        
         <footer class="">
             <div class="logo">
                 <p>footer-logo</p>

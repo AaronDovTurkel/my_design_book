@@ -36,11 +36,6 @@ app.get("/", (req, res) => {
   res.sendFile("public/index.html");
 });
 
-// submit log-in
-app.post("/", (req, res) => {
-  res.sendFile("public/index.html");
-});
-
 // routed CRUD pages
 app.use("/sign_up_form", sign_up_form);
 app.use("/client_pages", client_pages);

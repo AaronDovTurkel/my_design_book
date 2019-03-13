@@ -14,6 +14,29 @@ const { Account, Project, SubProject, SubProjectPicture } = require('./models');
 
 // get section //
 
+router.get('/', function (req, res, next) {
+
+    const options = {
+        root: __dirname + '/views/pages/client-pages',
+        dotfiles: 'deny',
+        headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
+    };
+
+    const fileName = '/client-home.html';
+    res.sendFile(fileName, options, function (err) {
+    if (err) {
+        next(err);
+    } else {
+        console.log('Sent:', fileName);
+    }
+    });
+
+});
+
+
 // get - find() -  all accounts
 router.get("/explore", (req, res) => {
     Account.
@@ -36,6 +59,7 @@ router.get("/explore", (req, res) => {
 });
 
 // get - findById() - find account by id
+
 router.get("/:id", (req, res) => {
     Account.
         findById(req.params.id).
@@ -586,6 +610,48 @@ router.delete("/subProjectPicture/:id", (req, res) => {
         console.error(err);
         res.status(500).json({ error: 'something went terribly wrong' });
     });
+});
+
+// Test Endpoints //
+
+//login
+router.post("/login", (req, res) => {
+    const requiredFields = ['userName', 'passWord'];
+    for (let i = 0; i < requiredFields.length; i++) {
+        const field = requiredFields[i];
+        if (!(field in req.body)) {
+            const message = `Missing \`${field}\` in request body`;
+            console.error(message);
+            return res.status(400).send(message);
+        }
+    }
+
+    Account.
+        findOne({
+            userName: req.body.userName,
+            passWord: req.body.passWord
+        }).
+        then(account => {
+            Account.
+                findById(account._id).
+                populate({
+                    path: 'projects',
+                    populate: {
+                        path: 'subProjects',
+                        populate: { path: 'pictures'}
+                    }
+                }).
+                then(populatedAccount => {
+                    //res.sendFile("../views/pages/client-pages/client-home.html");
+                    res.status(200).json(populatedAccount);
+
+                    console.log(`${populatedAccount}`);
+                });
+        }).
+        catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Incorrect username or password' });
+        });
 });
 
 
