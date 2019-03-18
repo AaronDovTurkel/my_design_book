@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 html {
     display: grid;
     grid-template-rows: 1;
@@ -13,218 +17,228 @@ html {
         align-self: stretch;
         justify-self: stretch;
         display: grid;
-        grid-template-rows: .5fr 8.5fr 1fr;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1;
+        grid-template-columns: 1;
         border: 1px solid black;
     }
-
-        header{
-            grid-row: 1 / 2;
-            grid-column: 1 / 4;
+        
+        main {
             align-self: stretch;
             justify-self: stretch;
             display: grid;
-            grid-template-rows: 1fr;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(8, 12.5vw);
+            grid-template-rows: repeat(10, 10vh);
+            grid-template-areas: 
+                "client_profile_pic project_container project_container project_container project_container project_container project_container project_container"
+                "client_profile_pic project_container project_container project_container project_container project_container project_container project_container"
+                "client_options sub_project_container sub_project_container sub_project_container sub_project_container sub_project_container sub_project_container sub_project_container"
+                "client_options sub_project_options sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture"
+                "client_options sub_project_options sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture"
+                "client_options sub_project_options sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture"
+                "client_options sub_project_options sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture"
+                "client_options sub_project_options sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture"
+                "client_options sub_project_options sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture"
+                "client_options sub_project_options sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture";
             border: 1px solid black;
         }
 
-        main {
-            grid-row: 2 / 3;
-            grid-column: 1 / 4;
-            align-self: center;
-            justify-self: center;
-            display: grid;
-            grid-template-rows: 1.5fr 7fr 1.5fr;
-            grid-template-columns: 1fr;
-            border: 1px solid black;
-        }
-
-            .sign_in-header {
-                grid-row: 1 / 2;
-                grid-column: 1 / 4;
-                align-self: center;
-                justify-self: center;
+            .client_profile_pic {
+                border: 1px solid yellow;
+                grid-area: client_profile_pic;
                 display: grid;
-                grid-template-rows: 1fr;
-                grid-template-columns: 1fr;
-                border: 1px solid black;
-                text-align: center;
+                grid-template-rows: 4fr 1fr;
+                grid-template-areas: 
+                    "profile_pic"
+                    "profile_name";
             }
 
-            .sign_in-main {
-                grid-row: 2 / 3;
-                grid-column: 1 / 4;
-                align-self: center;
-                justify-self: center;
-                display: grid;
-                grid-template-rows: 1fr;
-                grid-template-columns: 1fr;
-                font-size: 1.5em;
-                border: 1px solid black;
-            }
-
-                .sign_in-main-form {
-                    grid-row: 1 / 2;
-                    grid-column: 1 / 2;
-                    align-self: center;
-                    justify-self: center;
-                    display: grid;
-                    grid-auto-flow: row;
-                    grid-auto-rows: 1fr;
-                    grid-gap: .1em;
+                .profile_pic {
                     border: 1px solid black;
+                    grid-area: profile_pic;
                 }
 
-                    .sign_in-main-form-user_name {
-                        grid-row: 1 / 2;
-                        grid-column: 1 / 2;
-                        align-self: center;
-                        justify-self: center;
-                        width: 90%;
-                        border: 1px solid black;
-                    }
+                .profile_name {
+                    border: 1px solid black;
+                    grid-area: profile_name;
+                }
 
-                    .sign_in-main-form-pass_word {
-                        grid-row: 2 / 3;
-                        grid-column: 1 / 2;
-                        align-self: center;
-                        justify-self: center;
-                        width: 90%;
-                        border: 1px solid black;
-                    }
-
-                    .sign_in-main-form-submit {
-                        grid-row: 3 / 4;
-                        grid-column: 1 / 2;
-                        align-self: center;
-                        justify-self: center;
-                        width: 80%;
-                        border: 1px solid black;
-                    }
-
-                    .sign_in-main-form-forgot_password_link {
-                        grid-row: 4 / 5;
-                        grid-column: 1 / 2;
-                        align-self: center;
-                        justify-self: center;
-                        border: 1px solid black;
-                        width: 80%;
-                        text-align: center;
-                    }
-
-                    .sign_in-main-form-input {
-                        width: 65%;
-                    }
-
-            .sign_in-footer {
-                grid-row: 3 / 4;
-                grid-column: 1 / 4;
-                align-self: center;
-                justify-self: center;
+            .project_container {
+                border: 1px solid green;
+                width: 100%;
+                grid-area: project_container;
                 display: grid;
+                padding: 1rem;
+                grid-template-columns: 30%;
                 grid-template-rows: 1fr;
-                grid-template-columns: 1fr;
-                border: 1px solid black;
+                grid-auto-flow: column;
+                grid-auto-columns: 30%;
+                grid-gap: 1rem;
+                overflow-x: scroll
+            }
+
+                .project_card {
+                    display: grid;
+                    box-shadow: 0px 1px 5px #555;
+                    background-color: white;
+                    justify-self: start;
+                }
+
+
+
+            .client_options {
+                border: 1px solid blue;
+                grid-area: client_options;
+                display: grid;
+                grid-template-rows: repeat(8, 1fr);
+                grid-template-areas: 
+                    "projects"
+                    "tasks"
+                    "calendar"
+                    "workers"
+                    "orders"
+                    "billing"
+                    "explore"
+                    "info";
+                justify-content: center;
+                align-content: center;
                 text-align: center;
             }
 
-        footer {
-            grid-row: 3 / 4;
-            grid-column: 1 / 4;
-            align-self: stretch;
-            justify-self: stretch;
-            display: grid;
-            grid-template-rows: 1fr;
-            grid-template-columns: 1fr;
-            border: 1px solid black;
-        }
+                .projects {
+                    border: 1px solid black;
+                    grid-area: projects;
+                }
 
-            .logo {
-                grid-row: 1 / 2;
-                grid-column: 1 / 2;
-                align-self: center;
-                justify-self: center;
+                .tasks {
+                    border: 1px solid black;
+                    grid-area: tasks;
+                }
+
+                .calendar {
+                    border: 1px solid black;
+                    grid-area: calendar;
+                }
+
+                .workers {
+                    border: 1px solid black;
+                    grid-area: workers;
+                }
+
+                .orders {
+                    border: 1px solid black;
+                    grid-area: orders;
+                }
+
+                .billing {
+                    border: 1px solid black;
+                    grid-area: billing;
+                }
+
+                .explore {
+                    border: 1px solid black;
+                    grid-area: explore;
+                }
+
+                .info {
+                    border: 1px solid black;
+                    grid-area: info;
+                }
+
+            .sub_project_container {
+                border: 1px solid red;
+                grid-area: sub_project_container;
+                width: 100%;
                 display: grid;
+                padding: 1rem;
+                grid-template-columns: 30%;
                 grid-template-rows: 1fr;
-                grid-template-columns: 1fr;
-                border: 1px solid black; 
+                grid-auto-flow: column;
+                grid-auto-columns: 30%;
+                grid-gap: 1rem;
+                overflow-x: scroll;
             }
 
-/*Sign_up*/
+                .sub_project_card {
+                    display: grid;
+                    box-shadow: 0px 1px 5px #555;
+                    background-color: white;
+                    justify-self: start;
+                }
 
-    .sign_up-main {
-        grid-row: 2 / 3;
-        grid-column: 1 / 4;
-        align-self: center;
-        justify-self: center;
-        display: none;
-        grid-template-rows: 1fr;
-        grid-template-columns: 1fr;
-        font-size: 1.5em;
-        border: 1px solid black;
-    }
-
-        .sign_up-main-form {
-            grid-row: 1 / 2;
-            grid-column: 1 / 2;
-            align-self: center;
-            justify-self: center;
-            display: grid;
-            grid-auto-flow: row;
-            grid-auto-rows: 1fr;
-            grid-gap: .1em;
-            border: 1px solid black;
-        }
-
-            .sign_up-main-form-name {
-                grid-row: 2 / 3;
-                grid-column: 1 / 2;
-                align-self: center;
-                justify-self: center;
-                width: 90%;
-                border: 1px solid black;
+            .sub_project_options {
+                border: 1px solid purple;
+                grid-area: sub_project_options;
+                display: grid;
+                grid-template-rows: repeat(3, 1fr);
+                grid-template-areas: 
+                    "pictures"
+                    "measurements"
+                    "comments";
+                justify-content: center;
+                align-content: center;
+                text-align: center;
             }
 
-            .sign_up-main-form-email {
-                grid-row: 3 / 4;
-                grid-column: 1 / 2;
-                align-self: center;
-                justify-self: center;
-                width: 90%;
-                border: 1px solid black;
+                .pictures {
+                    border: 1px solid black;
+                    grid-area: pictures;
+                }
+
+                .measurements {
+                    border: 1px solid black;
+                    grid-area: measurements;
+                }
+
+                .comments {
+                    border: 1px solid black;
+                    grid-area: comments;
+                }
+
+            .sub_project_picture {
+                border: 1px solid teal;
+                grid-area: sub_project_picture;
+                display: grid;
+                padding: 1rem;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 16.6666%));
+                grid-gap: 1rem;
+                overflow: scroll;
+                justify-content: space-evenly;
+                align-content: space-evenly;
             }
 
-            .sign_up-main-form-user_name {
-                grid-row: 1 / 2;
-                grid-column: 1 / 2;
-                align-self: center;
-                justify-self: center;
-                width: 90%;
-                border: 1px solid black;
-            }
+                .card {
+                    display: grid;
+                    box-shadow: 0px 1px 5px #555;
+                    background-color: white;
+                }
 
-            .sign_up-main-form-pass_word {
-                grid-row: 4 / 5;
-                grid-column: 1 / 2;
-                align-self: center;
-                justify-self: center;
-                width: 90%;
-                border: 1px solid black;
-            }
+                .card .button {
+                    align-self: end;
+                }
 
-            .sign_up-main-form-submit {
-                grid-row: 5 / 6;
-                grid-column: 1 / 2;
-                align-self: center;
-                justify-self: center;
-                width: 90%;
-                border: 1px solid black;
-            }
+                .card__title {
+                    font-size: 2rem;
+                    padding: .5rem;
+                }
 
-            .sign_up-main-form-input {
-                width: 65%;
-            }
-    .sign_up-footer-return_button {
-        display: none;
-    }
+                .card__description {
+                    padding: .5rem;
+                    line-height: 1.6em;
+                }
+
+                .button {
+                    display: block;
+                    background-color: tomato;
+                    padding: 10px 20px;
+                    color: white;
+                    text-decoration: none;
+                    text-align: center;
+                    transition: .3s ease-out;
+                }
+
+                
+/**/                
+img {
+    max-width: 100%;
+}
+

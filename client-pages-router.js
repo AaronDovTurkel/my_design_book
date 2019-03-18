@@ -36,6 +36,28 @@ router.get('/', function (req, res, next) {
 
 });
 
+router.get('/client-home.css', function (req, res, next) {
+
+    const options = {
+        root: __dirname + '/views/pages/client-pages',
+        dotfiles: 'deny',
+        headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
+    };
+
+    const fileName = '/client-home.css';
+    res.sendFile(fileName, options, function (err) {
+    if (err) {
+        next(err);
+    } else {
+        console.log('Sent:', fileName);
+    }
+    });
+
+});
+
 
 // get - find() -  all accounts
 router.get("/explore", (req, res) => {
