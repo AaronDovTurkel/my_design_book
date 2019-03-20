@@ -55,6 +55,7 @@ const accountSchema = mongoose.Schema({
   email: {type: String, required: true},
   userName: {type: String, required: true},
   passWord: {type: String, required: true}, 
+  profileImg: {type: String, required: false},
   projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }]
 });
 

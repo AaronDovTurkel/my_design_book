@@ -36,27 +36,6 @@ router.get('/', function (req, res, next) {
 
 });
 
-router.get('/client-home.css', function (req, res, next) {
-
-    const options = {
-        root: __dirname + '/views/pages/client-pages',
-        dotfiles: 'deny',
-        headers: {
-            'x-timestamp': Date.now(),
-            'x-sent': true
-        }
-    };
-
-    const fileName = '/client-home.css';
-    res.sendFile(fileName, options, function (err) {
-    if (err) {
-        next(err);
-    } else {
-        console.log('Sent:', fileName);
-    }
-    });
-
-});
 
 
 // get - find() -  all accounts
@@ -370,7 +349,7 @@ router.post("/subProjectMeasurements/:id", (req, res) => {
 // put - update Account info
 router.put("/:id", (req, res) => {
     const updated = {};
-    const updateableFields = ['name', 'email', 'userName', 'passWord'];
+    const updateableFields = ['name', 'email', 'userName', 'passWord', 'profileImg'];
     updateableFields.forEach(field => {
     if (field in req.body) {
         updated[field] = req.body[field];

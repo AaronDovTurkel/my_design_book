@@ -29,7 +29,8 @@ router.post('/', (req, res) => {
       name: req.body.name,
       email: req.body.email,
       userName: req.body.userName,
-      passWord: req.body.passWord
+      passWord: req.body.passWord,
+      profileImg: req.body.profileImg
     })
     .then(user => {
       Project

@@ -48,14 +48,23 @@ html {
                 display: grid;
                 grid-template-rows: 4fr 1fr;
                 grid-template-areas: 
-                    "profile_pic"
+                    "profile_img"
                     "profile_name";
             }
 
-                .profile_pic {
+                .profile_img {
                     border: 1px solid black;
-                    grid-area: profile_pic;
+                    grid-area: profile_img;
+                    display: grid;
                 }
+
+                    .profile_img_current {
+                        display: grid;
+                        border-radius: 50%;
+                        height: 100%;
+                        justify-self: center;
+                        align-self: center;
+                    }
 
                 .profile_name {
                     border: 1px solid black;
@@ -80,7 +89,7 @@ html {
                     display: grid;
                     box-shadow: 0px 1px 5px #555;
                     background-color: white;
-                    justify-self: start;
+                    justify-self: stretch;
                 }
 
 
@@ -91,18 +100,23 @@ html {
                 display: grid;
                 grid-template-rows: repeat(8, 1fr);
                 grid-template-areas: 
+                    "profile"
                     "projects"
                     "tasks"
                     "calendar"
                     "workers"
                     "orders"
                     "billing"
-                    "explore"
-                    "info";
+                    "explore";
                 justify-content: center;
                 align-content: center;
                 text-align: center;
             }
+
+                .profile {
+                    border: 1px solid black;
+                    grid-area: profile;
+                }
 
                 .projects {
                     border: 1px solid black;
@@ -139,10 +153,6 @@ html {
                     grid-area: explore;
                 }
 
-                .info {
-                    border: 1px solid black;
-                    grid-area: info;
-                }
 
             .sub_project_container {
                 border: 1px solid red;
@@ -162,7 +172,7 @@ html {
                     display: grid;
                     box-shadow: 0px 1px 5px #555;
                     background-color: white;
-                    justify-self: start;
+                    justify-self: stretch;
                 }
 
             .sub_project_options {
@@ -194,47 +204,28 @@ html {
                     grid-area: comments;
                 }
 
-            .sub_project_picture {
+            .sub_project_picture_container {
                 border: 1px solid teal;
                 grid-area: sub_project_picture;
                 display: grid;
-                padding: 1rem;
-                grid-template-columns: repeat(auto-fill, minmax(200px, 16.6666%));
+                width: 100%;
+                grid-template-rows: 20%;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+                grid-auto-flow: row;
+                grid-auto-rows: 20%;
                 grid-gap: 1rem;
+                padding: 1rem;
                 overflow: scroll;
-                justify-content: space-evenly;
-                align-content: space-evenly;
             }
 
-                .card {
+                .sub_project_picture_card {
                     display: grid;
                     box-shadow: 0px 1px 5px #555;
                     background-color: white;
+                    justify-self: stretch;
                 }
 
-                .card .button {
-                    align-self: end;
-                }
 
-                .card__title {
-                    font-size: 2rem;
-                    padding: .5rem;
-                }
-
-                .card__description {
-                    padding: .5rem;
-                    line-height: 1.6em;
-                }
-
-                .button {
-                    display: block;
-                    background-color: tomato;
-                    padding: 10px 20px;
-                    color: white;
-                    text-decoration: none;
-                    text-align: center;
-                    transition: .3s ease-out;
-                }
 
                 
 /**/                
