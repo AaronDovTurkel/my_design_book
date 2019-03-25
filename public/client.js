@@ -13,28 +13,25 @@ function change_url(pathArg) {
 const mvp_static_account_id = `5c9038e8242d32247981b932`;
 const client_home_url = change_url(`client_pages/${mvp_static_account_id}`);
 
+// current account store //
 let selected_storage = {
     project: 0,
     subProject: 0,
     subProjectPicture: 0
 }
 
-// current account store //
-
-
+// initial page load // 
 function initial_mvp_page_load() {
     $.getJSON(client_home_url)
         .then(account_data => {
                 console.log(account_data);
-                let number_of_projects = account_data.projects.length;
-                let number_of_sub_projects = account_data.projects[`${number_of_projects - 1}`].subProjects.length;
-                let number_of_sub_project_pictures = account_data.projects[`${number_of_projects - 1}`].subProjects[`${number_of_sub_projects - 1}`].pictures.length;
-                console.log(number_of_projects, number_of_sub_projects, number_of_sub_project_pictures);
-                initial_place_projects(account_data, number_of_projects);
-                initial_place_sub_projects(account_data, number_of_projects, number_of_sub_projects);
-                initial_place_sub_project_pictures(account_data, number_of_projects, number_of_sub_projects, number_of_sub_project_pictures);
+                selected_storage.project = (account_data.projects.length) - 1;
+                selected_storage.subProject = (account_data.projects[`${selected_storage.project}`].subProjects.length) - 1;
+                initial_place_projects(account_data, account_data.projects.length);
                 initial_place_profile_name(account_data);
                 initial_place_profile_img(account_data);
+                selector_place_sub_projects(account_data);
+                selector_place_sub_project_pictures(account_data);
                 return account_data;
         })
         .then(temporary_storage => {
@@ -59,37 +56,6 @@ function initial_place_projects(account_dataArg, number_of_projectsArg) {
                     <p>${account_dataArg.projects[i].projectTitle}</p>
                 </div>
 
-            </article>`
-        );
-    }
-}
-
-function initial_place_sub_projects(account_dataArg, number_of_projectsArg, number_of_sub_projectsArg) {
-    for (let i = 0; i < number_of_sub_projectsArg; i++) {
-        console.log(`place_sub_project worked ${i + 1} time(s).`);
-        $('.sub_project_container').prepend(
-            `<article class="sub_project_card unique_sub_project_card">
-                        
-                <div class="project_card__description">
-                    <p>${account_dataArg.projects[number_of_projectsArg - 1].subProjects[i].subProjectTitle}</p>
-                </div>
-    
-            </article>`
-        );
-    }
-}
-
-function initial_place_sub_project_pictures(account_dataArg, number_of_projectsArg, number_of_sub_projectsArg, number_of_sub_project_picturesArg) {
-    for (let i = 0; i < number_of_sub_project_picturesArg; i++) {
-        console.log(`place_sub_project_pictures worked ${i + 1} time(s).`);
-        $('.sub_project_picture_container').prepend(
-            `<article class="sub_project_picture_card unique_sub_project_picture_card">
-                <header class="card__title">
-                    <p>${account_dataArg.projects[number_of_projectsArg - 1].subProjects[number_of_sub_projectsArg - 1].pictures[i].pictureTitle}</p>
-                </header>
-                <figure class="card__thumbnail">
-                    <img src="${account_dataArg.projects[number_of_projectsArg - 1].subProjects[number_of_sub_projectsArg - 1].pictures[i].imgUrl} alt="Smiley face"">
-                </figure>
             </article>`
         );
     }
@@ -137,6 +103,8 @@ function sub_project_class_toggle(x, y) {
     target_card.toggleClass('sub_project_card-checked');
 }
 
+
+
 function select_project(current_account_store) {
     $('.project_container').on( "click", ".project_card", ( event => {
         event.preventDefault();	
@@ -145,9 +113,11 @@ function select_project(current_account_store) {
             if (current_account_store.projects[i].projectTitle == selected_project) {
                 console.log(`Loading subProjects for ${current_account_store.projects[i].projectTitle}`);
                 selected_storage.project = i;
+                selected_storage.subProject = (current_account_store.projects[selected_storage.project].subProjects.length) - 1;
                 console.log(selected_storage.project);
                 project_class_toggle(event.currentTarget, '.project_card');
                 selector_place_sub_projects(current_account_store);
+                selector_place_sub_project_pictures(current_account_store);
             } else {
                 console.log(`${selected_project} is not in ${current_account_store.projects[i].projectTitle}`);
             }
@@ -177,15 +147,27 @@ function selector_place_sub_projects(account_dataArg) {
     selector_clear_sub_projects();
     for (let i = 0; i < account_dataArg.projects[selected_storage.project].subProjects.length; i++) {
         console.log(`place_sub_project worked ${i + 1} time(s).`);
-        $('.sub_project_container').prepend(
-            `<article class="sub_project_card unique_sub_project_card">
-                        
-                <div class="project_card__description">
-                    <p>${account_dataArg.projects[selected_storage.project].subProjects[i].subProjectTitle}</p>
-                </div>
-    
-            </article>`
-        );
+        if (i == account_dataArg.projects[selected_storage.project].subProjects.length) {
+            $('.sub_project_container').prepend(
+                `<article class="sub_project_card unique_sub_project_card most_recent_sub_project">
+                            
+                    <div class="project_card__description">
+                        <p>${account_dataArg.projects[selected_storage.project].subProjects[i].subProjectTitle}</p>
+                    </div>
+        
+                </article>`
+            );
+        } else {
+            $('.sub_project_container').prepend(
+                `<article class="sub_project_card unique_sub_project_card">
+                            
+                    <div class="project_card__description">
+                        <p>${account_dataArg.projects[selected_storage.project].subProjects[i].subProjectTitle}</p>
+                    </div>
+        
+                </article>`
+            );
+        }
     }
 }
 
@@ -208,14 +190,13 @@ function selector_place_sub_project_pictures(account_dataArg) {
 
 
 function selector_clear_sub_projects() {
-    console.log(`got here`);
     $('Article.unique_sub_project_card').remove();
 }
 
 function selector_clear_sub_project_pictures() {
-    console.log(`got here`);
     $('Article.unique_sub_project_picture_card').remove();
 }
+
 
 function run_all_functions() {
     initial_mvp_page_load();
