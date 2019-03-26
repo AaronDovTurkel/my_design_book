@@ -77,10 +77,10 @@ html {
                 grid-area: project_container;
                 display: grid;
                 padding: 1rem;
-                grid-template-columns: 30%;
+                grid-template-columns: 20%;
                 grid-template-rows: 1fr;
                 grid-auto-flow: column;
-                grid-auto-columns: 30%;
+                grid-auto-columns: 20%;
                 grid-gap: 1rem;
                 overflow-x: scroll
             }
@@ -92,7 +92,13 @@ html {
                     justify-self: stretch;
                 }
 
-
+                .add_button {
+                    display: grid;
+                    border-radius: 50%;
+                    height: 100%;
+                    justify-self: center;
+                    align-self: center;
+                }
 
             .client_options {
                 border: 1px solid blue;
@@ -160,16 +166,37 @@ html {
                 width: 100%;
                 display: grid;
                 padding: 1rem;
-                grid-template-columns: 30%;
+                grid-template-columns: 25%;
                 grid-template-rows: 1fr;
                 grid-auto-flow: column;
-                grid-auto-columns: 30%;
+                grid-auto-columns: 25%;
                 grid-gap: 1rem;
                 overflow-x: scroll;
             }
 
                 .sub_project_card {
                     display: grid;
+                    box-shadow: 0px 1px 5px #555;
+                    background-color: white;
+                    justify-self: stretch;
+                }
+
+                .project-add_submition {
+                    display: none;
+                    box-shadow: 0px 1px 5px #555;
+                    background-color: white;
+                    justify-self: stretch;
+                }
+
+                .sub_project-add_submition {
+                    display: none;
+                    box-shadow: 0px 1px 5px #555;
+                    background-color: white;
+                    justify-self: stretch;
+                }
+
+                .sub_project_picture-add_submition {
+                    display: none;
                     box-shadow: 0px 1px 5px #555;
                     background-color: white;
                     justify-self: stretch;
