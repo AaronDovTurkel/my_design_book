@@ -27,6 +27,7 @@ const mvp_static_account_id = `5c992f195bdf02489526598c`;
 const client_home_url = change_url(`client_pages/${mvp_static_account_id}`);
 const client_post_project_url = change_url(`client_pages/project/${mvp_static_account_id}`);
 let client_post_sub_project_url = '';
+let client_post_sub_project_picture_url = '';
 
 
 // initial page load // 
@@ -117,6 +118,7 @@ function store_sub_project_picture_id(subProjectPictureTitleArg) {
                 if (subProjectPictureTitleArg == account_data.projects[selected_storage.project].subProjects[selected_storage.subProject].pictures[i].pictureTitle) {
                     selected_storage.subProjectPictureId = account_data.projects[selected_storage.project].subProjects[selected_storage.subProject].pictures[i]._id;
                     selected_storage.subProjectPictureTitle = subProjectPictureTitleArg;
+                    client_post_sub_project_picture_url = change_url(`client_pages/subProjectPicture/${selected_storage.subProjectId}`)
                     console.log(selected_storage);
                 }
             }
@@ -296,6 +298,7 @@ function refresh_page() {
 function add_functions() {
     new_project_toggle();
     new_sub_project_toggle();
+    new_sub_project_picture_toggle();
 }
 
 // new project add functions
@@ -358,6 +361,8 @@ function new_project_ajax_post(x) {
     })
     .then(results => {
         clear_all();
+        $('.project-add_button').css("display", "grid");
+        $('.project-add_submition').css("display", "none");
         return results;
     })
     .then(results => {
@@ -431,6 +436,8 @@ function new_sub_project_ajax_post(x) {
     .then(results => {
         selector_clear_sub_projects();
         selector_clear_sub_project_pictures();
+        $('.sub_project-add_button').css("display", "grid");
+        $('.sub_project-add_submition').css("display", "none");
         sub_project_load(x);
         return results;
     })
@@ -456,6 +463,110 @@ function sub_project_load() {
                     store_project_id(current_account_store.projects[i].projectTitle);
                 } else {
                     console.log(`${selected_project} is not in ${current_account_store.projects[i].projectTitle}`);
+                }
+            }
+        });
+}
+
+// new sub_project_picture add functions
+function new_sub_project_picture_toggle() {
+    $('.sub_project_picture_container').on( "click", ".sub_project_picture-add_button", ( event => {
+        event.preventDefault();
+        new_sub_project_picture_submition_form();
+        new_sub_project_picture_submition();
+        new_sub_project_picture_back_toggle();
+    }));
+}
+
+function new_sub_project_picture_submition_form() {
+    $('.sub_project_picture-add_button').css("display", "none");
+    $('.sub_project_picture-add_submition').css("display", "grid");
+    $('.sub_project_picture-add_submition').html(
+        `<label for="sub_project_picture_title">Sub-project_picture Title:</label>
+
+        <input type="text" id="sub_project_picture_title" name="sub_project_picture_title" required minlength="1" maxlength="25">
+
+        <label for="sub_project_picture_url">Sub-project_picture Url:</label>
+
+        <input type="text" id="sub_project_picture_url" name="sub_project_picture_url" required minlength="1" maxlength="25">
+        
+        <input type="submit" class="sub_project_picture_submition_button">
+        <input type="button" value="Back" class="sub_project_picture_back_button">`
+    );
+}
+
+function new_sub_project_picture_back_toggle() {
+    $('.sub_project_picture_container').on( "click", ".sub_project_picture_back_button", ( event => {
+        event.preventDefault();
+        $('.sub_project_picture-add_button').css("display", "grid");
+        $('.sub_project_picture-add_submition').css("display", "none");
+    }));
+}
+
+function new_sub_project_picture_submition() {
+    $('.sub_project_picture_container').on( "click", ".sub_project_picture_submition_button", ( event => {
+        event.preventDefault();	
+        console.log(`this clicked`);
+        let new_sub_project_picture_title = $('#sub_project_picture_title').val();
+        $('#sub_project_picture_title').val('');
+        let new_sub_project_picture_url = $('#sub_project_picture_url').val();
+        $('#new_sub_project_picture_url').val('');
+        if ((new_sub_project_picture_title !== '') && (new_sub_project_picture_url !== '')) {
+            console.log(new_sub_project_picture_url);
+            new_sub_project_picture_ajax_post(new_sub_project_picture_title, new_sub_project_picture_url);
+        } else {
+            alert(`Error. Something went wrong. Please try again.`);
+        }
+    }));
+}
+
+function new_sub_project_picture_ajax_post(x, y) {
+    let bodyRequest = { pictureTitle: x, imgUrl: y };
+    console.log(JSON.stringify(bodyRequest));
+    $.ajax({
+        contentType: 'application/json',
+        data: JSON.stringify(bodyRequest),
+        dataType: 'json',
+        success: function(){
+            console.log("device control succeeded");
+        },
+        error: function(err){
+            console.log("Device control failed");
+            console.log(err);
+            alert(`Error. Something went wrong. Please try again.`)
+        },
+        processData: false,
+        type: 'POST',
+        url: client_post_sub_project_picture_url
+    })
+    .then(results => {
+        selector_clear_sub_project_pictures();
+        sub_project_picture_load(x);
+        $('.sub_project_picture-add_button').css("display", "grid");
+        $('.sub_project_picture-add_submition').css("display", "none");
+        return results;
+    })
+    .then(results => {
+        console.log(results);
+        sub_project_picture_load(x);
+    });
+}
+
+function sub_project_picture_load() {
+    let selected_sub_project = selected_storage.subProjectTitle;
+    $.getJSON(client_home_url)
+        .then(current_account_store => {
+            console.log(current_account_store);
+            for (let i = 0; i < current_account_store.projects[selected_storage.project].subProjects.length; i++) {
+                if (current_account_store.projects[selected_storage.project].subProjects[i].subProjectTitle == selected_sub_project) {
+                    console.log(`Loading subProjectsPicture for ${current_account_store.projects[selected_storage.project].subProjects[i].subProjectTitle}`);
+                    selected_storage.subProject = i;
+                    selected_storage.subProjectPicture = (current_account_store.projects[selected_storage.project].subProjects[selected_storage.subProject].pictures.length) - 1;
+                    console.log(selected_storage);
+                    selector_place_sub_project_pictures(current_account_store);
+                    store_project_id(current_account_store.projects[selected_storage.project].subProjects[i].subProjectTitle);
+                } else {
+                    console.log(`${selected_sub_project} is not in ${current_account_store.projects[selected_storage.project].subProjects[i].subProjectTitle}`);
                 }
             }
         });
