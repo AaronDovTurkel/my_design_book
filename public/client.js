@@ -62,8 +62,10 @@ function initial_place_projects(account_dataArg, number_of_projectsArg) {
         if (i == number_of_projectsArg - 1) {
             $('.project_container').prepend(
                 `<article class="project_card unique_project_card">
-                                
-                    <div class="project_card__description">
+
+                    <img class="project-edit_tab" src="https://image.flaticon.com/icons/svg/69/69334.svg" alt="Edit">  
+
+                    <div class="card_description">
                         <p>${account_dataArg.projects[i].projectTitle}</p>
                     </div>
     
@@ -73,8 +75,10 @@ function initial_place_projects(account_dataArg, number_of_projectsArg) {
         } else {
             $('.project_container').prepend(
                 `<article class="project_card unique_project_card">
-                                
-                    <div class="project_card__description">
+
+                    <img class="project-edit_tab" src="https://image.flaticon.com/icons/svg/69/69334.svg" alt="Edit">  
+
+                    <div class="card_description">
                         <p>${account_dataArg.projects[i].projectTitle}</p>
                     </div>
     
@@ -215,8 +219,10 @@ function selector_place_sub_projects(account_dataArg) {
         if (i == account_dataArg.projects[selected_storage.project].subProjects.length - 1) {
             $('.sub_project_container').prepend(
                 `<article class="sub_project_card unique_sub_project_card most_recent_sub_project">
-                            
-                    <div class="project_card__description">
+                     
+                    <img class="sub_project-edit_tab" src="https://image.flaticon.com/icons/svg/69/69334.svg" alt="Edit">
+
+                    <div class="card_description">
                         <p>${account_dataArg.projects[selected_storage.project].subProjects[i].subProjectTitle}</p>
                     </div>
         
@@ -227,7 +233,9 @@ function selector_place_sub_projects(account_dataArg) {
             $('.sub_project_container').prepend(
                 `<article class="sub_project_card unique_sub_project_card">
                             
-                    <div class="project_card__description">
+                    <img class="sub_project-edit_tab" src="https://image.flaticon.com/icons/svg/69/69334.svg" alt="Edit">
+
+                    <div class="card_description">
                         <p>${account_dataArg.projects[selected_storage.project].subProjects[i].subProjectTitle}</p>
                     </div>
         
@@ -244,24 +252,30 @@ function selector_place_sub_project_pictures(account_dataArg) {
         if (i == account_dataArg.projects[selected_storage.project].subProjects[selected_storage.subProject].pictures.length - 1) {
             $('.sub_project_picture_container').prepend(
                 `<article class="sub_project_picture_card unique_sub_project_picture_card">
-                    <header class="card__title">
+
+                    <img class="picture-edit_tab" src="https://image.flaticon.com/icons/svg/69/69334.svg" alt="Edit">
+                        
+                    <div class="picture-card_description">
                         <p>${account_dataArg.projects[selected_storage.project].subProjects[selected_storage.subProject].pictures[i].pictureTitle}</p>
-                    </header>
-                    <figure class="card__thumbnail">
-                        <img src="${account_dataArg.projects[selected_storage.project].subProjects[selected_storage.subProject].pictures[i].imgUrl} alt="Smiley face"">
-                    </figure>
+                    </div>
+
+                    <img class="picture-card_thumbnail" src="${account_dataArg.projects[selected_storage.project].subProjects[selected_storage.subProject].pictures[i].imgUrl} alt="Smiley face"">
+
                 </article>`
             );
             store_sub_project_picture_id(account_dataArg.projects[selected_storage.project].subProjects[selected_storage.subProject].pictures[i].pictureTitle);
         } else {
             $('.sub_project_picture_container').prepend(
                 `<article class="sub_project_picture_card unique_sub_project_picture_card">
-                    <header class="card__title">
+
+                    <img class="picture-edit_tab" src="https://image.flaticon.com/icons/svg/69/69334.svg" alt="Edit">
+
+                    <div class="picture-card_description">
                         <p>${account_dataArg.projects[selected_storage.project].subProjects[selected_storage.subProject].pictures[i].pictureTitle}</p>
-                    </header>
-                    <figure class="card__thumbnail">
-                        <img src="${account_dataArg.projects[selected_storage.project].subProjects[selected_storage.subProject].pictures[i].imgUrl} alt="Smiley face"">
-                    </figure>
+                    </div>
+
+                    <img class="picture-card_thumbnail" src="${account_dataArg.projects[selected_storage.project].subProjects[selected_storage.subProject].pictures[i].imgUrl} alt="Smiley face"">
+  
                 </article>`
             );
         }
@@ -488,7 +502,7 @@ function new_sub_project_picture_submition_form() {
 
         <label for="sub_project_picture_url">Sub-project_picture Url:</label>
 
-        <input type="text" id="sub_project_picture_url" name="sub_project_picture_url" required minlength="1" maxlength="25">
+        <input type="text" id="sub_project_picture_url" name="sub_project_picture_url" required minlength="1">
         
         <input type="submit" class="sub_project_picture_submition_button">
         <input type="button" value="Back" class="sub_project_picture_back_button">`

@@ -8,7 +8,7 @@ html {
     grid-template-columns: 1;
     height: 100vh;
     width: 100vw;
-    border: 1px solid black;
+    background-color: rgba(181, 146, 214, 0.705);
 }
 
     body {
@@ -19,7 +19,6 @@ html {
         display: grid;
         grid-template-rows: 1;
         grid-template-columns: 1;
-        border: 1px solid black;
     }
         
         main {
@@ -43,17 +42,17 @@ html {
         }
 
             .client_profile_pic {
-                border: 1px solid yellow;
                 grid-area: client_profile_pic;
                 display: grid;
                 grid-template-rows: 4fr 1fr;
                 grid-template-areas: 
                     "profile_img"
                     "profile_name";
+                background-color: rgba(255, 255, 255, 0.438);
+                border-radius: 15px;
             }
 
                 .profile_img {
-                    border: 1px solid black;
                     grid-area: profile_img;
                     display: grid;
                 }
@@ -67,12 +66,13 @@ html {
                     }
 
                 .profile_name {
-                    border: 1px solid black;
                     grid-area: profile_name;
+                    text-align: center;
+                    text-decoration: overline;
                 }
 
             .project_container {
-                border: 1px solid green;
+                border: 3px solid rgba(255, 255, 255, 0.438);
                 width: 100%;
                 grid-area: project_container;
                 display: grid;
@@ -92,6 +92,29 @@ html {
                     justify-self: stretch;
                 }
 
+                .unique_project_card {
+                    display: grid;
+                    grid-template-rows: 5% 15% 80%;
+                    grid-template-columns: repeat(10, 10%);
+                    grid-template-areas:
+                        ". . . . . . . . . edit_tab"
+                        ". . . . . . . . . ."
+                        "filler filler filler filler filler filler filler filler filler filler";
+                        overflow: hidden;
+                }
+
+                    .project-edit_tab {
+                        grid-area: edit_tab;
+                        width: 20px;
+                        height: auto;
+                        justify-self: end;
+                    }
+
+                    .card_description {
+                        grid-area: filler;
+                        justify-self: center;
+                    }
+
                 .add_button {
                     display: grid;
                     border-radius: 50%;
@@ -101,7 +124,6 @@ html {
                 }
 
             .client_options {
-                border: 1px solid blue;
                 grid-area: client_options;
                 display: grid;
                 grid-template-rows: repeat(8, 1fr);
@@ -114,54 +136,71 @@ html {
                     "orders"
                     "billing"
                     "explore";
-                justify-content: center;
-                align-content: center;
+                justify-self: stretch;
                 text-align: center;
+                text-decoration: underline;
+                border-radius: 15px;
+                grid-gap: space-between;
             }
 
                 .profile {
-                    border: 1px solid black;
                     grid-area: profile;
+                    border-radius: 15px;
+                    background-color: rgba(255, 255, 255, 0.438);
+                    align-self: center;
                 }
 
                 .projects {
-                    border: 1px solid black;
                     grid-area: projects;
+                    border-radius: 15px;
+                    background-color: rgba(255, 255, 255, 0.438);
+                    align-self: center;
                 }
 
                 .tasks {
-                    border: 1px solid black;
                     grid-area: tasks;
+                    border-radius: 15px;
+                    background-color: rgba(255, 255, 255, 0.438);
+                    align-self: center;
                 }
 
                 .calendar {
-                    border: 1px solid black;
                     grid-area: calendar;
+                    border-radius: 15px;
+                    background-color: rgba(255, 255, 255, 0.438);
+                    align-self: center;
                 }
 
                 .workers {
-                    border: 1px solid black;
                     grid-area: workers;
+                    border-radius: 15px;
+                    background-color: rgba(255, 255, 255, 0.438);
+                    align-self: center;
                 }
 
                 .orders {
-                    border: 1px solid black;
                     grid-area: orders;
+                    border-radius: 15px;
+                    background-color: rgba(255, 255, 255, 0.438);
+                    align-self: center;
                 }
 
                 .billing {
-                    border: 1px solid black;
                     grid-area: billing;
+                    border-radius: 15px;
+                    background-color: rgba(255, 255, 255, 0.438);
+                    align-self: center;
                 }
 
                 .explore {
-                    border: 1px solid black;
                     grid-area: explore;
+                    border-radius: 15px;
+                    background-color: rgba(255, 255, 255, 0.438);
+                    align-self: center;
                 }
 
 
             .sub_project_container {
-                border: 1px solid red;
                 grid-area: sub_project_container;
                 width: 100%;
                 display: grid;
@@ -172,6 +211,7 @@ html {
                 grid-auto-columns: 25%;
                 grid-gap: 1rem;
                 overflow-x: scroll;
+                border: 3px solid rgba(255, 255, 255, 0.438);
             }
 
                 .sub_project_card {
@@ -180,6 +220,23 @@ html {
                     background-color: white;
                     justify-self: stretch;
                 }
+
+                .unique_sub_project_card {
+                    display: grid;
+                    grid-template-rows: 5% 95%;
+                    grid-template-columns: repeat(10, 10%);
+                    grid-template-areas:
+                        ". . . . . . . . . edit_tab"
+                        "filler filler filler filler filler filler filler filler filler filler";
+                    overflow: hidden;
+                }
+
+                    .sub_project-edit_tab {
+                        grid-area: edit_tab;
+                        width: 20px;
+                        height: auto;
+                        justify-self: end;
+                    }
 
                 .project-add_submition {
                     display: none;
@@ -203,7 +260,6 @@ html {
                 }
 
             .sub_project_options {
-                border: 1px solid purple;
                 grid-area: sub_project_options;
                 display: grid;
                 grid-template-rows: repeat(3, 1fr);
@@ -214,25 +270,31 @@ html {
                 justify-content: center;
                 align-content: center;
                 text-align: center;
+                border: 3px solid rgba(255, 255, 255, 0.438);
             }
 
                 .pictures {
-                    border: 1px solid black;
                     grid-area: pictures;
+                    border-radius: 15px;
+                    background-color: rgba(255, 255, 255, 0.438);
+                    align-self: center;
                 }
 
                 .measurements {
-                    border: 1px solid black;
                     grid-area: measurements;
+                    border-radius: 15px;
+                    background-color: rgba(255, 255, 255, 0.438);
+                    align-self: center;
                 }
 
                 .comments {
-                    border: 1px solid black;
                     grid-area: comments;
+                    border-radius: 15px;
+                    background-color: rgba(255, 255, 255, 0.438);
+                    align-self: center;
                 }
 
             .sub_project_picture_container {
-                border: 1px solid teal;
                 grid-area: sub_project_picture;
                 display: grid;
                 width: 100%;
@@ -243,6 +305,7 @@ html {
                 grid-gap: 1rem;
                 padding: 1rem;
                 overflow: scroll;
+                border: 3px solid rgba(255, 255, 255, 0.438);
             }
 
                 .sub_project_picture_card {
@@ -252,11 +315,43 @@ html {
                     justify-self: stretch;
                 }
 
+                .unique_sub_project_picture_card {
+                    display: grid;
+                    grid-template-rows: 5% 10% 20% 65%;
+                    grid-template-columns: repeat(10, 10%);
+                    grid-template-areas:
+                        ". . . . . . . . . picture-edit_tab"
+                        "description description description description description description description description description description"
+                        ". . . . . . . . . ."
+                        "thumbnail thumbnail thumbnail thumbnail thumbnail thumbnail thumbnail thumbnail thumbnail thumbnail";
+                    overflow: hidden;
+                }
+
+                    .picture-edit_tab {
+                        grid-area: picture-edit_tab;
+                        width: 20px;
+                        height: auto;
+                        justify-self: end;
+                    }
+                    
+                    .picture-card_description {
+                        grid-area: description;
+                        justify-self: center;
+                    }
+
+                    .picture-card_thumbnail {
+                        grid-area: thumbnail;
+                        justify-self: center;
+                        align-self: center;
+                        object-fit: cover;
+                        width: 100%;
+                        height: 50%;
+                        max-height: 100%;
+                        border-radius: 50%;
+                    }
+
 
 
                 
-/**/                
-img {
-    max-width: 100%;
-}
+
 
