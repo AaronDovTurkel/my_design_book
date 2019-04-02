@@ -588,12 +588,73 @@ function sub_project_picture_load() {
 
 
 
-// //
+//Delete functions  //
+
+function delete_and_edit_functions() {
+    delete_and_edit_project_toggle();
+    delete_and_edit_sub_project_toggle();
+    delete_and_edit_project_back_toggle();
+}
+
+// project delete and edit functions
+function delete_and_edit_project_toggle() {
+    $('.project_container').on( "click", ".project-edit_tab", ( event => {
+        event.preventDefault();
+        $(event.currentTarget).siblings().html(`<p class="editing_color">Editing...</p>`);
+        $(event.currentTarget).addClass('editing');
+        $('.project_card').css('background-color', 'grey');
+        $('.project_card').not($('.editing')).toggle();
+        $('.sub_project_card').toggle();
+        $('.sub_project_picture_container').html(
+            `<form class="project-edit_submition">
+                <label for="edit_project_title">New Project Title:</label>
+
+                <input type="text" id="edit_project_title" name="edit_project_title" required minlength="1" maxlength="25">
+                
+                <input type="submit" class="edit_project_submition_button">
+                <input type="button" value="Back" class="edit_project_back_button">
+                <input type="button" value="Delete" class="delete_project_back_button">
+            </form>`
+        );
+    }));
+}
+
+function delete_and_edit_project_back_toggle() {
+    $('.sub_project_picture_container').on( "click", ".edit_project_back_button", ( event => {
+        event.preventDefault();
+        console.log(`this clicked`);
+        $('.project_card').toggle();
+        $('.sub_project_card').toggle();
+    }));
+}
+
+// subProject delete and edit functions
+function delete_and_edit_sub_project_toggle() {
+    $('.sub_project_container').on( "click", ".sub_project-edit_tab", ( event => {
+        event.preventDefault();
+        $(event.currentTarget).siblings().html(`<p class="editing_color">Editing...</p>`);
+        $('.sub_project_card').css('background-color', 'grey');
+        $('.project_container').toggle();
+        $(event.currentEvent).parent().siblings().toggle();
+        $('.sub_project_picture_container').html(
+            `<form class="sub_project-edit_submition">
+                <label for="edit_sub_project_title">New SubProject Title:</label>
+
+                <input type="text" id="edit_sub_project_title" name="edit_sub_project_title" required minlength="1" maxlength="25">
+                
+                <input type="submit" class="edit_sub_project_submition_button">
+                <input type="button" value="Back" class="edit_sub_project_back_button">
+                <input type="button" value="Delete" class="delete_sub_project_back_button">
+            </form>`
+        );
+    }));
+}
 
 function run_all_functions() {
     initial_mvp_page_load();
     selector_functions();
     add_functions();
+    delete_and_edit_functions();
 }
 
 run_all_functions();
