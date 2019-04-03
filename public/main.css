@@ -3,12 +3,13 @@
 }
 
 html {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    /**/
     display: grid;
-    grid-template-rows: 1;
-    grid-template-columns: 1;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(181, 146, 214, 0.705);
+    grid-template-rows: 100%;
+    grid-template-columns: 100%;
 }
 
     body {
@@ -16,344 +17,251 @@ html {
         grid-column: 1 / 2;
         align-self: stretch;
         justify-self: stretch;
+        /**/
         display: grid;
-        grid-template-rows: 1;
-        grid-template-columns: 1;
+        grid-template-rows: 10% 90%;
+        grid-template-columns: 100%;
     }
-        
-        main {
-            align-self: stretch;
-            justify-self: stretch;
+
+        header {
+            grid-row: 1 / 2;
+            /**/
             display: grid;
-            grid-template-columns: repeat(8, 12.5vw);
-            grid-template-rows: repeat(9, 11.111vh);
-            grid-template-areas: 
-                "client_profile_pic project_container project_container project_container project_container project_container project_container project_container"
-                "client_profile_pic sub_project_container sub_project_container sub_project_container sub_project_container sub_project_container sub_project_container sub_project_container"
-                "client_options sub_project_options sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture"
-                "client_options sub_project_options sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture"
-                "client_options sub_project_options sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture"
-                "client_options sub_project_options sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture"
-                "client_options sub_project_options sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture"
-                "client_options sub_project_options sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture"
-                "client_options sub_project_options sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture sub_project_picture";
-            border: 1px solid black;
+            grid-template-rows: 100%;
+            grid-template-columns: 25% 50% 25%;
+            /**/
+            border: .5px solid black;
         }
 
-            .client_profile_pic {
-                grid-area: client_profile_pic;
+            .profile_img {
+                grid-column: 1 / 2;
+                /**/
+                padding: 5%;
+                /**/
                 display: grid;
-                grid-template-rows: 4fr 1fr;
-                grid-template-areas: 
-                    "profile_img"
-                    "profile_name";
-                background-color: rgba(255, 255, 255, 0.438);
-                border-radius: 15px;
             }
 
-                .profile_img {
-                    grid-area: profile_img;
-                    display: grid;
-                }
-
-                    .profile_img_current {
-                        display: grid;
-                        border-radius: 50%;
-                        height: 100%;
-                        justify-self: center;
-                        align-self: center;
-                    }
-
-                .profile_name {
-                    grid-area: profile_name;
-                    text-align: center;
-                    text-decoration: overline;
-                }
-
-            .project_container {
-                border: 3px solid rgba(255, 255, 255, 0.438);
-                width: 100%;
-                grid-area: project_container;
-                display: grid;
-                padding: 1rem;
-                grid-template-columns: 20%;
-                grid-template-rows: 1fr;
-                grid-auto-flow: column;
-                grid-auto-columns: 20%;
-                grid-gap: 1rem;
-                overflow-x: scroll
-            }
-
-                .project_card {
-                    display: grid;
-                    box-shadow: 0px 1px 5px #555;
-                    background-color: white;
-                    justify-self: stretch;
-                }
-
-                .unique_project_card {
-                    display: grid;
-                    grid-template-rows: 5% 15% 80%;
-                    grid-template-columns: repeat(10, 10%);
-                    grid-template-areas:
-                        ". . . . . . . . . edit_tab"
-                        ". . . . . . . . . ."
-                        "filler filler filler filler filler filler filler filler filler filler";
-                        overflow: hidden;
-                }
-
-                    .project-edit_tab {
-                        grid-area: edit_tab;
-                        width: 20px;
-                        height: auto;
-                        justify-self: end;
-                    }
-
-                    .card_description {
-                        grid-area: filler;
-                        justify-self: center;
-                    }
-
-                .add_button {
-                    display: grid;
+                .profile_img_current {
                     border-radius: 50%;
                     height: 100%;
+                    /**/
+                    justify-self: start;
+                    align-self: center;
+                }
+
+            .mdb_logo {
+                grid-column: 2 / 3;
+                /**/
+                padding: 5%;
+                border: .5px solid black;
+                /**/
+                display: grid;
+            }
+
+                .logo_img {
+                    height: 100%;
+                    /**/
                     justify-self: center;
                     align-self: center;
                 }
 
+            .project_toggle {
+                justify-self: end;
+                align-self: center;
+                grid-column: 3 / 4;
+                /**/
+                height: 100%;
+                padding: 5%;
+                /**/
+            }
+        
+        main {
+            grid-row: 2 / 3;
+            grid-column: 1 / 2;
+            align-self: stretch;
+            justify-self: stretch;
+            /**/
+            display: grid;
+            grid-template-rows: 1fr;
+            grid-template-columns: 1fr 1fr;
+            /**/
+            padding: 3%;
+            border-radius: 15px;
+        }
 
-
-            .client_options {
-                grid-area: client_options;
-                display: grid;
-                grid-template-rows: repeat(8, 1fr);
-                grid-template-areas: 
-                    "profile"
-                    "projects"
-                    "tasks"
-                    "calendar"
-                    "workers"
-                    "orders"
-                    "billing"
-                    "explore";
+            .main_display {
+                grid-row: 1 / 2;
+                grid-column: 1 / 3;
+                align-self: stretch;
                 justify-self: stretch;
-                text-align: center;
-                text-decoration: underline;
+                /**/
                 border-radius: 15px;
-                grid-gap: space-between;
-            }
-
-                .profile {
-                    grid-area: profile;
-                    border-radius: 15px;
-                    background-color: rgba(255, 255, 255, 0.438);
-                    align-self: center;
-                }
-
-                .projects {
-                    grid-area: projects;
-                    border-radius: 15px;
-                    background-color: rgba(255, 255, 255, 0.438);
-                    align-self: center;
-                }
-
-                .tasks {
-                    grid-area: tasks;
-                    border-radius: 15px;
-                    background-color: rgba(255, 255, 255, 0.438);
-                    align-self: center;
-                }
-
-                .calendar {
-                    grid-area: calendar;
-                    border-radius: 15px;
-                    background-color: rgba(255, 255, 255, 0.438);
-                    align-self: center;
-                }
-
-                .workers {
-                    grid-area: workers;
-                    border-radius: 15px;
-                    background-color: rgba(255, 255, 255, 0.438);
-                    align-self: center;
-                }
-
-                .orders {
-                    grid-area: orders;
-                    border-radius: 15px;
-                    background-color: rgba(255, 255, 255, 0.438);
-                    align-self: center;
-                }
-
-                .billing {
-                    grid-area: billing;
-                    border-radius: 15px;
-                    background-color: rgba(255, 255, 255, 0.438);
-                    align-self: center;
-                }
-
-                .explore {
-                    grid-area: explore;
-                    border-radius: 15px;
-                    background-color: rgba(255, 255, 255, 0.438);
-                    align-self: center;
-                }
-
-
-            .sub_project_container {
-                grid-area: sub_project_container;
-                width: 100%;
+                /**/
                 display: grid;
-                padding: 1rem;
-                grid-template-columns: 25%;
                 grid-template-rows: 1fr;
-                grid-auto-flow: column;
-                grid-auto-columns: 25%;
-                grid-gap: 1rem;
-                overflow-x: scroll;
-                border: 3px solid rgba(255, 255, 255, 0.438);
+                grid-template-columns: 1fr;
             }
 
-                .sub_project_card {
-                    display: grid;
-                    box-shadow: 0px 1px 5px #555;
-                    background-color: white;
+                .picture_list {
+                    grid-row: 1 / 2;
+                    grid-column: 1 / 2;
                     justify-self: stretch;
-                }
-
-                .unique_sub_project_card {
+                    align-self: stretch;
+                    /**/
+                    width: 100%;
+                    height: 100%;
+                    border: .5px solid black;
+                    border-radius: 15px;
+                    /**/
                     display: grid;
-                    grid-template-rows: 5% 95%;
-                    grid-template-columns: repeat(10, 10%);
-                    grid-template-areas:
-                        ". . . . . . . . . edit_tab"
-                        "filler filler filler filler filler filler filler filler filler filler";
+                    grid-template-rows: 33.33%;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-auto-flow: row;
+                    grid-auto-rows: 33.33%;
+                    grid-gap: 1em;
+                    padding: 1em;
                     overflow: scroll;
                 }
 
-                    .sub_project-edit_tab {
-                        grid-area: edit_tab;
-                        width: 20px;
-                        height: auto;
-                        justify-self: end;
+                    .picture_card {
+                        justify-self: stretch;
+                        align-self: stretch;
+                        /**/
+                        box-shadow: 0px 5px 10px #555;
+                        background-color: white;
+                        border: .5px solid black;
+                        /**/
+                        display: grid;
+                        grid-template-rows: 1fr;
+                        grid-template-columns: 1fr;
                     }
 
-                .project-add_submition {
-                    display: none;
-                    box-shadow: 0px 1px 5px #555;
-                    background-color: white;
-                    justify-self: stretch;
-                }
+                        .list_img {
+                            height: 100%;
+                            width: 100%;
+                            /**/
+                            grid-row: 1 / 2;
+                            grid-column: 1 / 2;
+                            justify-self: stretch;
+                            align-self: stretch;
+                        }
 
-                .sub_project-add_submition {
-                    display: none;
-                    box-shadow: 0px 1px 5px #555;
-                    background-color: white;
-                    justify-self: stretch;
-                }
+                        .add_button {
+                            border-radius: 50%;
+                        }
 
-                .sub_project_picture-add_submition {
-                    display: none;
-                    box-shadow: 0px 1px 5px #555;
-                    background-color: white;
-                    justify-self: stretch;
-                }
-
-            .sub_project_options {
-                grid-area: sub_project_options;
-                display: grid;
-                grid-template-rows: repeat(3, 1fr);
-                grid-template-areas: 
-                    "pictures"
-                    "measurements"
-                    "comments";
-                justify-content: center;
-                align-content: center;
+            .client_options_container {
+                grid-row: 1 / 2;
+                grid-column: 1 / 2;
+                align-self: stretch;
+                justify-self: stretch;
+                /**/
                 text-align: center;
-                border: 3px solid rgba(255, 255, 255, 0.438);
+                text-decoration: underline;
+                border-radius: 15px;
+                border: .5px solid black;
+                /**/
+                display: none;
+                grid-template-rows: repeat(8, 1fr);
+                grid-gap: space-between;
             }
 
-                .pictures {
-                    grid-area: pictures;
+                .client_options {
+                    align-self: center;
+                    /**/
                     border-radius: 15px;
                     background-color: rgba(255, 255, 255, 0.438);
-                    align-self: center;
                 }
 
-                .measurements {
-                    grid-area: measurements;
-                    border-radius: 15px;
-                    background-color: rgba(255, 255, 255, 0.438);
-                    align-self: center;
-                }
-
-                .comments {
-                    grid-area: comments;
-                    border-radius: 15px;
-                    background-color: rgba(255, 255, 255, 0.438);
-                    align-self: center;
-                }
-
-            .sub_project_picture_container {
-                grid-area: sub_project_picture;
-                display: grid;
-                width: 100%;
-                grid-template-rows: 30%;
-                grid-template-columns: 1fr 1fr 1fr;
-                grid-auto-flow: row;
-                grid-auto-rows: 30%;
-                grid-gap: 1rem;
-                padding: 1rem;
-                overflow: scroll;
-                border: 3px solid rgba(255, 255, 255, 0.438);
+            .project_options_container {
+                grid-row: 1 / 2;
+                grid-column: 2 / 3;
+                align-self: stretch;
+                justify-self: stretch;
+                /**/
+                text-align: center;
+                text-decoration: underline;
+                border-radius: 15px;
+                border: .5px solid black;
+                /**/
+                display: none;
+                grid-template-rows: 1fr 2fr 1fr 2fr;
             }
 
-                .sub_project_picture_card {
-                    display: grid;
-                    box-shadow: 0px 1px 5px #555;
-                    background-color: white;
+                .project_options {
                     justify-self: stretch;
+                    align-self: stretch;
+                    /**/
+                    border-radius: 15px;
+                    border: .5px solid black;
+                    background-color: rgba(255, 255, 255, 0.438);
                 }
 
-                .unique_sub_project_picture_card {
-                    display: grid;
-                    grid-template-rows: 15% 20% 65%;
-                    grid-template-columns: repeat(10, 10%);
-                    grid-template-areas:
-                        ". . . . . . . . . picture-edit_tab"
-                        "description description description description description description description description description description"
-                        "thumbnail thumbnail thumbnail thumbnail thumbnail thumbnail thumbnail thumbnail thumbnail thumbnail";
+                .project_header {
+                    align-self: center;
                 }
 
-                    .picture-edit_tab {
-                        grid-area: picture-edit_tab;
-                        width: 20px;
-                        height: auto;
-                        justify-self: end;
-                    }
-                    
-                    .picture-card_description {
-                        grid-area: description;
-                        justify-self: center;
-                    }
+                .sub_project_header {
+                    align-self: center;
+                }
 
-                    .picture-card_thumbnail {
-                        grid-area: thumbnail;
-                        justify-self: center;
-                        align-self: center;
-                        object-fit: cover;
-                        width: 100%;
-                        height: 50%;
-                        max-height: 100%;
-                    }
+                .project_list {
+                    align-self: center;
+                    /**/
+                    border: .5px solid black;
+                    height: 60%;
+                    overflow: scroll;
+                    padding: .5em;
+                }
 
-        .editing_color {
-            color: rgba(181, 146, 214, 0.705);
-        }
+                .sub_project_list {
+                    align-self: center;
+                    /**/
+                    border: .5px solid black;
+                    height: 60%;
+                    overflow: scroll;
+                    padding: .5em;
+                }
 
+/**/
 
+.project-add_submition {
+    display: none;
+}
 
-                
+.sub_project-add_submition {
+    display: none;
+}
 
+.add_submition {
+    display: none;
+}
 
+/**/
+
+ol {
+    margin: 0;
+    list-style-type: none;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+    font-size: 1.2em;
+}
+
+/**/
+
+.profile_img_current:hover {
+    border: 1px blue solid;
+    cursor: pointer;
+}
+
+.project_toggle:hover {
+    transform: scale(1, .8);
+    cursor: pointer;
+}

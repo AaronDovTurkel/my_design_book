@@ -9,50 +9,78 @@
         <link rel="stylesheet" href="./main.css" type="text/css">
         <title>My Design Book</title>
     </head>
-    <body class="">
-        <main class="main_display">
-            <section class="client_profile_pic">
-                <div class="profile_img"><p>profile_pic</p></div>
-                <div class="profile_name"><p>profile_name</p></div>
+    <body>
+        <header>
+            <div class="profile_img">
+                <img class="profile_img_current" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="No Img">
+            </div>
+            <div class="mdb_logo">
+                <img class="logo_img" src="https://www.freelogodesign.org/Content/img/logo-ex-7.png" alt="No Img">
+            </div>
+            <img class="project_toggle" src="https://css-tricks.com/wp-content/uploads/2012/10/threelines.png" alt="No Img">
+        </header>
+        <main>
+            <section class="main_display">
+                <ol class="picture_list" type="1">
+                    <li class="picture_card">
+                        <img class="list_img add_button" src="https://cdn2.iconfinder.com/data/icons/maths-01/20/122-512.png" alt="add new" />
+                        <form class="add_submition">
+                            <label for="sub_project_picture_title">Picture Title:</label>
+
+                            <input type="text" id="sub_project_picture_title" name="sub_project_picture_title" required minlength="1" maxlength="25">
+                    
+                            <label for="sub_project_picture_url">Image Url:</label>
+                    
+                            <input type="text" id="sub_project_picture_url" name="sub_project_picture_url" required minlength="1">
+                            
+                            <input type="submit" class="sub_project_picture_submition_button">
+                            <input type="button" value="Back" class="sub_project_picture_back_button">
+                        </form>
+                    </li>
+                </ol>
             </section>
-            <section class="project_container">
-                    <article class="project_card">
-                            <input type="image" class="project-add_button add_button" src="https://cdn2.iconfinder.com/data/icons/maths-01/20/122-512.png" alt="add a new project" / >
-                            <form class="project-add_submition"></form>
-                            <form class="sub_project-edit_submition"></form>
-                    </article>
+            <section class="client_options_container">
+                <div class="client_options profile"><p>profile</p></div>
+                <div class="client_options projects"><p>projects</p></div>
+                <div class="client_options tasks"><p>tasks</p></div>
+                <div class="client_options calendar"><p>calendar</p></div>
+                <div class="client_options workers"><p>workers</p></div>
+                <div class="client_options orders"><p>orders</p></div>
+                <div class="client_options billing"><p>billing</p></div>
+                <div class="client_options explore"><p>explore</p></div>
             </section>
-            <section class="client_options">
-                    <div class="profile"><p>profile</p></div>
-                    <div class="projects"><p>projects</p></div>
-                    <div class="tasks"><p>tasks</p></div>
-                    <div class="calendar"><p>calendar</p></div>
-                    <div class="workers"><p>workers</p></div>
-                    <div class="orders"><p>orders</p></div>
-                    <div class="billing"><p>billing</p></div>
-                    <div class="explore"><p>explore</p></div>
-            </section>
-            <section class="sub_project_container">
-                    <article class="sub_project_card">
-                            <input type="image" class="sub_project-add_button add_button" src="https://cdn2.iconfinder.com/data/icons/maths-01/20/122-512.png" alt="add a new subProject" />
-                            <form class="sub_project-add_submition"></form>
-                            <form class="sub_project-edit_submition"></form>
-                    </article>
-  
-            </section>
-            <section class="sub_project_options">
-                    <div class="pictures"><p>pictures</p></div>
-                    <div class="measurements"><p>measurements</p></div>
-                    <div class="comments"><p>comments</p></div>
-            </section>
-            <section class="sub_project_picture_container">
-                    <article class="sub_project_picture_card">
-                            <input type="image" class="sub_project_picture-add_button add_button" src="https://cdn2.iconfinder.com/data/icons/maths-01/20/122-512.png" alt="add a new picture" />
-                            <form class="sub_project_picture-add_submition"></form>
-                    </article>
+            <section class="project_options_container">
+                <h2 class="project_options project_header">Homes</h2>
+                <ol class="project_list project_options" type="1">
+                    <li class="project_card">
+                        <input type="button" class="project_add_button" value="Add Home" />
+                    </li>
+                </ol>
+                <form class="project-add_submition">
+                    <label for="project_title">Home Title:</label>
+
+                    <input type="text" id="project_title" name="project_title" required minlength="1" maxlength="25">
+                    
+                    <input type="submit" class="project_submition_button">
+                    <input type="button" value="Back" class="project_back_button">
+                </form>
+                <h2 class="project_options sub_project_header">Rooms</h2>
+                <ol class="sub_project_list project_options" type="1">
+                    <li class="sub_project_card">
+                        <input type="button" class="sub_project_add_button" value="Add Room" />
+                    </li>
+                </ol>
+                <form class="sub_project-add_submition">
+                        <label for="sub_project_title">Room Title:</label>
+    
+                        <input type="text" id="sub_project_title" name="sub_project_title" required minlength="1" maxlength="25">
+                        
+                        <input type="submit" class="sub_project_submition_button">
+                        <input type="button" value="Back" class="sub_project_back_button">
+                    </form>
             </section>
         </main>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="./client.js"></script>
+        <script src="./beta.js"></script>
     </body>
 </html>
