@@ -160,7 +160,7 @@ router.post("/project/:id", (req, res) => {
                         create({
                             pictureTitle: `Empty Picture One`,
                             subProject: subProject._id,
-                            imgUrl: 'fakeUrl.furl'
+                            imgUrl: 'http://sfwallpaper.com/images/minimal-desktop-backgrounds-21.jpg'
                         }).
                         then (subProjectPicture => {
                             subProject.pictures.push(subProjectPicture);
@@ -218,7 +218,7 @@ router.post("/subProject/:id", (req, res) => {
                 create({
                     pictureTitle: `Empty Picture One`,
                     subProject: subProject._id,
-                    imgUrl: 'fakeUrl.furl'
+                    imgUrl: 'http://sfwallpaper.com/images/minimal-desktop-backgrounds-21.jpg'
                 }).
                 then (subProjectPicture => {
                     subProject.pictures.push(subProjectPicture);
@@ -251,7 +251,7 @@ router.post("/subProject/:id", (req, res) => {
 
 // post - create - post to unique client -> unique project -> unique subProject -> new picture
 router.post("/subProjectPicture/:id", (req, res) => {
-    const requiredFields = ['pictureTitle', 'imgUrl'];
+    const requiredFields = ['imgUrl'];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
@@ -263,7 +263,7 @@ router.post("/subProjectPicture/:id", (req, res) => {
 
     SubProjectPicture.
         create({
-            pictureTitle: req.body.pictureTitle,
+            pictureTitle: "MVP Picture Title",
             subProject: req.params.id,
             imgUrl: req.body.imgUrl
         }).

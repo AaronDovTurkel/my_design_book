@@ -5,11 +5,13 @@
 html {
     height: 100%;
     width: 100%;
-    background-color: white;
+    background-color: rgba(1, 22, 6, 0.952);
     /**/
     display: grid;
     grid-template-rows: 100%;
     grid-template-columns: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
     body {
@@ -30,7 +32,6 @@ html {
             grid-template-rows: 100%;
             grid-template-columns: 25% 50% 25%;
             /**/
-            border: .5px solid black;
         }
 
             .profile_img {
@@ -42,7 +43,7 @@ html {
             }
 
                 .profile_img_current {
-                    border-radius: 50%;
+                    border-radius: 25%;
                     height: 100%;
                     /**/
                     justify-self: start;
@@ -52,28 +53,34 @@ html {
             .mdb_logo {
                 grid-column: 2 / 3;
                 /**/
-                padding: 5%;
-                border: .5px solid black;
+                padding: 5px;
                 /**/
                 display: grid;
             }
 
                 .logo_img {
-                    height: 100%;
+                    height: 13vh;
+                    width: 9vw;
+                    border-radius: 25%;
                     /**/
                     justify-self: center;
-                    align-self: center;
+                    align-self: start;
                 }
 
             .project_toggle {
-                justify-self: end;
-                align-self: center;
                 grid-column: 3 / 4;
                 /**/
-                height: 100%;
-                padding: 5%;
                 /**/
+                display: grid;
             }
+
+                .project_toggle_img {
+                    border-radius: 25%;
+                    height: 100%;
+                    /**/
+                    justify-self: end;
+                    align-self: center;
+                }
         
         main {
             grid-row: 2 / 3;
@@ -85,7 +92,10 @@ html {
             grid-template-rows: 1fr;
             grid-template-columns: 1fr 1fr;
             /**/
-            padding: 3%;
+            padding-top: 3%;
+            padding-bottom: 3%;
+            padding-right: 8%;
+            padding-left: 8%;
             border-radius: 15px;
         }
 
@@ -94,8 +104,6 @@ html {
                 grid-column: 1 / 3;
                 align-self: stretch;
                 justify-self: stretch;
-                /**/
-                border-radius: 15px;
                 /**/
                 display: grid;
                 grid-template-rows: 1fr;
@@ -110,8 +118,6 @@ html {
                     /**/
                     width: 100%;
                     height: 100%;
-                    border: .5px solid black;
-                    border-radius: 15px;
                     /**/
                     display: grid;
                     grid-template-rows: 33.33%;
@@ -127,9 +133,8 @@ html {
                         justify-self: stretch;
                         align-self: stretch;
                         /**/
-                        box-shadow: 0px 5px 10px #555;
-                        background-color: white;
-                        border: .5px solid black;
+                        background-color: rgba(255, 255, 255, 0.363);
+                        border-radius: 5%;
                         /**/
                         display: grid;
                         grid-template-rows: 1fr;
@@ -139,6 +144,8 @@ html {
                         .list_img {
                             height: 100%;
                             width: 100%;
+                            background-color: rgba(255, 255, 255, 0.363);
+                            border-radius: 5%;
                             /**/
                             grid-row: 1 / 2;
                             grid-column: 1 / 2;
@@ -146,20 +153,17 @@ html {
                             align-self: stretch;
                         }
 
-                        .add_button {
-                            border-radius: 50%;
-                        }
-
             .client_options_container {
                 grid-row: 1 / 2;
                 grid-column: 1 / 2;
                 align-self: stretch;
-                justify-self: stretch;
+                justify-self: center;
                 /**/
                 text-align: center;
                 text-decoration: underline;
+                background-color: rgba(255, 255, 255, 0.363);
+                padding: 5%;
                 border-radius: 15px;
-                border: .5px solid black;
                 /**/
                 display: none;
                 grid-template-rows: repeat(8, 1fr);
@@ -168,9 +172,8 @@ html {
 
                 .client_options {
                     align-self: center;
+                    justify-self: center;
                     /**/
-                    border-radius: 15px;
-                    background-color: rgba(255, 255, 255, 0.438);
                 }
 
             .project_options_container {
@@ -180,48 +183,95 @@ html {
                 justify-self: stretch;
                 /**/
                 text-align: center;
-                text-decoration: underline;
-                border-radius: 15px;
-                border: .5px solid black;
                 /**/
                 display: none;
-                grid-template-rows: 1fr 2fr 1fr 2fr;
+                grid-template-rows: 5% 45% 5% 45%;
             }
 
                 .project_options {
-                    justify-self: stretch;
-                    align-self: stretch;
                     /**/
                     border-radius: 15px;
-                    border: .5px solid black;
-                    background-color: rgba(255, 255, 255, 0.438);
+                    background-color: rgba(255, 255, 255, 0.363);
                 }
 
                 .project_header {
-                    align-self: center;
+                    align-self: start;
+                    justify-self: stretch;
                 }
 
                 .sub_project_header {
-                    align-self: center;
+                    align-self: start;
+                    justify-self: stretch;
                 }
 
                 .project_list {
                     align-self: center;
+                    justify-self: center;
                     /**/
-                    border: .5px solid black;
-                    height: 60%;
+                    height: 12vh;
                     overflow: scroll;
                     padding: .5em;
                 }
 
+                    .project_card {
+                        padding: 10px;
+                    }
+
+                    .unique_project_card {
+                        display: grid;
+                        grid-template-rows: 1;
+                        grid-template-columns: 1fr 4fr;
+                    }
+
+                        .project_edit {
+                            grid-column: 1 / 2;
+                            justify-self: start;
+                            align-self: start;
+                            background-color: transparent;
+                            border: 0px;
+                        }
+
+                        .unique_project_card > p {
+                            grid-column: 2 / 3;
+                            text-align: start;
+                            text-decoration: underline;
+                            justify-self: start;
+                        }
+
                 .sub_project_list {
                     align-self: center;
+                    justify-self: center;
                     /**/
-                    border: .5px solid black;
-                    height: 60%;
+                    height: 12vh;
                     overflow: scroll;
                     padding: .5em;
                 }
+
+                    .sub_project_card {
+                        padding: 10px;
+                    }
+
+                    .unique_sub_project_card {
+                        display: grid;
+                        grid-template-rows: 1;
+                        grid-template-columns: 1fr 4fr;
+                    }
+
+                        .sub_project_edit {
+                            grid-column: 1 / 2;
+                            justify-self: start;
+                            align-self: start;
+                            background-color: transparent;
+                            border: 0px;
+                        }
+
+                        .unique_sub_project_card > p {
+                            text-decoration: underline;
+                            text-align: start;
+                            grid-column: 2 / 3;
+                            justify-self: start;
+                        }
+
 
 /**/
 
@@ -237,6 +287,10 @@ html {
     display: none;
 }
 
+input[type=button] {
+    border-radius: 15px;
+}
+
 /**/
 
 ol {
@@ -246,6 +300,7 @@ ol {
 
 h2 {
     font-size: 1.5em;
+    padding: 5px;
 }
 
 p {
@@ -257,11 +312,76 @@ p {
 /**/
 
 .profile_img_current:hover {
-    border: 1px blue solid;
+    border: 5px black double;
     cursor: pointer;
 }
 
-.project_toggle:hover {
-    transform: scale(1, .8);
+.project_toggle_img:hover {
+    border: 5px black double;
     cursor: pointer;
+}
+
+.add_button:hover {
+    cursor: pointer;
+}
+
+.client_options:hover {
+    color: rgba(15, 65, 27, 0.952);
+    cursor: pointer;
+}
+
+.project_card:hover {
+    color: rgba(15, 65, 27, 0.952);
+    cursor: pointer;
+}
+
+.sub_project_card:hover {
+    color: rgba(15, 65, 27, 0.952);
+    cursor: pointer;
+}
+
+.project_add_button:hover {
+    color: rgba(15, 65, 27, 0.952);
+    cursor: pointer;
+}
+
+.sub_project_add_button:hover {
+    color: rgba(15, 65, 27, 0.952);
+    cursor: pointer;
+}
+
+.project_edit:hover {
+    color: rgba(189, 9, 9, 0.952);
+    cursor: pointer;
+}
+
+.sub_project_edit:hover {
+    color: rgba(189, 9, 9, 0.952);
+    cursor: pointer;
+}
+
+/**/
+
+#drop-container {
+	background: #ffffff;
+	padding: 10px;
+	border: #07c6f1 2px dashed;
+}
+
+.drop-area-text {
+	text-align: center;
+	color: #e0dfdf;
+	font-size: 1.5em;
+	padding-bottom: 20px;
+}
+
+.drop-image {
+	display: none;
+}
+
+.preview {
+	margin: 20px;
+    width: 150px;
+    height: 150px;
+    display: inline-block;
 }

@@ -115,6 +115,7 @@ function place_projects(account_dataArg, number_of_projectsArg) {
         if (i == number_of_projectsArg - 1) {
             $('.project_list').prepend(
                 `<li class="project_card unique_project_card">
+                    <input class="project_edit" type="button" value="x">
                     <p>${account_dataArg.projects[i].projectTitle}</p>
                 </li>`
             );
@@ -122,6 +123,7 @@ function place_projects(account_dataArg, number_of_projectsArg) {
         } else {
             $('.project_list').prepend(
                 `<li class="project_card unique_project_card">
+                    <input class="project_edit" type="button" value="x">
                     <p>${account_dataArg.projects[i].projectTitle}</p>
                 </li>`
             );
@@ -135,6 +137,7 @@ function place_sub_projects(account_dataArg) {
         if (i == account_dataArg.projects[selected_storage.project].subProjects.length - 1) {
             $('.sub_project_list').prepend(
                 `<li class="sub_project_card unique_sub_project_card">
+                    <input class="sub_project_edit" type="button" value="x">
                     <p>${account_dataArg.projects[selected_storage.project].subProjects[i].subProjectTitle}</p>
                 </li>`
             );
@@ -142,6 +145,7 @@ function place_sub_projects(account_dataArg) {
         } else {
             $('.sub_project_list').prepend(
                 `<li class="sub_project_card unique_sub_project_card">
+                    <input class="project_edit" type="button" value="x">
                     <p>${account_dataArg.projects[selected_storage.project].subProjects[i].subProjectTitle}</p>
                 </li>`
             );
@@ -178,7 +182,7 @@ function selector_functions() {
 
 
 function select_project() {
-    $('.project_list').on( "click", ".unique_project_card", ( event => {
+    $('.project_list').on( "click", ".unique_project_card > p", ( event => {
         event.preventDefault();	
         let selected_project = $(event.currentTarget).text().trim();
         $.getJSON(client_home_url)
@@ -201,7 +205,7 @@ function select_project() {
 }
 
 function select_sub_project() {
-    $('.sub_project_list').on( "click", ".unique_sub_project_card", ( event => {
+    $('.sub_project_list').on( "click", ".unique_sub_project_card > p", ( event => {
         event.preventDefault();
         $.getJSON(client_home_url)
             .then(current_account_store => {
@@ -424,7 +428,8 @@ function new_sub_project_picture_submition() {
 }
 
 function new_sub_project_picture_ajax_post(x, y) {
-    let bodyRequest = { pictureTitle: x, imgUrl: y };
+    let formData = new FormData(y);
+    let bodyRequest = { pictureTitle: x, imgUrl: formData };
     console.log(JSON.stringify(bodyRequest));
     $.ajax({
         contentType: 'application/json',
@@ -494,6 +499,8 @@ function client_options_toggle() {
             $('.client_options_container').css('display', 'grid');
             $('.project_options_container').css('display', 'none');
             $('main').css('grid-template-columns', '1fr 2fr');
+            $('.profile_img_current').css('filter', 'blur(2px)');
+            $('.project_toggle').css('filter', 'blur(0px)');
         } else {
             $('.main_display').css('grid-column', '1 / 3');
             $('.picture_list').css('grid-template-columns', '1fr 1fr 1fr');
@@ -502,6 +509,7 @@ function client_options_toggle() {
             $('.client_options_container').css('display', 'none');
             $('.project_options_container').css('display', 'none');
             $('main').css('grid-template-columns', '1fr 1fr');
+            $('.profile_img_current').css('filter', 'blur(0px)');
         }
     }));
 }
@@ -519,6 +527,8 @@ function project_options_toggle() {
             $('.project_options_container').css('display', 'grid');
             $('.client_options_container').css('display', 'none');
             $('main').css('grid-template-columns', '2fr 1fr');
+            $('.profile_img_current').css('filter', 'blur(0px)');
+            $('.project_toggle').css('filter', 'blur(2px)');
         } else {
             $('.main_display').css('grid-column', '1 / 3');
             $('.picture_list').css('grid-template-columns', '1fr 1fr 1fr');
@@ -527,8 +537,68 @@ function project_options_toggle() {
             $('.project_options_container').css('display', 'none');
             $('.client_options_container').css('display', 'none');
             $('main').css('grid-template-columns', '1fr 1fr');
+            $('.project_toggle').css('filter', 'blur(0px)');
         }
     }));
+}
+
+/**/
+function drag_and_drop_image_upload() {
+    $("#drop-container").on('dragenter', function(e) {
+        e.preventDefault();
+        $(this).css('border', '#39b311 2px dashed');
+        $(this).css('background', '#f1ffef');
+    });
+
+    $("#drop-container").on('dragover', function(e) {
+        e.preventDefault();
+    });
+
+    $("#drop-container").on('drop', function(e) {
+        $(this).css('border', '#07c6f1 2px dashed');
+        $(this).css('background', '#FFF');
+        e.preventDefault();
+        let image = e.originalEvent.dataTransfer.files;
+        createFormData(image);
+        console.log(image);
+    });
+};
+
+
+function createFormData(image) {
+	let formImage = new FormData();
+    formImage.append('dropImage', image[0]);
+	uploadFormData(formImage);
+}
+
+function uploadFormData(formData) {
+        let bodyRequest = { imgUrl: formData };
+    $.ajax({
+        url: client_post_sub_project_picture_url,
+        type: "POST",
+        data: JSON.stringify(bodyRequest),
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function(response){
+            var imagePreview = $(".drop-image").clone();
+            imagePreview.attr("src", response); 
+            imagePreview.removeClass("drop-image");
+            imagePreview.addClass("preview");
+            $('#drop-container').append(imagePreview);
+        }
+    })
+    .then(results => {
+        clear_sub_project_pictures();
+        sub_project_picture_load();
+        $('.add_button').css("display", "grid");
+        $('.add_submition').css("display", "none");
+        return results;
+    })
+    .then(results => {
+        console.log(results);
+        sub_project_picture_load();
+    });
 }
 
 
@@ -538,6 +608,7 @@ function run_all_functions() {
     initial_mvp_page_load();
     selector_functions();
     add_functions();
+    drag_and_drop_image_upload();
 }
 
 run_all_functions();

@@ -3,10 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="">
+        <meta name="description" content="A hub for streamlining home design for clients and designers.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
         <link rel="stylesheet" href="./main.css" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro" rel="stylesheet">
         <title>My Design Book</title>
     </head>
     <body>
@@ -15,9 +16,11 @@
                 <img class="profile_img_current" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="No Img">
             </div>
             <div class="mdb_logo">
-                <img class="logo_img" src="https://www.freelogodesign.org/Content/img/logo-ex-7.png" alt="No Img">
+                <img class="logo_img" src="../img_store/mdb_logo.png" alt="No Img">
             </div>
-            <img class="project_toggle" src="https://css-tricks.com/wp-content/uploads/2012/10/threelines.png" alt="No Img">
+            <div class="project_toggle">
+                <img class="project_toggle_img" src="https://cdn3.iconfinder.com/data/icons/menu-icons-1/100/menu9-512.png" alt="No Img">
+            </div>
         </header>
         <main>
             <section class="main_display">
@@ -25,29 +28,27 @@
                     <li class="picture_card">
                         <img class="list_img add_button" src="https://cdn2.iconfinder.com/data/icons/maths-01/20/122-512.png" alt="add new" />
                         <form class="add_submition">
-                            <label for="sub_project_picture_title">Picture Title:</label>
-
-                            <input type="text" id="sub_project_picture_title" name="sub_project_picture_title" required minlength="1" maxlength="25">
-                    
-                            <label for="sub_project_picture_url">Image Url:</label>
-                    
-                            <input type="text" id="sub_project_picture_url" name="sub_project_picture_url" required minlength="1">
-                            
-                            <input type="submit" class="sub_project_picture_submition_button">
+                            <div id="drop-container">
+                                <div class="drop-area-text">
+                                    Drag and Drop Images Here. Or...
+                                </div>
+                            </div>
+                            <img src="" class="drop-image" />
+                            <input type="file" accept="image/png, image/jpeg">
                             <input type="button" value="Back" class="sub_project_picture_back_button">
                         </form>
                     </li>
                 </ol>
             </section>
             <section class="client_options_container">
-                <div class="client_options profile"><p>profile</p></div>
-                <div class="client_options projects"><p>projects</p></div>
-                <div class="client_options tasks"><p>tasks</p></div>
-                <div class="client_options calendar"><p>calendar</p></div>
-                <div class="client_options workers"><p>workers</p></div>
-                <div class="client_options orders"><p>orders</p></div>
-                <div class="client_options billing"><p>billing</p></div>
-                <div class="client_options explore"><p>explore</p></div>
+                <div class="client_options profile"><p>Profile</p></div>
+                <div class="client_options projects"><p>Projects</p></div>
+                <div class="client_options tasks"><p>Tasks</p></div>
+                <div class="client_options calendar"><p>Calendar</p></div>
+                <div class="client_options workers"><p>Workers</p></div>
+                <div class="client_options orders"><p>Orders</p></div>
+                <div class="client_options billing"><p>Billing</p></div>
+                <div class="client_options explore"><p>Explore</p></div>
             </section>
             <section class="project_options_container">
                 <h2 class="project_options project_header">Homes</h2>
