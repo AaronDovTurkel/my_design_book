@@ -51,30 +51,29 @@
                 <div class="client_options explore"><p>Explore</p></div>
             </section>
             <section class="project_options_container">
-                <h2 class="project_options project_header">Homes</h2>
-                <ol class="project_list project_options" type="1">
+                <h2 class="project_options project_header"><input class="home_button" type="button" value="Homes" /> / <input class="room_button" type="button" value="Rooms" /></h2>
+                <ol class="project_list project_options selected" type="1">
                     <li class="project_card">
                         <input type="button" class="project_add_button" value="Add Home" />
                     </li>
                 </ol>
-                <form class="project-add_submition">
-                    <label for="project_title">Home Title:</label>
-
-                    <input type="text" id="project_title" name="project_title" required minlength="1" maxlength="25">
-                    
-                    <input type="submit" class="project_submition_button">
-                    <input type="button" value="Back" class="project_back_button">
-                </form>
-                <h2 class="project_options sub_project_header">Rooms</h2>
                 <ol class="sub_project_list project_options" type="1">
                     <li class="sub_project_card">
                         <input type="button" class="sub_project_add_button" value="Add Room" />
                     </li>
                 </ol>
+                <form class="project-add_submition">
+                    <label for="project_title">Home Title:</label>
+
+                    <input type="text" id="project_title" name="project_title" required minlength="1">
+                    
+                    <input type="submit" class="project_submition_button">
+                    <input type="button" value="Back" class="project_back_button">
+                </form>
                 <form class="sub_project-add_submition">
                         <label for="sub_project_title">Room Title:</label>
     
-                        <input type="text" id="sub_project_title" name="sub_project_title" required minlength="1" maxlength="25">
+                        <input type="text" id="sub_project_title" name="sub_project_title" required minlength="1">
                         
                         <input type="submit" class="sub_project_submition_button">
                         <input type="button" value="Back" class="sub_project_back_button">

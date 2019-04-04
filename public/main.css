@@ -53,18 +53,18 @@ html {
             .mdb_logo {
                 grid-column: 2 / 3;
                 /**/
-                padding: 5px;
                 /**/
                 display: grid;
             }
 
                 .logo_img {
-                    height: 13vh;
-                    width: 9vw;
+                    height: 125%;
+                    width: auto;
                     border-radius: 25%;
+                    border: 3px groove black;
                     /**/
                     justify-self: center;
-                    align-self: start;
+                    align-self: center;
                 }
 
             .project_toggle {
@@ -89,13 +89,10 @@ html {
             justify-self: stretch;
             /**/
             display: grid;
-            grid-template-rows: 1fr;
+            grid-template-rows: repeat(auto-fit, 1fr);
             grid-template-columns: 1fr 1fr;
             /**/
-            padding-top: 3%;
-            padding-bottom: 3%;
-            padding-right: 8%;
-            padding-left: 8%;
+            padding: 3%;
             border-radius: 15px;
         }
 
@@ -178,14 +175,14 @@ html {
 
             .project_options_container {
                 grid-row: 1 / 2;
-                grid-column: 2 / 3;
+                grid-column: 1 / 3;
                 align-self: stretch;
                 justify-self: stretch;
                 /**/
                 text-align: center;
                 /**/
                 display: none;
-                grid-template-rows: 5% 45% 5% 45%;
+                grid-template-rows: 1fr 3fr;
             }
 
                 .project_options {
@@ -195,22 +192,31 @@ html {
                 }
 
                 .project_header {
-                    align-self: start;
+                    align-self: center;
                     justify-self: stretch;
+                    grid-row: 1 / 2;
                 }
 
-                .sub_project_header {
-                    align-self: start;
-                    justify-self: stretch;
+                .home_button {
+                    background-color: white;
+                    border: none;
+                }
+
+                .room_button {
+                    background-color: transparent;
+                    border: none;
                 }
 
                 .project_list {
+                    grid-row: 2 / 3;
                     align-self: center;
                     justify-self: center;
+                    display: none;
                     /**/
-                    height: 12vh;
+                    height: 50%;
                     overflow: scroll;
                     padding: .5em;
+                    border: 3px black groove;
                 }
 
                     .project_card {
@@ -220,7 +226,7 @@ html {
                     .unique_project_card {
                         display: grid;
                         grid-template-rows: 1;
-                        grid-template-columns: 1fr 4fr;
+                        grid-template-columns: .5fr 2fr;
                     }
 
                         .project_edit {
@@ -239,12 +245,14 @@ html {
                         }
 
                 .sub_project_list {
+                    display: none;
                     align-self: center;
                     justify-self: center;
                     /**/
-                    height: 12vh;
+                    height: 50%;
                     overflow: scroll;
                     padding: .5em;
+                    border: 3px black groove;
                 }
 
                     .sub_project_card {
@@ -254,7 +262,7 @@ html {
                     .unique_sub_project_card {
                         display: grid;
                         grid-template-rows: 1;
-                        grid-template-columns: 1fr 4fr;
+                        grid-template-columns: .5fr 2fr;
                     }
 
                         .sub_project_edit {
@@ -266,9 +274,9 @@ html {
                         }
 
                         .unique_sub_project_card > p {
-                            text-decoration: underline;
-                            text-align: start;
                             grid-column: 2 / 3;
+                            text-align: start;
+                            text-decoration: underline;
                             justify-self: start;
                         }
 
@@ -306,7 +314,7 @@ h2 {
 p {
     padding: 0;
     margin: 0;
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 /**/
@@ -358,6 +366,20 @@ p {
 .sub_project_edit:hover {
     color: rgba(189, 9, 9, 0.952);
     cursor: pointer;
+}
+
+.home_button:hover {
+    color: rgba(15, 65, 27, 0.952);
+    cursor: pointer;
+}
+
+.room_button:hover {
+    color: rgba(15, 65, 27, 0.952);
+    cursor: pointer;
+}
+
+.selected {
+    display: grid;
 }
 
 /**/

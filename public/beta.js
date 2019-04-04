@@ -53,7 +53,8 @@ function store_project_id(projectTitleArg) {
             for (let i = 0; i < account_data.projects.length; i++) {
                 if (projectTitleArg == account_data.projects[i].projectTitle) {
                     selected_storage.projectId = account_data.projects[i]._id;
-                    selected_storage.projectTitle = projectTitleArg;
+                    selected_storage.projectTitle = account_data.projects[i].projectTitle;
+                    client_post_sub_project_url = change_url(`client_pages/subProject/${selected_storage.projectId}`);
                 }
             }
         });
@@ -138,7 +139,7 @@ function place_sub_projects(account_dataArg) {
             $('.sub_project_list').prepend(
                 `<li class="sub_project_card unique_sub_project_card">
                     <input class="sub_project_edit" type="button" value="x">
-                    <p>${account_dataArg.projects[selected_storage.project].subProjects[i].subProjectTitle}</p>
+                    <p class="room_name">${account_dataArg.projects[selected_storage.project].subProjects[i].subProjectTitle}</p>
                 </li>`
             );
             store_sub_project_id(account_dataArg.projects[selected_storage.project].subProjects[i].subProjectTitle);
@@ -146,7 +147,7 @@ function place_sub_projects(account_dataArg) {
             $('.sub_project_list').prepend(
                 `<li class="sub_project_card unique_sub_project_card">
                     <input class="project_edit" type="button" value="x">
-                    <p>${account_dataArg.projects[selected_storage.project].subProjects[i].subProjectTitle}</p>
+                    <p class="room_name">${account_dataArg.projects[selected_storage.project].subProjects[i].subProjectTitle}</p>
                 </li>`
             );
         }
@@ -183,7 +184,8 @@ function selector_functions() {
 
 function select_project() {
     $('.project_list').on( "click", ".unique_project_card > p", ( event => {
-        event.preventDefault();	
+        event.preventDefault();
+        room_selected();
         let selected_project = $(event.currentTarget).text().trim();
         $.getJSON(client_home_url)
             .then(current_account_store => {
@@ -192,10 +194,10 @@ function select_project() {
                         console.log(`Loading subProjects for ${current_account_store.projects[i].projectTitle}`);
                         selected_storage.project = i;
                         selected_storage.subProject = (current_account_store.projects[selected_storage.project].subProjects.length) - 1;
-                        console.log(selected_storage.project);
                         place_sub_projects(current_account_store);
                         place_sub_project_pictures(current_account_store);
                         store_project_id(current_account_store.projects[i].projectTitle);
+                        console.log(selected_storage);
                     } else {
                         console.log(`${selected_project} is not in ${current_account_store.projects[i].projectTitle}`);
                     }
@@ -228,8 +230,14 @@ function select_sub_project() {
 //POST (add) Functions//
 function add_functions() {
     new_project_toggle();
+    new_project_submition();
+    new_project_back_toggle();
     new_sub_project_toggle();
+    new_sub_project_submition();
+    new_sub_project_back_toggle();
     new_sub_project_picture_toggle();
+    new_sub_project_picture_submition();
+    new_sub_project_picture_back_toggle();
 }
 
 // Project POST (add) Functions
@@ -237,8 +245,6 @@ function new_project_toggle() {
     $('.project_list').on( "click", ".project_add_button", ( event => {
         event.preventDefault();
         new_project_submition_form();
-        new_project_submition();
-        new_project_back_toggle();
     }));
 }
 
@@ -270,14 +276,6 @@ function new_project_ajax_post(x) {
         contentType: 'application/json',
         data: JSON.stringify({ projectTitle: x}),
         dataType: 'json',
-        success: function(){
-            console.log("device control succeeded");
-        },
-        error: function(err){
-            console.log("Device control failed");
-            console.log(err);
-            alert(`Error. Something went wrong. Please try again.`)
-        },
         processData: false,
         type: 'POST',
         url: client_post_project_url
@@ -285,7 +283,8 @@ function new_project_ajax_post(x) {
     .then(results => {
         $('.project-add_submition').css("display", "none");
         $('.project_list').css("display", "grid");
-        console.log(results)
+        console.log(results);
+        console.log("device control succeeded");
         clear_projects();
         clear_sub_projects();
         clear_sub_project_pictures();
@@ -301,8 +300,6 @@ function new_sub_project_toggle() {
     $('.sub_project_list').on( "click", ".sub_project_add_button", ( event => {
         event.preventDefault();
         new_sub_project_submition_form();
-        new_sub_project_submition();
-        new_sub_project_back_toggle();
     }));
 }
 
@@ -337,12 +334,12 @@ function sub_project_load() {
     let selected_project = selected_storage.projectTitle;
     $.getJSON(client_home_url)
         .then(current_account_store => {
+            console.log(current_account_store);
             for (let i = 0; i < current_account_store.projects.length; i++) {
                 if (current_account_store.projects[i].projectTitle == selected_project) {
                     console.log(`Loading subProjects for ${current_account_store.projects[i].projectTitle}`);
                     selected_storage.project = i;
                     selected_storage.subProject = (current_account_store.projects[selected_storage.project].subProjects.length) - 1;
-                    console.log(selected_storage.project);
                     place_sub_projects(current_account_store);
                     place_sub_project_pictures(current_account_store);
                     store_project_id(current_account_store.projects[i].projectTitle);
@@ -358,28 +355,16 @@ function new_sub_project_ajax_post(x) {
         contentType: 'application/json',
         data: JSON.stringify({ subProjectTitle: x}),
         dataType: 'json',
-        success: function(){
-            console.log("device control succeeded");
-        },
-        error: function(err){
-            console.log("Device control failed");
-            console.log(err);
-            alert(`Error. Something went wrong. Please try again.`)
-        },
         processData: false,
         type: 'POST',
         url: client_post_sub_project_url
     })
     .then(results => {
+        console.log(results);
         clear_sub_projects();
         clear_sub_project_pictures();
         $('.sub_project-add_submition').css("display", "none");
         $('.sub_project_list').css("display", "grid");
-        sub_project_load();
-        return results;
-    })
-    .then(results => {
-        console.log(results);
         sub_project_load();
     })
     .catch(err => {
@@ -392,8 +377,6 @@ function new_sub_project_picture_toggle() {
     $('.picture_list').on( "click", ".add_button", ( event => {
         event.preventDefault();
         new_sub_project_picture_submition_form();
-        new_sub_project_picture_submition();
-        new_sub_project_picture_back_toggle();
     }));
 }
 
@@ -484,6 +467,9 @@ function sub_project_picture_load() {
 function display_js_functions() {
     client_options_toggle();
     project_options_toggle();
+    home_button_toggle();
+    room_button_toggle();
+    room_to_pic_toggle();
 }
 
 function client_options_toggle() {
@@ -492,16 +478,18 @@ function client_options_toggle() {
         $('.profile_img_current').toggleClass('clicked');
         $('.project_toggle').removeClass('clicked');
         if ($('.profile_img_current').hasClass('clicked')) {
+            $('.main_display').css('display', 'grid');
             $('.main_display').css('grid-column', '2 / 3');
             $('.picture_list').css('grid-template-columns', '1fr');
             $('.picture_list').css('grid-template-rows', '100%');
             $('.picture_list').css('grid-auto-rows', '100%');
             $('.client_options_container').css('display', 'grid');
             $('.project_options_container').css('display', 'none');
-            $('main').css('grid-template-columns', '1fr 2fr');
+            $('main').css('grid-template-columns', '1fr 9fr');
             $('.profile_img_current').css('filter', 'blur(2px)');
             $('.project_toggle').css('filter', 'blur(0px)');
         } else {
+            $('.main_display').css('display', 'grid');
             $('.main_display').css('grid-column', '1 / 3');
             $('.picture_list').css('grid-template-columns', '1fr 1fr 1fr');
             $('.picture_list').css('grid-template-rows', '33.33%');
@@ -520,16 +508,14 @@ function project_options_toggle() {
         $('.project_toggle').toggleClass('clicked');
         $('.profile_img_current').removeClass('clicked');
         if ($('.project_toggle').hasClass('clicked')) {
-            $('.main_display').css('grid-column', '1 / 2');
-            $('.picture_list').css('grid-template-columns', '1fr');
-            $('.picture_list').css('grid-template-rows', '100%');
-            $('.picture_list').css('grid-auto-rows', '100%');
+            $('.main_display').css('display', 'none');
             $('.project_options_container').css('display', 'grid');
             $('.client_options_container').css('display', 'none');
-            $('main').css('grid-template-columns', '2fr 1fr');
+            $('main').css('grid-template-columns', '1fr');
             $('.profile_img_current').css('filter', 'blur(0px)');
             $('.project_toggle').css('filter', 'blur(2px)');
         } else {
+            $('.main_display').css('display', 'grid');
             $('.main_display').css('grid-column', '1 / 3');
             $('.picture_list').css('grid-template-columns', '1fr 1fr 1fr');
             $('.picture_list').css('grid-template-rows', '33.33%');
@@ -540,6 +526,68 @@ function project_options_toggle() {
             $('.project_toggle').css('filter', 'blur(0px)');
         }
     }));
+}
+
+function room_to_pic_toggle() {
+    $('.project_options_container').on( "click", ".room_name", ( event => {
+        event.preventDefault();
+        $('.project_toggle').toggleClass('clicked');
+        $('.profile_img_current').removeClass('clicked');
+        if ($('.project_toggle').hasClass('clicked')) {
+            $('.main_display').css('display', 'none');
+            $('.project_options_container').css('display', 'grid');
+            $('.client_options_container').css('display', 'none');
+            $('main').css('grid-template-columns', '1fr');
+            $('.profile_img_current').css('filter', 'blur(0px)');
+            $('.project_toggle').css('filter', 'blur(2px)');
+        } else {
+            $('.main_display').css('display', 'grid');
+            $('.main_display').css('grid-column', '1 / 3');
+            $('.picture_list').css('grid-template-columns', '1fr 1fr 1fr');
+            $('.picture_list').css('grid-template-rows', '33.33%');
+            $('.picture_list').css('grid-auto-rows', '33.33%');
+            $('.project_options_container').css('display', 'none');
+            $('.client_options_container').css('display', 'none');
+            $('main').css('grid-template-columns', '1fr 1fr');
+            $('.project_toggle').css('filter', 'blur(0px)');
+        }
+    }));
+}
+
+function home_button_toggle() {
+    $('.home_button').on( "click", ( event => {
+        home_selected()
+    }));
+}
+
+function room_button_toggle() {
+    $('.room_button').on( "click", ( event => {
+        event.preventDefault();
+        room_selected();
+    }));
+}
+
+function room_selected() {
+    $('.room_button').css('background-color', 'white');
+    $('.home_button').css('background-color', 'transparent');
+    if ($('.sub_project_list').hasClass('selected')) {
+        $('.project_list').removeClass('selected');
+    } else {
+        $('.sub_project_list').addClass('selected');
+        $('.project_list').removeClass('selected');
+    }
+}
+
+function home_selected() {
+    $('.home_button').css('background-color', 'white');
+    $('.room_button').css('background-color', 'transparent');
+    event.preventDefault();
+    if ($('.project_list').hasClass('selected')) {
+        $('.sub_project_list').removeClass('selected');
+    } else {
+        $('.project_list').addClass('selected');
+        $('.sub_project_list').removeClass('selected');
+    }
 }
 
 /**/
