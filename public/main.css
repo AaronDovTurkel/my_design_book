@@ -244,6 +244,10 @@ html {
                             justify-self: start;
                         }
 
+                        .delete_project_form {
+                            display: none;
+                        }
+
                 .sub_project_list {
                     display: none;
                     align-self: center;

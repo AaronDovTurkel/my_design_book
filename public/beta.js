@@ -19,7 +19,8 @@ let selected_storage = {
     subProjectPictureId: '',
     projectTitle: '',
     subProjectTitle: '',
-    subProjectPictureTitle: ''
+    subProjectPictureTitle: '',
+    selected_project_for_deletion: ''
 }
 
 // static client_page for mvp (will have log in page that will change id)
@@ -28,6 +29,7 @@ const client_home_url = change_url(`client_pages/${mvp_static_account_id}`);
 const client_post_project_url = change_url(`client_pages/project/${mvp_static_account_id}`);
 let client_post_sub_project_url = '';
 let client_post_sub_project_picture_url = '';
+let client_delete_project_url = '';
 
 // initial page load // 
 function initial_mvp_page_load() {
@@ -115,7 +117,7 @@ function place_projects(account_dataArg, number_of_projectsArg) {
         console.log(`place_project worked ${i + 1} time(s).`);
         if (i == number_of_projectsArg - 1) {
             $('.project_list').prepend(
-                `<li class="project_card unique_project_card">
+                `<li class="project_card unique_project_card ${account_dataArg.projects[i].projectTitle}">
                     <input class="project_edit" type="button" value="x">
                     <p>${account_dataArg.projects[i].projectTitle}</p>
                 </li>`
@@ -123,7 +125,7 @@ function place_projects(account_dataArg, number_of_projectsArg) {
             store_project_id(account_dataArg.projects[i].projectTitle)
         } else {
             $('.project_list').prepend(
-                `<li class="project_card unique_project_card">
+                `<li class="project_card unique_project_card ${account_dataArg.projects[i].projectTitle}">
                     <input class="project_edit" type="button" value="x">
                     <p>${account_dataArg.projects[i].projectTitle}</p>
                 </li>`
@@ -463,6 +465,69 @@ function sub_project_picture_load() {
         });
 }
 
+////
+
+function delete_functions() {
+    delete_project_toggle();
+    verify_delete_project_input();
+    verify_keep_project_input();
+}
+
+function delete_project_toggle() {
+    $('main').on('click', ".project_edit", ( event => {
+        event.preventDefault();
+        selected_storage.selected_project_for_deletion = $(event.currentTarget).siblings().text().trim();
+        console.log(selected_storage.selected_project_for_deletion);
+        verify_delete_display_toggle();
+    }));
+}
+
+function verify_delete_display_toggle() {
+    console.log(`this is working`);
+    $('.project_list').css('display', 'none');
+    $('.delete_project_form').css('display', 'grid');
+}
+
+function verify_delete_project_input() {
+    $('main').on('click', '.delete_project', ( event => {
+        event.preventDefault();
+        $.getJSON(client_home_url)
+        .then(current_account_store => {
+            for (let i = 0; i < current_account_store.projects.length; i++) {
+                if (current_account_store.projects[i].projectTitle == selected_storage.selected_project_for_deletion) {
+                    console.log(`Deleteing ${selected_storage.selected_project_for_deletion}`);
+                    client_delete_project_url = change_url(`client_pages/project/${current_account_store.projects[i]._id}`);
+                    ajax_delete();
+                }
+            }
+        });
+    }));
+}
+
+function verify_keep_project_input() {
+    $('main').on('click', '.keep_project', ( event => {
+        event.preventDefault();
+        console.log(`Keeping Project`);
+    }));
+}
+
+function ajax_delete() {
+    $.ajax({
+        contentType: 'application/json',
+        dataType: 'json',
+        processData: false,
+        type: 'Delete',
+        url: client_delete_project_url
+    })
+    .then(results => {
+        console.log(results);
+        console.log("device control succeeded");
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
+
 //Display JS//
 function display_js_functions() {
     client_options_toggle();
@@ -656,6 +721,7 @@ function run_all_functions() {
     initial_mvp_page_load();
     selector_functions();
     add_functions();
+    delete_functions();
     drag_and_drop_image_upload();
 }
 
