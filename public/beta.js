@@ -21,7 +21,9 @@ let selected_storage = {
     subProjectTitle: '',
     subProjectPictureTitle: '',
     selected_project_for_deletion: '',
-    selected_sub_project_for_deletion: ''
+    selected_sub_project_for_deletion: '',
+    selected_project_for_edit: '',
+    selected_sub_project_for_edit: ''
 }
 
 //click and double click timers
@@ -35,6 +37,7 @@ let client_post_sub_project_url = '';
 let client_post_sub_project_picture_url = '';
 let client_delete_project_url = '';
 let client_delete_sub_project_url = '';
+let client_edit_project_url = '';
 
 // initial page load // 
 function initial_mvp_page_load() {
@@ -295,6 +298,8 @@ function new_project_submition_form() {
     $('.project_options_container').css("display", "none");
     $('.form_container').css("display", "grid");
     $('.project-add_submition').css("display", "grid");
+    $('.project_toggle').css("pointer-events", "none");
+    $('.profile_img').css("pointer-events", "none");
 }
 
 function new_project_submition() {
@@ -313,6 +318,8 @@ function new_project_back_toggle() {
         $('.project_options_container').css("display", "grid");
         $('.form_container').css("display", "none");
         $('.project-add_submition').css("display", "none");
+        $('.project_toggle').css("pointer-events", "auto");
+        $('.profile_img').css("pointer-events", "auto");
     }));
 }
 
@@ -335,6 +342,8 @@ function new_project_ajax_post(x) {
         $('.project_options_container').css("display", "grid");
         $('.form_container').css("display", "none");
         $('.project-add_submition').css("display", "none");
+        $('.project_toggle').css("pointer-events", "auto");
+        $('.profile_img').css("pointer-events", "auto");
     })
     .catch(err => {
         console.log(err);
@@ -353,6 +362,8 @@ function new_sub_project_submition_form() {
     $('.project_options_container').css("display", "none");
     $('.form_container').css("display", "grid");
     $('.sub_project-add_submition').css("display", "grid");
+    $('.project_toggle').css("pointer-events", "none");
+    $('.profile_img').css("pointer-events", "none");
 }
 
 function new_sub_project_submition() {
@@ -375,6 +386,8 @@ function new_sub_project_back_toggle() {
         $('.project_options_container').css("display", "grid");
         $('.form_container').css("display", "none");
         $('.sub_project-add_submition').css("display", "none");
+        $('.project_toggle').css("pointer-events", "auto");
+        $('.profile_img').css("pointer-events", "auto");
     }));
 }
 
@@ -414,6 +427,8 @@ function new_sub_project_ajax_post(x) {
         $('.project_options_container').css("display", "grid");
         $('.form_container').css("display", "none");
         $('.sub_project-add_submition').css("display", "none");
+        $('.project_toggle').css("pointer-events", "auto");
+        $('.profile_img').css("pointer-events", "auto");
         sub_project_load();
     })
     .catch(err => {
@@ -681,6 +696,8 @@ function ajax_delete_sub_project() {
 
 function put_functions() {
     edit_project_title_toggle();
+    edit_project_title_back_toggle();
+    edit_project_title_submition();
 }
 
 // PUT (edit) Project functions
@@ -688,16 +705,74 @@ function edit_project_title_toggle() {
     $('.project_list').on( "dblclick", ".unique_project_card > p", ( event => {
         event.preventDefault();
         console.log(`this dblclicked`);
+        $(".unique_project_card > p").css("pointer-events", "none");
+        selected_storage.selected_project_for_edit = $(event.currentTarget).text().trim();
         $(event.currentTarget).parent().html(
             `<form class="edit_project_title_form">
-                <input type="text">
-                <input type="submit" class="edit_project_title" value="change">
-                <input type="submit" class="edit_project_title_back" value="back">
+                <input type="text" class="new_project_title_input">
+                <input type="button" class="edit_project_title_submition" value="change">
+                <input type="button" class="edit_project_title_back" value="back">
             </form>`
-        )
+        );
+        $.getJSON(client_home_url)
+            .then(current_account_store => {
+                for (let i = 0; i < current_account_store.projects.length; i++) {
+                    if (current_account_store.projects[i].projectTitle == selected_storage.selected_project_for_edit) {
+                        console.log(`Editing ${selected_storage.selected_project_for_edit}...`);
+                        client_edit_project_url = change_url(`client_pages/project/${current_account_store.projects[i]._id}`);
+                    }
+                };
+            });
     }));
 }
 
+function edit_project_title_back_toggle() {
+    $('.project_list').on('click', '.edit_project_title_back', ( event => {
+        event.preventDefault();
+        console.log('returning...');
+        $(".unique_project_card > p").css("pointer-events", "auto");
+        selected_storage.selected_project_for_edit = '';
+        clear_projects();
+        clear_sub_projects();
+        clear_sub_project_pictures();
+        initial_mvp_page_load();
+    }));
+}
+
+function edit_project_title_submition() {
+    $('.project_list').on('click', '.edit_project_title_submition', ( event => {
+        event.preventDefault();
+        console.log('Submiting change...');
+        let new_project_title = $('.new_project_title_input').val();
+        $('.new_project_title_input').val('');
+        console.log(new_project_title);
+        ajax_edit_project(new_project_title);
+    }));
+}
+
+function ajax_edit_project(newProjectTitleArg) {
+    $.ajax({
+        contentType: 'application/json',
+        data: JSON.stringify({ projectTitle: newProjectTitleArg}),
+        dataType: 'json',
+        processData: false,
+        type: 'Put',
+        url: client_edit_project_url
+    })
+    .then(results => { 
+        console.log(results);
+        console.log("device control succeeded");
+        selected_storage.selected_project_for_deletion = '';
+        $(".unique_project_card > p").css("pointer-events", "auto");
+        clear_projects();
+        clear_sub_projects();
+        clear_sub_project_pictures();
+        initial_mvp_page_load();
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
 
 //Display JS//
 function display_js_functions() {
