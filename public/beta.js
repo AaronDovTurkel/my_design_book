@@ -399,12 +399,27 @@ function new_sub_project_toggle() {
 }
 
 function new_sub_project_submition_form() {
-    $('.project_options_container').css("display", "none");
-    $('.form_container').css("display", "grid");
-    $('.add_submition').css("display", "grid");
-    render_new_sub_project_form();
-    $('.project_toggle').css("pointer-events", "none");
-    $('.profile_img').css("pointer-events", "none");
+    if ($(".client_options_container").css("grid-auto-flow") == "row" ) {
+        console.log(`Full-Sized Functions`);
+        $('.project_options_container').css("display", "none");
+        $('.form_container').css("display", "grid");
+        $('.add_submition').css("display", "grid");
+        render_new_sub_project_form()
+        $('.project_toggle').css("pointer-events", "none");
+        $('.profile_img').css("pointer-events", "none");
+    } else {
+        console.log(`Mobile Functions`);
+        $('.form_container').css('display', 'grid');
+        $('.form_container').css('grid-row', '1 / 3');
+        $('.form_container').css('grid-column', '1 / 2');
+        $('.client_options_container').css('display', 'none');
+        $('.main_display').css('display', 'none');
+        $('.project_options_container').css("display", "none");
+        $('.add_submition').css("display", "grid");
+        render_new_sub_project_form();
+        $('.project_toggle').css("pointer-events", "none");
+        $('.profile_img').css("pointer-events", "none");
+    }
 }
 
 function render_new_sub_project_form() {
@@ -435,11 +450,23 @@ function new_sub_project_submition() {
 function new_sub_project_back_toggle() {
     $('.add_submition').on( "click", ".sub_project_back_button", ( event => {
         event.preventDefault();
-        $('.project_options_container').css("display", "grid");
-        $('.form_container').css("display", "none");
-        $('.add_submition').css("display", "none");
-        $('.project_toggle').css("pointer-events", "auto");
-        $('.profile_img').css("pointer-events", "auto");
+        if ($(".client_options_container").css("grid-auto-flow") == "row" ) {
+            console.log(`Full-Sized Functions`);
+            $('.project_options_container').css("display", "grid");
+            $('.form_container').css("display", "none");
+            $('.add_submition').css("display", "none");
+            $('.project_toggle').css("pointer-events", "auto");
+            $('.profile_img').css("pointer-events", "auto");
+        } else {
+            console.log(`Mobile Functions`);
+            $('.form_container').css('display', 'none');
+            $('.client_options_container').css('display', 'none');
+            $('.main_display').css('display', 'none');
+            $('.project_options_container').css("display", "grid");
+            $('.add_submition').css("display", "none");
+            $('.project_toggle').css("pointer-events", "auto");
+            $('.profile_img').css("pointer-events", "auto");
+        }
     }));
 }
 
@@ -611,17 +638,39 @@ function delete_project_toggle() {
 }
 
 function verify_delete_project_display_toggle(homeArg) {
-    console.log(`this is working`);
-    $('.project_options_container').css('display', 'none');
-    $('.form_container').css('display', 'grid');
-    $('.delete_form').css('display', 'grid');
-    $('.delete_form').html(
-        `<label class="delete_label" for="verify_delete_project">Are you sure you want to delete ${homeArg}?</label>
-                    
-        <input type="button" class="verify_delete_project delete delete_project" id="verify_delete_project" value="Yes">
-        
-        <input type="button" class="verify_delete_project keep keep_project" id="verify_delete_project" value="No">`
-    );
+    if ($(".client_options_container").css("grid-auto-flow") == "row" ) {
+        console.log(`Full-Sized Functions`);
+        $('.project_options_container').css("display", "none");
+        $('.form_container').css("display", "grid");
+        $('.delete_form').css("display", "grid");
+        $('.delete_form').html(
+            `<label class="delete_label" for="verify_delete_project">Are you sure you want to delete "${homeArg}"?</label>
+                        
+            <input type="button" class="verify_delete_project delete delete_project" id="verify_delete_project" value="Yes">
+            
+            <input type="button" class="verify_delete_project keep keep_project" id="verify_delete_project" value="No">`
+        );
+        $('.project_toggle').css("pointer-events", "none");
+        $('.profile_img').css("pointer-events", "none");
+    } else {
+        console.log(`Mobile Functions`);
+        $('.form_container').css('display', 'grid');
+        $('.form_container').css('grid-row', '1 / 3');
+        $('.form_container').css('grid-column', '1 / 2');
+        $('.client_options_container').css('display', 'none');
+        $('.main_display').css('display', 'none');
+        $('.project_options_container').css("display", "none");
+        $('.delete_form').css("display", "grid");
+        $('.delete_form').html(
+            `<label class="delete_label" for="verify_delete_project">Are you sure you want to delete "${homeArg}"?</label>
+                        
+            <input type="button" class="verify_delete_project delete delete_project" id="verify_delete_project" value="Yes">
+            
+            <input type="button" class="verify_delete_project keep keep_project" id="verify_delete_project" value="No">`
+        );
+        $('.project_toggle').css("pointer-events", "none");
+        $('.profile_img').css("pointer-events", "none");
+    }
 }
 
 function verify_delete_project_input() {
@@ -689,17 +738,39 @@ function delete_sub_project_toggle() {
 }
 
 function verify_delete_sub_project_display_toggle(roomArg) {
-    console.log(`this is working`);
-    $('.project_options_container').css('display', 'none');
-    $('.form_container').css('display', 'grid');
-    $('.delete_form').css('display', 'grid');
-    $('.delete_form').html(
-        `<label class="delete_label" for="verify_delete_sub_project">Are you sure you want to delete ${roomArg}?</label>
-                    
-        <input type="button" class="verify_delete_sub_project delete delete_sub_project" id="verify_delete_sub_project" value="Yes">
-        
-        <input type="button" class="verify_delete_sub_project keep keep_sub_project" id="verify_delete_sub_project" value="No">`
-    )
+    if ($(".client_options_container").css("grid-auto-flow") == "row" ) {
+        console.log(`Full-Sized Functions`);
+        $('.project_options_container').css("display", "none");
+        $('.form_container').css("display", "grid");
+        $('.delete_form').css("display", "grid");
+        $('.delete_form').html(
+            `<label class="delete_label" for="verify_delete_sub_project">Are you sure you want to delete ${roomArg}?</label>
+                        
+            <input type="button" class="verify_delete_sub_project delete delete_sub_project" id="verify_delete_sub_project" value="Yes">
+            
+            <input type="button" class="verify_delete_sub_project keep keep_sub_project" id="verify_delete_sub_project" value="No">`
+        )
+        $('.project_toggle').css("pointer-events", "none");
+        $('.profile_img').css("pointer-events", "none");
+    } else {
+        console.log(`Mobile Functions`);
+        $('.form_container').css('display', 'grid');
+        $('.form_container').css('grid-row', '1 / 3');
+        $('.form_container').css('grid-column', '1 / 2');
+        $('.client_options_container').css('display', 'none');
+        $('.main_display').css('display', 'none');
+        $('.project_options_container').css("display", "none");
+        $('.delete_form').css("display", "grid");
+        $('.delete_form').html(
+            `<label class="delete_label" for="verify_delete_sub_project">Are you sure you want to delete ${roomArg}?</label>
+                        
+            <input type="button" class="verify_delete_sub_project delete delete_sub_project" id="verify_delete_sub_project" value="Yes">
+            
+            <input type="button" class="verify_delete_sub_project keep keep_sub_project" id="verify_delete_sub_project" value="No">`
+        )
+        $('.project_toggle').css("pointer-events", "none");
+        $('.profile_img').css("pointer-events", "none");
+    }
 }
 
 function verify_delete_sub_project_input() {
@@ -812,36 +883,72 @@ function put_functions() {
 
 // PUT (edit) Project functions
 function edit_project_title_toggle() {
-    $('.project_list').on( 'mousedown', ".unique_project_card > p", ( event => {
-        event.preventDefault();
-        timeoutId = setTimeout( () => {
-            console.log(`Editing Home Name`);
-            $(".unique_project_card > p").css("pointer-events", "none");
-            selected_storage.selected_project_for_edit = $(event.currentTarget).text().trim();
-            $('.project_options_container').css('display', 'none');
-            $('.form_container').css('display', 'grid');
-            $('.edit_submition').css('display', 'grid');
-            $('.edit_submition').html(
-                `<label class="form_edit_label" for="new_project_title">New Room Title</label>
-        
-                <input class="form_edit_text" type="text" id="new_project_title" name="new_project_title" required minlength="1">
-                
-                <input type="button" value="Submit" class="project_submition_button edit_submition_button">
-                <input type="button" value="Back" class="project_back_button edit_submition_back">`
-            );
-            $.getJSON(client_home_url)
-                .then(current_account_store => {
-                    for (let i = 0; i < current_account_store.projects.length; i++) {
-                        if (current_account_store.projects[i].projectTitle == selected_storage.selected_project_for_edit) {
-                            console.log(`Editing ${selected_storage.selected_project_for_edit}...`);
-                            client_edit_project_url = change_url(`client_pages/project/${current_account_store.projects[i]._id}`);
-                        }
-                    };
-                });
-        }, 500)
-    })).on('mouseup mouseleave', function() {
-        clearTimeout(timeoutId);
-    });
+    if ($(".client_options_container").css("grid-auto-flow") == "row" ) {
+        console.log(`Full-Sized Functions`);
+        $('.project_list').on( 'mousedown', ".unique_project_card > p", ( event => {
+            event.preventDefault();
+            timeoutId = setTimeout( () => {
+                console.log(`Editing Home Name`);
+                $(".unique_project_card > p").css("pointer-events", "none");
+                selected_storage.selected_project_for_edit = $(event.currentTarget).text().trim();
+                $('.project_options_container').css('display', 'none');
+                $('.form_container').css('display', 'grid');
+                $('.edit_submition').css('display', 'grid');
+                $('.edit_submition').html(
+                    `<label class="form_edit_label" for="new_project_title">New Room Title</label>
+            
+                    <input class="form_edit_text" type="text" id="new_project_title" name="new_project_title" required minlength="1">
+                    
+                    <input type="button" value="Submit" class="project_submition_button edit_submition_button">
+                    <input type="button" value="Back" class="project_back_button edit_submition_back">`
+                );
+                $.getJSON(client_home_url)
+                    .then(current_account_store => {
+                        for (let i = 0; i < current_account_store.projects.length; i++) {
+                            if (current_account_store.projects[i].projectTitle == selected_storage.selected_project_for_edit) {
+                                console.log(`Editing ${selected_storage.selected_project_for_edit}...`);
+                                client_edit_project_url = change_url(`client_pages/project/${current_account_store.projects[i]._id}`);
+                            }
+                        };
+                    });
+            }, 500)
+        })).on('mouseup mouseleave', function() {
+            clearTimeout(timeoutId);
+        });
+    } else {
+        console.log(`Mobile Functions`);
+        $('.project_list').on( 'touchstart', ".unique_project_card > p", ( event => {
+            event.preventDefault();
+            timeoutId = setTimeout( () => {
+                console.log(`Editing Home Name`);
+                $(".unique_project_card > p").css("pointer-events", "none");
+                selected_storage.selected_project_for_edit = $(event.currentTarget).text().trim();
+                $('.project_options_container').css('display', 'none');
+                $('.form_container').css('display', 'grid');
+                $('.edit_submition').css('display', 'grid');
+                $('.edit_submition').html(
+                    `<label class="form_edit_label" for="new_project_title">New Room Title</label>
+            
+                    <input class="form_edit_text" type="text" id="new_project_title" name="new_project_title" required minlength="1">
+                    
+                    <input type="button" value="Submit" class="project_submition_button edit_submition_button">
+                    <input type="button" value="Back" class="project_back_button edit_submition_back">`
+                );
+                $.getJSON(client_home_url)
+                    .then(current_account_store => {
+                        for (let i = 0; i < current_account_store.projects.length; i++) {
+                            if (current_account_store.projects[i].projectTitle == selected_storage.selected_project_for_edit) {
+                                console.log(`Editing ${selected_storage.selected_project_for_edit}...`);
+                                client_edit_project_url = change_url(`client_pages/project/${current_account_store.projects[i]._id}`);
+                            }
+                        };
+                    });
+            }, 500)
+        })).on('touchend', function() {
+            clearTimeout(timeoutId);
+        });
+    }
+    
 }
 
 function edit_project_title_back_toggle() {
@@ -900,37 +1007,72 @@ function ajax_edit_project(newProjectTitleArg) {
 
 // PUT (edit) Sub-Project functions
 function edit_sub_project_title_toggle() {
-    $('.sub_project_list').on( 'mousedown', ".unique_sub_project_card > p", ( event => {
-        event.preventDefault();
-        event.preventDefault();
-        timeoutId = setTimeout( () => {
-            console.log(`Editing Room Name`);
-            $(".unique_sub_project_card > p").css("pointer-events", "none");
-            selected_storage.selected_sub_project_for_edit = $(event.currentTarget).text().trim();
-            $('.project_options_container').css('display', 'none');
-            $('.form_container').css('display', 'grid');
-            $('.edit_submition').css('display', 'grid');
-            $('.edit_submition').html(
-                `<label class="form_edit_label" for="new_sub_project_title">New Room Title</label>
-        
-                <input class="form_edit_text" type="text" id="new_sub_project_title" name="new_sub_project_title" required minlength="1">
-                
-                <input type="button" value="Submit" class="sub_project_submition_button edit_submition_button">
-                <input type="button" value="Back" class="sub_project_back_button edit_submition_back">`
-            );
-            $.getJSON(client_home_url)
-                .then(current_account_store => { 
-                    for (let i = 0; i < current_account_store.projects[selected_storage.project].subProjects.length; i++) {
-                        if (current_account_store.projects[selected_storage.project].subProjects[i].subProjectTitle == selected_storage.selected_sub_project_for_edit) {
-                            console.log(`Editing ${selected_storage.selected_sub_project_for_edit}...`);
-                            client_edit_sub_project_url = change_url(`client_pages/subProjectTitle/${current_account_store.projects[selected_storage.project].subProjects[i]._id}`);
-                        }
-                    };
-                });
-        }, 500)
-    })).on('mouseup mouseleave', function() {
-        clearTimeout(timeoutId);
-    });
+    if ($(".client_options_container").css("grid-auto-flow") == "row" ) {
+        console.log(`Full-Sized Functions`);
+        $('.sub_project_list').on( 'mousedown', ".unique_sub_project_card > p", ( event => {
+            event.preventDefault();
+            timeoutId = setTimeout( () => {
+                console.log(`Editing Room Name`);
+                $(".unique_sub_project_card > p").css("pointer-events", "none");
+                selected_storage.selected_sub_project_for_edit = $(event.currentTarget).text().trim();
+                $('.project_options_container').css('display', 'none');
+                $('.form_container').css('display', 'grid');
+                $('.edit_submition').css('display', 'grid');
+                $('.edit_submition').html(
+                    `<label class="form_edit_label" for="new_sub_project_title">New Room Title</label>
+            
+                    <input class="form_edit_text" type="text" id="new_sub_project_title" name="new_sub_project_title" required minlength="1">
+                    
+                    <input type="button" value="Submit" class="sub_project_submition_button edit_submition_button">
+                    <input type="button" value="Back" class="sub_project_back_button edit_submition_back">`
+                );
+                $.getJSON(client_home_url)
+                    .then(current_account_store => { 
+                        for (let i = 0; i < current_account_store.projects[selected_storage.project].subProjects.length; i++) {
+                            if (current_account_store.projects[selected_storage.project].subProjects[i].subProjectTitle == selected_storage.selected_sub_project_for_edit) {
+                                console.log(`Editing ${selected_storage.selected_sub_project_for_edit}...`);
+                                client_edit_sub_project_url = change_url(`client_pages/subProjectTitle/${current_account_store.projects[selected_storage.project].subProjects[i]._id}`);
+                            }
+                        };
+                    });
+            }, 500)
+        })).on('mouseup mouseleave', function() {
+            clearTimeout(timeoutId);
+        })
+    } else {
+        console.log(`Mobile Functions`);
+        $('.sub_project_list').on( 'touchstart', ".unique_sub_project_card > p", ( event => {
+            event.preventDefault();
+            timeoutId = setTimeout( () => {
+                console.log(`Editing Room Name`);
+                $(".unique_sub_project_card > p").css("pointer-events", "none");
+                selected_storage.selected_sub_project_for_edit = $(event.currentTarget).text().trim();
+                $('.project_options_container').css('display', 'none');
+                $('.form_container').css('display', 'grid');
+                $('.edit_submition').css('display', 'grid');
+                $('.edit_submition').html(
+                    `<label class="form_edit_label" for="new_sub_project_title">New Room Title</label>
+            
+                    <input class="form_edit_text" type="text" id="new_sub_project_title" name="new_sub_project_title" required minlength="1">
+                    
+                    <input type="button" value="Submit" class="sub_project_submition_button edit_submition_button">
+                    <input type="button" value="Back" class="sub_project_back_button edit_submition_back">`
+                );
+                $.getJSON(client_home_url)
+                    .then(current_account_store => { 
+                        for (let i = 0; i < current_account_store.projects[selected_storage.project].subProjects.length; i++) {
+                            if (current_account_store.projects[selected_storage.project].subProjects[i].subProjectTitle == selected_storage.selected_sub_project_for_edit) {
+                                console.log(`Editing ${selected_storage.selected_sub_project_for_edit}...`);
+                                client_edit_sub_project_url = change_url(`client_pages/subProjectTitle/${current_account_store.projects[selected_storage.project].subProjects[i]._id}`);
+                            }
+                        };
+                    });
+            }, 500)
+        })).on('touchend', function() {
+            clearTimeout(timeoutId);
+        })
+    }
+    
 }
 
 function edit_sub_project_title_back_toggle() {
