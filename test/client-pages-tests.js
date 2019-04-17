@@ -393,7 +393,7 @@ describe('client pages API resource', function () {
         it('should add a new subProjectPicture', function () {
 
             const newSubProjectPicture = {
-                pictureTitle: faker.lorem.words(),
+                pictureTitle: 'MVP Picture Title',
                 imgUrl: faker.image.imageUrl()
             };
 
