@@ -4,7 +4,7 @@
 
 // url finder independant of domain name
 function change_url(pathArg) {
-    let url = window.location;
+    let url = 'https://afternoon-cove-68012.herokuapp.com/';
     let new_url = url + `${pathArg}`;
     return new_url;
 }
@@ -31,7 +31,7 @@ let selected_storage = {
 let timeoutId = 0;
 
 // static client_page for mvp (will have log in page that will change id)
-const mvp_static_account_id = `5c992f195bdf02489526598c`;
+const mvp_static_account_id = `5c6e29146667000017fde5a8`;
 const client_home_url = change_url(`client_pages/${mvp_static_account_id}`);
 const client_post_project_url = change_url(`client_pages/project/${mvp_static_account_id}`);
 let client_post_sub_project_url = '';
