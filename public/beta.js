@@ -120,7 +120,7 @@ function clear_sub_project_pictures() {
 //Placement Functions//
 function place_profile_img(account_dataArg) {
     $('.profile_img_current').html(
-        `<img class="profile_img_current" src="https://www.thinkful.com/pysplash/api/hupers/me/avatar" alt="No Img">`
+        `<img class="profile_img_current" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="No Img">`
     );
 }
 
