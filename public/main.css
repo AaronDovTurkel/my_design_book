@@ -11,9 +11,6 @@ html {
     grid-template-columns: 100%;
     font-family: 'Roboto', sans-serif;
     font-family: 'Source Sans Pro', sans-serif;
-}
-
-html {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
 }
