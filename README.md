@@ -1,4 +1,4 @@
-<p align="center"><img width=30% height=30% src=public/img_store/mdb_logo.png></p>
+<p align="center" width=100% background-color="rgba(0, 0, 0, .800)"><img width=30% height=30% border-radius=50% src=public/img_store/mdb_logo.png></p>
 
 <p align"center">Welcome to "My Design Book", a hub for streamlining home design for both designers and home owners alike.</p>
 <br>
