@@ -1,7 +1,4 @@
-<div style="border-radius:50%">
-<img width=25% height=25% style="border-radius:50%" src=public/img_store/mdb_logo.png>
-</div>
-
+<img align="center" width=20% height=20% src=public/img_store/mdb_logo.png>
 
 <p align"center">Welcome to "My Design Book", a hub for streamlining home design for both designers and home owners alike.</p>
 <br>
