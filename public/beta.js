@@ -51,7 +51,6 @@ function initial_mvp_page_load() {
             selected_storage.project = (account_data.projects.length) - 1;
             selected_storage.subProject = (account_data.projects[`${selected_storage.project}`].subProjects.length) - 1;
             place_projects(account_data, account_data.projects.length);
-            place_profile_img(account_data);
             place_sub_projects(account_data);
             place_sub_project_pictures(account_data);
         })
@@ -117,11 +116,6 @@ function clear_sub_project_pictures() {
 
 
 //Placement Functions//
-function place_profile_img(account_dataArg) {
-    $('.profile_img_current').html(
-        `<img class="profile_img_current" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="No Img">`
-    );
-}
 
 function place_projects(account_dataArg, number_of_projectsArg) {
     for (let i = 0; i < number_of_projectsArg; i++) {
@@ -360,6 +354,7 @@ function new_project_back_toggle() {
             $('.add_submition').css("display", "none");
             $('.project_toggle').css("pointer-events", "auto");
             $('.profile_img').css("pointer-events", "auto");
+            $('.add_submition').html('');
         } else {
             $('.form_container').css('display', 'none');
             $('.client_options_container').css('display', 'none');
@@ -368,6 +363,7 @@ function new_project_back_toggle() {
             $('.add_submition').css("display", "none");
             $('.project_toggle').css("pointer-events", "auto");
             $('.profile_img').css("pointer-events", "auto");
+            $('.add_submition').html('');
         }
     }));
 }
@@ -391,6 +387,7 @@ function new_project_ajax_post(x) {
         $('.add_submition').css("display", "none");
         $('.project_toggle').css("pointer-events", "auto");
         $('.profile_img').css("pointer-events", "auto");
+        $('.add_submition').html('');
     })
     .catch(err => {
         console.log(err);
@@ -460,6 +457,7 @@ function new_sub_project_back_toggle() {
             $('.add_submition').css("display", "none");
             $('.project_toggle').css("pointer-events", "auto");
             $('.profile_img').css("pointer-events", "auto");
+            $('.add_submition').html('');
         } else {
             $('.form_container').css('display', 'none');
             $('.client_options_container').css('display', 'none');
@@ -468,6 +466,7 @@ function new_sub_project_back_toggle() {
             $('.add_submition').css("display", "none");
             $('.project_toggle').css("pointer-events", "auto");
             $('.profile_img').css("pointer-events", "auto");
+            $('.add_submition').html('');
         }
     }));
 }
@@ -517,6 +516,7 @@ function new_sub_project_ajax_post(x) {
         $('.add_submition').css("display", "none");
         $('.project_toggle').css("pointer-events", "auto");
         $('.profile_img').css("pointer-events", "auto");
+        $('.add_submition').html('');
         sub_project_load();
     })
     .catch(err => {
@@ -1244,8 +1244,18 @@ function client_list_options_beta_alert() {
 function info_box() {
     $('body').append(
         `<div class="info_box">
-            <input class="sub_project_picture_edit info_box_delete" type="button" value="x">
-            <p>This is an info box! Here I will explain how this app works and what exactly it does... Now I am just filling in the space so that I can see how this box fills the screen; if it fits nicely, or poorly.</p>
+            <h1>My Design Book</h1>
+            <p>Welcome to "My Design Book", a hub for streamlining home design for both designers and home owners alike.</p>
+            <br>
+            <p>At the current beta stage our app allows you to store pictures in an easy-to-use filing system. Try creating a new home; or maybe a room; and then add a couple of new pictures! (Please use open sourced images. You can try copying the images from <a href="https://unsplash.com/">here</a>).</p>
+            <br>
+            <p>Located at the top right of the page you will find our "list tab". From here you can select the home and room you would like to view and/or edit. Clicking on the profile image on the top left of the page will bring you back to the main image viewer. To delete a picture, home, or room: simply click on the "x" button. If you click and hold on a home or room name, you will be taken to our editing window. Just type your new name and hit "submit" to make a change.</p>
+            <br>
+            <p>"My Design Book" is in its humble beginnings but has lofty goals. We hope to make waves in the design world by creating a socially adept system for designers to find home owners and visa versa. Not only will this app connect people but it will also be the home base for all design needs. Whether you would like to set up a calendar, send an invoice, or store room dimensions "My Design Book" will have it all.</p>
+            <br>
+            <p>If you would like to learn more about this apps potential please contact <a href="mailto:theholycoder@gmail.com?Subject=Hello%20again" target="_top">The Holy Coder</a>.</p>
+            <br>
+            <input class="info_box_delete" type="button" value="Go to the app!">
         </div>`
     )
     info_box_delete_toggle();

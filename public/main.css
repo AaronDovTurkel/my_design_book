@@ -136,7 +136,6 @@ html {
                     grid-template-rows: 50% 50%;
                     display: grid;
                     height: 100%;
-                    width: 50%;
                 }
 
                     .home_display {
@@ -703,15 +702,22 @@ main {
     justify-self: center;
     align-self: center;
     position: relative;
-    height: 75%;
-    width: 75%;
+    height: 95%;
+    width: 95%;
     padding: 2%;
     font-size: 1.3em;
     overflow: scroll;
+    text-align: center;
 }
+
+
 /**/
 
 @media screen and (max-height: 600px), screen and (max-width: 500px) {
+   
+    body {
+        grid-template-rows: 10% 90%;
+    }
 
     main {
         grid-row: 2 / 3;
@@ -749,7 +755,9 @@ main {
         overflow: scroll;
     }
 
-    
+    .current_selection {
+        width: 50%;
+    }
 
     .client_options_container {
         grid-row: 1 / 2;
@@ -770,6 +778,10 @@ main {
 }
 
 @media screen and (orientation: landscape) and (max-width: 1100px) and (min-width: 500px) {
+    body {
+        grid-template-rows: 15% 85%;
+    }
+    
     .main_display {
         grid-template-rows: 15% 85%;
     }
@@ -789,6 +801,10 @@ main {
         grid-gap: 3%;
         padding: 3%;
         overflow: scroll;
+    }
+
+    .current_selection {
+        width: 50%;
     }
 
 }
