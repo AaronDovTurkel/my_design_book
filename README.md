@@ -15,11 +15,48 @@ At the current beta stage our app allows you to store pictures in an easy-to-use
 
 ## Road Map
 
-"My Design Book" is in its humble beginnings but has lofty goals. We hope to make waves in the design world by creating a socially adept system for designers to find home owners and visa versa. Not only will this app connect people but it will also be the home base for all design needs. Whether you would like to set up a calendar, send an invoice, or store room dimensions "My Design Book" will have it all.
+"My Design Book" is in its humble beginnings but has lofty goals. 
+We hope to make waves in the design world by creating a socially adept system for designers to find home owners and visa versa. 
+Not only will this app connect people but it will also be the home base for all design needs. 
+Whether you would like to set up a calendar, send an invoice, or store room dimensions "My Design Book" will have it all.
+
+~ Features under Construction ~
+
+1. "Profile"
+    * You will be able to create a full intent-specific profile. 
+    * If you are a home owner you will be able to specificy your needs, or if you are a designer you can present your style.
+    * From the profile page you can update your icon tell us a little about yourself and where you live.
+
+2. "Projects"
+    * The projects tab now lets you store images in an easy-to-use filing system. But thats just the beginning... You will be       able to...
+        * Create a comment flow on any image.
+        * Create specific folders for sub-projects within rooms.
+        * Tag workers and clients associated with any image.
+
+3. "Tasks"
+    * Will handle any event reminders for the day, week, months; each with their own respective task view.
+
+4. "Calendar"
+    * A full sized calendar where you can make appointments with any workers, designers, or clients associated with your            account.
+
+5. "Workers"
+    * A place to tag other accounts to yours.
+
+6. "Orders"
+    * A place to view any orders that were made for your projects.
+
+7. "Billing"
+    * A place to keep track of all your billing needs.
+
+8. "Explore"
+    * The explore tab has high hopes. From here you will be able to search our data base for other accounts.
+    * If you are a deisgner you will be able to look for home owners in your area and visa versa.
+
+
 
 ### Authors and Acknowledgments
 
-"My Deisgn Book" was created and is currently maintained by Aaron Dov Turkel.
+"My Design Book" was created and is currently maintained by Aaron Dov Turkel.
 
 Shout-out to my special friend, RH.
 
