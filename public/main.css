@@ -26,6 +26,8 @@ html {
         display: grid;
         grid-template-rows: 10% 90%;
         grid-template-columns: 100%;
+        width: 100%;
+        height: 100%;
     }
 
         header {
@@ -38,6 +40,8 @@ html {
             background-color: rgba(255, 255, 255, .500);
             border-radius: 0 0 15px 15px;
             border: .5px solid rgba(0, 0, 0, .500);
+            width: 100%;
+            height: 100%;
         }
 
             .profile_img {
@@ -95,10 +99,12 @@ html {
             justify-self: stretch;
             /**/
             display: grid;
-            grid-template-rows: repeat(auto-fit, 1fr);
+            grid-template-rows: 100%;
             grid-template-columns: 1fr 8fr;
             /**/
             border-radius: 15px;
+            width: 100%;
+            height: 100%;
         }
 
             .main_display {
@@ -111,21 +117,35 @@ html {
                 border: .5px solid rgba(0, 0, 0, .500);
                 /**/
                 display: grid;
-                grid-template-rows: .6fr 9fr;
+                grid-template-rows: 8% 92%;
                 grid-template-columns: 1fr;
-                position: relative;
+                width: 100%;
+                height: 100%;
             }
 
                 .current_selection {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
+                    grid-row: 1 / 2;
+                    justify-self: start;
+                    align-self: start;
                     background-color: rgba(255, 255, 255, .500);
                     border-radius: 15px 0px 5px 0px;
                     border: .5px solid rgba(0, 0, 0, .500);
                     padding: 1%;
                     color: rgba(0, 0, 0, .900);
+                    grid-template-columns: 1fr;
+                    grid-template-rows: 1fr 1fr;
+                    display: grid;
                 }
+
+                    .home_display {
+                        font-size: .8em;
+                        grid-row: 1 / 2;
+                    }
+
+                    .room_display {
+                        font-size: .8em;
+                        grid-row: 2 / 3;
+                    }
 
                     .current_home {
                         color: rgba(54, 0, 45, 0.952);
@@ -138,25 +158,27 @@ html {
                 .picture_list {
                     grid-row: 2 / 3;
                     grid-column: 1 / 2;
-                    justify-self: stretch;
-                    align-self: stretch;
+                    justify-self: center;
+                    align-self: center;
                     /**/
                     width: 100%;
                     height: 100%;
                     /**/
                     display: grid;
-                    grid-template-rows: 40%;
-                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-template-rows: 1fr 1fr;
+                    grid-template-columns: repeat(3, 1fr);
                     grid-auto-flow: row;
-                    grid-auto-rows: 40%;
-                    grid-gap: 2%;
+                    grid-auto-rows: 1fr;
+                    grid-gap: 3%;
                     padding: 3%;
                     overflow: scroll;
                 }
 
                     .picture_card {
-                        justify-self: stretch;
-                        align-self: stretch;
+                        justify-self: center;
+                        align-self: center;
+                        width: 100%;
+                        height: auto;
                         /**/
                         background-color: rgba(255, 255, 255, 0.333);
                         border-radius: 15px;
@@ -169,21 +191,20 @@ html {
                     }
 
                         .list_img {
-                            height: 100%;
-                            width: 100%;
+                            max-width: 100%;
+                            height: auto;
                             background-color: rgba(255, 255, 255, 0.333);
                             border-radius: 15px;
                             /**/
                             grid-row: 1 / 2;
                             grid-column: 1 / 2;
-                            justify-self: stretch;
-                            align-self: stretch;
+                            justify-self: auto;
+                            align-self: auto;
                         }
 
                         .add_button {
-                            height: 50%;
-                            width: 50%;
-                            border-radius: 15px;
+                            width: 100%;
+                            border-radius: 50%;
                             border: .5px outset rgba(255, 255, 255, 0.500);
                             /**/
                             grid-row: 1 / 2;
@@ -191,6 +212,7 @@ html {
                             justify-self: center;
                             align-self: center;
                         }
+                        
                 
                     .sub_project_picture_edit {
                         position: absolute;
@@ -700,75 +722,36 @@ main {
         grid-column: 1 / 2;
         align-self: stretch;
         justify-self: stretch;
-
         display: none;
-        grid-template-rows: 1fr 9fr;
+        grid-template-rows: 10% 90%;
         grid-template-columns: 1fr;
-
         border-radius: 15px;
+        width: 100%;
+        height: 100%;
     }
 
     .main_display {
         grid-row: 2 / 3;
         grid-column: 1 / 3;
-        align-self: stretch;
-        justify-self: stretch;
-        background-color: rgba(255, 255, 255, .500);
-        border-radius: 15px;
-        border: .5px solid rgba(0, 0, 0, .500);
-
-        display: grid;
-        grid-template-rows: .8fr 9fr;
-        grid-template-columns: 1fr;
-        position: relative;
     }
-    
-        .current_selection {
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: rgba(255, 255, 255, .500);
-            border-radius: 15px 5px 5px 5px;
-            border: .5px solid rgba(0, 0, 0, .500);
-            padding: 1%;
-            color: rgba(0, 0, 0, .900);
-        }
 
-            .current_home {
-                color: rgba(54, 0, 45, 0.952);
-            }
-
-            .current_room {
-                color: rgba(54, 0, 45, 0.952);
-            }
 
     .picture_list {
         grid-row: 2 / 3;
         grid-column: 1 / 2;
-        justify-self: stretch;
-        align-self: stretch;
-
+        justify-self: center;
+        align-self: center;
         width: 100%;
         height: 100%;
-
         display: grid;
-        grid-template-rows: 100%;
+        grid-template-rows: 1fr;
         grid-template-columns: 1fr;
         grid-auto-flow: row;
-        grid-auto-rows: 100%;
+        grid-auto-rows: 1fr;
+        grid-gap: 3%;
+        padding: 3%;
         overflow: scroll;
     }
-
-        .picture_card {
-            justify-self: stretch;
-            align-self: stretch;
-            background-color: rgba(255, 255, 255, 0.333);
-            border-radius: 15px;
-            box-shadow: 10px 10px 25px 5px rgba(0, 0, 0, .500);
-            display: grid;
-            grid-template-rows: 1fr;
-            grid-template-columns: 1fr;
-        }
 
     
 
@@ -792,24 +775,24 @@ main {
 
 @media screen and (orientation: landscape) and (max-width: 1100px) and (min-width: 500px) {
     .main_display {
-        grid-template-rows: 1.6fr 9fr;
+        grid-template-rows: 15% 85%;
     }
 
     .picture_list {
         grid-row: 2 / 3;
         grid-column: 1 / 2;
-        justify-self: stretch;
-        align-self: stretch;
-
+        justify-self: center;
+        align-self: center;
         width: 100%;
         height: 100%;
-
         display: grid;
-        grid-template-rows: 100%;
+        grid-template-rows: 1fr;
         grid-template-columns: 1fr 1fr;
         grid-auto-flow: row;
-        grid-auto-rows: 100%;
-        grid-gap: 5%;
+        grid-auto-rows: 1fr;
+        grid-gap: 3%;
+        padding: 3%;
         overflow: scroll;
     }
+
 }

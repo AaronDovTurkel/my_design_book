@@ -1165,7 +1165,7 @@ function client_options_toggle() {
             $('.client_options_container').css('display', 'grid');
             $('.project_options_container').css('display', 'none');
             $('main').css('grid-template-columns', '1fr');
-            $('main').css('grid-template-rows', '1fr 9fr');
+            $('main').css('grid-template-rows', '10% 90%');
         }
     }));
 }
@@ -1268,7 +1268,7 @@ function mobile_select_sub_project() {
     $('.client_options_container').css('display', 'grid');
     $('.project_options_container').css('display', 'none');
     $('main').css('grid-template-columns', '1fr');
-    $('main').css('grid-template-rows', '1fr 9fr');
+    $('main').css('grid-template-rows', '10% 90%');
 }
 
 

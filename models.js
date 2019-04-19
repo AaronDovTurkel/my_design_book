@@ -61,11 +61,6 @@ const accountSchema = mongoose.Schema({
 
 
 
-//pre-hook
-
-
-// virtual pop
-
 
 //serialize
 accountSchema.virtual('accountName').get(function() {
