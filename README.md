@@ -1,4 +1,7 @@
-![Logo](src=public/img_store/mdb_logo.png# thumbnail bordered)
+<div style="width:150px; height:100px">
+![Logo](src=public/img_store/mdb_logo.png)
+</div>
+
 
 <p align"center">Welcome to "My Design Book", a hub for streamlining home design for both designers and home owners alike.</p>
 <br>
