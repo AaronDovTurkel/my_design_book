@@ -1,4 +1,4 @@
-<p align="center"><img border-radius=50% src=public/img_store/mdb_logo.png></p>
+<p align="center"><img border-radius=50% src=public/img_store/mdb_logo.png#thumbnail></p>
 
 <p align"center">Welcome to "My Design Book", a hub for streamlining home design for both designers and home owners alike.</p>
 <br>
@@ -23,7 +23,7 @@ Shout-out to my special friend, RH.
 
 For support and inquiries please contact the [delevoper](mailto:"theholycoder@gmail.com").
 
-img[src*="mdb_logo.png"] {
+img[src*="#thumbnail"] {
    width: 30%;
    height: 30%;
    border-radius: 50%;
