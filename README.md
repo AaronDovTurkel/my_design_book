@@ -1,5 +1,5 @@
 <div style="width:150px; height:100px">
-![Logo](src=public/img_store/mdb_logo.png)
+[Logo](src=public/img_store/mdb_logo.png)
 </div>
 
 
