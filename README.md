@@ -6,16 +6,14 @@
 
 At the current beta stage our app allows you to store pictures in an easy-to-use filing system. Try creating a new home; or maybe a room; and then add a couple of new pictures! (Please use open sourced images. You can try copying the images from <a href="https://unsplash.com/">here</a>).
 
-1. Located at the top right of the page you will find our "list tab".
-<p align="end"><img width=35% src=public/img_store/list_tab_mdb.png></p>
-<p align="start"><img width=55% src=public/img_store/client_options_mdb.png>
+1. Located at the top right of the page you will find our "list tab". <p align="end"><img width=20% src=public/img_store/list_tab_mdb.png></p>
+<p align="end"><img width=20% src=public/img_store/project_options_mdb.png></p>
      * From here you can select the home and room you would like to view and/or edit. 
      * To delete a picture, home, or room: simply click on the "x" button.
      * If you click and hold on a home or room name, you will be taken to our editing window. Just type your new name and hit        "submit" to make a change.
-</p>
   
 2. Clicking on the profile image on the top left of the page will bring you back to the main image viewer. 
-<p align="end"><img width=35% src=public/img_store/profile_img_mdb.png></p>
+<p align="end"><img width=20% src=public/img_store/profile_img_mdb.png></p>
 
 ## Road Map
 
