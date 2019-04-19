@@ -132,7 +132,7 @@ html {
                     border: .5px solid rgba(0, 0, 0, .500);
                     padding: 1%;
                     color: rgba(0, 0, 0, .900);
-                    grid-template-columns: 100%;
+                    grid-template-columns: 1fr;
                     grid-template-rows: 50% 50%;
                     display: grid;
                     height: 100%;
