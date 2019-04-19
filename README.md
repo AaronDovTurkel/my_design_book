@@ -1,4 +1,4 @@
-<div style="width:100%; height:auto">
+<div style="border-radius:50%">
 <img width=25% height=25% style="border-radius:50%" src=public/img_store/mdb_logo.png>
 </div>
 
