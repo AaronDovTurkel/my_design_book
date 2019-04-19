@@ -1,4 +1,4 @@
-<p align="center"><img border-radius=50% src=public/img_store/mdb_logo.png#thumbnail></p>
+![Logo](src=public/img_store/mdb_logo.png# thumbnail bordered)
 
 <p align"center">Welcome to "My Design Book", a hub for streamlining home design for both designers and home owners alike.</p>
 <br>
@@ -27,4 +27,8 @@ img[src*="#thumbnail"] {
    width: 30%;
    height: 30%;
    border-radius: 50%;
+}
+
+img[src~="bordered"] {
+   border: 1px solid black;
 }
