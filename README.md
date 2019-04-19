@@ -1,5 +1,5 @@
-<div style="width:150px; height:100px">
-[Logo](src=public/img_store/mdb_logo.png)
+<div style="width:100%; height:auto">
+<img width=25% height=25% style="border-radius:50%" src=public/img_store/mdb_logo.png)>
 </div>
 
 
@@ -25,13 +25,3 @@ Shout-out to my special friend, RH.
 #### Support
 
 For support and inquiries please contact the [delevoper](mailto:"theholycoder@gmail.com").
-
-img[src*="#thumbnail"] {
-   width: 30%;
-   height: 30%;
-   border-radius: 50%;
-}
-
-img[src~="bordered"] {
-   border: 1px solid black;
-}
